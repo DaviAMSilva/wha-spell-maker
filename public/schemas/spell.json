@@ -1,0 +1,429 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "format": "categories",
+    "basicCategoryTitle": "Spell Information",
+    "title": "Witch Hat Atelier Spell Editor",
+    "description": "A spell editor for creating custom spell based in the Witch Hat Atelier manga series by Kamome Shirahama.",
+    "options": {
+        "disable_collapse": true
+    },
+    "properties": {
+        "version": {
+            "type": "string",
+            "default": "100",
+            "title": "Format Version",
+            "readOnly": true
+        },
+        "name": {
+            "type": "string",
+            "default": "",
+            "title": "Spell Name",
+            "options": {
+                "infoText": "The name you give your spell"
+            }
+        },
+        "description": {
+            "type": "string",
+            "format": "textarea",
+            "default": "",
+            "title": "Spell Description",
+            "options": {
+                "infoText": "A description of what your spell does"
+            }
+        },
+        "grid": {
+            "$ref": "#/definitions/boolean",
+            "default": false,
+            "title": "Grid",
+            "options": {
+                "infoText": "Helps aligns your spell"
+            }
+        },
+        "background": {
+            "$ref": "#/definitions/boolean",
+            "default": true,
+            "title": "Background",
+            "options": {
+                "infoText": "A disabled background results in a transparent image"
+            }
+        },
+        "backgroundColor": {
+            "$ref": "#/definitions/color",
+            "title": "Background Color",
+            "default": "#ffffff",
+            "options": {
+                "dependencies": {
+                    "background": true
+                }
+            }
+        },
+        "seals": {
+            "type": "array",
+            "format": "tabs-top",
+            "title": "Spell Seals",
+            "options": {
+                "disable_collapse": true,
+                "enable_array_copy": true
+            },
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "format": "categories",
+                "title": "Seal",
+                "basicCategoryTitle": "Seal Options",
+                "headerTemplate": "{{#if self.name}}{{self.name}} {{titleWithoutNumber title}}{{else}}{{title}}{{/if}}",
+                "options": {
+                    "disable_collapse": true
+                },
+                "properties": {
+                    "visible": {
+                        "$ref": "#/definitions/visible",
+                        "title": "Seal Visible"
+                    },
+                    "name": {
+                        "type": "string",
+                        "default": "",
+                        "title": "Seal Name",
+                        "options": {
+                            "infoText": "Optional seal name"
+                        }
+                    },
+                    "angle": {
+                        "$ref": "#/definitions/angle",
+                        "title": "Seal Angle"
+                    },
+                    "scale": {
+                        "$ref": "#/definitions/scale",
+                        "title": "Seal Scale",
+                        "options": {
+                            "infoText": "As a percentage. Scales the entire seal"
+                        }
+                    },
+                    "offsetX": {
+                        "$ref": "#/definitions/offset",
+                        "title": "Seal Horizontal Offset"
+                    },
+                    "offsetY": {
+                        "$ref": "#/definitions/offset",
+                        "title": "Seal Vertical Offset"
+                    },
+                    "rings": {
+                        "type": "array",
+                        "format": "tabs-top",
+                        "title": "Seal Rings",
+                        "options": {
+                            "disable_collapse": true,
+                            "enable_array_copy": true
+                        },
+                        "items": {
+                            "type": "object",
+                            "title": "Ring",
+                            "headerTemplate": "{{#if self.name}}{{self.name}} {{titleWithoutNumber title}}{{else}}{{title}}{{/if}}",
+                            "properties": {
+                                "visible": {
+                                    "$ref": "#/definitions/visible",
+                                    "title": "Ring Visible"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "Ring Name",
+                                    "options": {
+                                        "infoText": "Optional ring name"
+                                    }
+                                },
+                                "color": {
+                                    "$ref": "#/definitions/color",
+                                    "title": "Ring Color"
+                                },
+                                "radius": {
+                                    "$ref": "#/definitions/radius",
+                                    "title": "Ring Radius"
+                                },
+                                "weight": {
+                                    "$ref": "#/definitions/weight",
+                                    "title": "Ring Line Weight"
+                                },
+                                "openingSize": {
+                                    "$ref": "#/definitions/angle",
+                                    "title": "Ring Opening Size",
+                                    "maximum": 360
+                                },
+                                "openingAngle": {
+                                    "$ref": "#/definitions/angle",
+                                    "title": "Ring Opening Angle"
+                                },
+                                "offsetX": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Ring Horizontal Offset"
+                                },
+                                "offsetY": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Ring Vertical Offset"
+                                }
+                            }
+                        }
+                    },
+                    "sigils": {
+                        "type": "array",
+                        "format": "tabs-top",
+                        "title": "Seal Sigils",
+                        "options": {
+                            "disable_collapse": true,
+                            "enable_array_copy": true
+                        },
+                        "items": {
+                            "type": "object",
+                            "title": "Sigil",
+                            "headerTemplate": "{{properties.name.enumTitle}} Sigil",
+                            "properties": {
+                                "visible": {
+                                    "$ref": "#/definitions/visible",
+                                    "title": "Sigil Visible"
+                                },
+                                "tinted": {
+                                    "$ref": "#/definitions/boolean",
+                                    "title": "Sigil Tinted",
+                                    "default": false
+                                },
+                                "color": {
+                                    "$ref": "#/definitions/color",
+                                    "title": "Sigil Color",
+                                    "options": {
+                                        "dependencies": {
+                                            "tinted": true
+                                        }
+                                    }
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "format": "select",
+                                    "title": "Sigil Symbol",
+                                    "default": "sigil_Water",
+                                    "enum": [
+                                        "sigil_Water"
+                                    ]
+                                },
+                                "size": {
+                                    "$ref": "#/definitions/size",
+                                    "title": "Sigil Size",
+                                    "default": 450
+                                },
+                                "angle": {
+                                    "$ref": "#/definitions/angle",
+                                    "title": "Sigil Angle"
+                                },
+                                "offsetX": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Sigil Horizontal Offset"
+                                },
+                                "offsetY": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Sigil Vertical Offset"
+                                }
+                            }
+                        }
+                    },
+                    "signs": {
+                        "type": "array",
+                        "format": "tabs-top",
+                        "title": "Seal Signs",
+                        "options": {
+                            "disable_collapse": true,
+                            "enable_array_copy": true
+                        },
+                        "items": {
+                            "type": "object",
+                            "title": "Sign",
+                            "headerTemplate": "{{properties.name.enumTitle}} Sign",
+                            "properties": {
+                                "visible": {
+                                    "$ref": "#/definitions/visible",
+                                    "title": "Sign Visible"
+                                },
+                                "tinted": {
+                                    "$ref": "#/definitions/boolean",
+                                    "title": "Sign Tinted",
+                                    "default": false
+                                },
+                                "color": {
+                                    "$ref": "#/definitions/color",
+                                    "title": "Sign Color",
+                                    "options": {
+                                        "dependencies": {
+                                            "tinted": true
+                                        }
+                                    }
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "format": "select",
+                                    "title": "Sign Symbol",
+                                    "default": "sign_Column",
+                                    "enum": [
+                                        "sign_Column"
+                                    ]
+                                },
+                                "size": {
+                                    "$ref": "#/definitions/size",
+                                    "title": "Sign Size",
+                                    "default": 250
+                                },
+                                "angle": {
+                                    "$ref": "#/definitions/angle",
+                                    "title": "Sign Angle",
+                                    "default": 180
+                                },
+                                "offsetStrafe": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Sign Strafe Offset"
+                                },
+                                "radius": {
+                                    "$ref": "#/definitions/radius",
+                                    "title": "Sign Circle Radius",
+                                    "default": 300
+                                },
+                                "amount": {
+                                    "$ref": "#/definitions/amount",
+                                    "title": "Sign Circle Symmetry",
+                                    "default": 8
+                                },
+                                "amountSkip": {
+                                    "$ref": "#/definitions/amount",
+                                    "title": "Signs Skipped",
+                                    "default": 0,
+                                    "minimum": 0
+                                },
+                                "rotation": {
+                                    "$ref": "#/definitions/angle",
+                                    "title": "Sign Circle Rotation"
+                                },
+                                "offsetX": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Sign Circle Horizontal Offset"
+                                },
+                                "offsetY": {
+                                    "$ref": "#/definitions/offset",
+                                    "title": "Sign Circle Vertical Offset"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "custom": {
+            "type": "object",
+            "title": "Custom Images",
+            "required": [
+                "images"
+            ],
+            "properties": {
+                "reload": {
+                    "format": "button",
+                    "options": {
+                        "button": {
+                            "text": "Load Custom Images",
+                            "icon": "upload",
+                            "action": "rebuildEditor"
+                        }
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "format": "table",
+                    "title": "Custom Images",
+                    "description": "Upload pictures here for them to become available in the editor.<br>Preferably images need to be square shaped and transparent<br>After uploading your images, click the <i class='fa fa-upload'></i> <b>Load Custom Images</b> button above to load the images into the editor.",
+                    "options": {
+                        "enable_array_copy": false,
+                        "titleHidden": true
+                    },
+                    "default": [],
+                    "items": {
+                        "type": "object",
+                        "title": "Custom Image",
+                        "properties": {
+                            "file": {
+                                "type": "string",
+                                "title": "Symbol Image",
+                                "default": "",
+                                "media": {
+                                    "binaryEncoding": "base64",
+                                    "type": "img/*"
+                                },
+                                "options": {
+                                    "multiple": true
+                                }
+                            },
+                            "name": {
+                                "type": "string",
+                                "title": "Symbol Name",
+                                "default": ""
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "visible": {
+            "type": "boolean",
+            "format": "checkbox",
+            "default": true
+        },
+        "boolean": {
+            "type": "boolean",
+            "format": "checkbox",
+            "default": false
+        },
+        "color": {
+            "type": "string",
+            "format": "color",
+            "default": "#000000"
+        },
+        "offset": {
+            "type": "number",
+            "format": "number",
+            "default": 0
+        },
+        "size": {
+            "type": "number",
+            "format": "number",
+            "minimum": 0,
+            "default": 100
+        },
+        "radius": {
+            "type": "number",
+            "format": "number",
+            "minimum": 0,
+            "default": 450
+        },
+        "angle": {
+            "type": "number",
+            "format": "range",
+            "minimum": 0,
+            "maximum": 360,
+            "default": 0
+        },
+        "scale": {
+            "type": "number",
+            "format": "number",
+            "minimum": 1,
+            "default": 100
+        },
+        "weight": {
+            "type": "number",
+            "format": "number",
+            "minimum": 1,
+            "default": 10
+        },
+        "amount": {
+            "type": "number",
+            "format": "number",
+            "minimum": 1,
+            "default": 1
+        }
+    }
+}

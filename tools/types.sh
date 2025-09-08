@@ -1,0 +1,1 @@
+for f in schemas/*.json; do npx json2ts "$f" > "types/$(basename "${f%.json}.d.ts")"; done

@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+
+    >div {
+        margin: 3vh;
+    }
+}
+
+
+
+#spell-container {
+    height: 94vh !important;
+    width: 94vh !important;
+    flex-shrink: 0;
+
+    canvas {
+        height: 94vh !important;
+        width: 94vh !important;
+
+        background-image: url("/images/background.webp");
+        background-size: contain
+    }
+}
+
+#jsoneditor-container {
+    height: 94vh;
+    width: 100%;
+    overflow: auto;
+}
+
+
+
+// Removing unnecessary titles
+#Spell-Seals {
+    .je-object__title {
+        display: none !important;
+    }
+
+    .je-object__controls {
+        display: none !important;
+    }
+
+    .je-object__container>.my-3 {
+        margin-top: 0 !important;
+    }
+}
+
+
+
+// Weird lack of spacing in object title
+span.card-title>span:nth-child(2) {
+    margin-right: 1ch;
+}
+
+
+
+.card {
+    --bs-card-spacer-x: 0.6rem !important;
+    --bs-card-spacer-y: 0.6rem !important;
+}
+
+
+
+// This formatting needs more work to function properly
+// .je-object__container {
+//     div.row {
+//         div.form-group {
+//             display: flex;
+//             align-items: center;
+
+//             // Field name
+//             >label {
+//                 display: inline-block;
+//                 width: 33%;
+//                 flex-shrink: 0; // Prevent label from shrinking
+//                 margin-bottom: 0;
+
+//                 // Only if a button does not exist
+//                 &:not(:has(+ button)) {
+//                     margin-right: 1rem;
+//                 }
+//             }
+
+//             // Info hover
+//             >button {
+//                 width: 3%;
+//             }
+
+//             // Fixes the case where the button is not present
+//             &:not(:has(button)) {
+
+//                 >input,
+//                 >select,
+//                 >textarea,
+//                 .je-range-control {
+//                     margin-left: 3%;
+//                 }
+//             }
+
+//             // Actual input
+//             >input,
+//             >select,
+//             >textarea,
+//             .je-range-control {
+//                 width: 40%;
+//                 min-width: 7ch;
+//                 display: flex;
+//                 // margin-left: auto;
+//                 margin-right: 0;
+//                 align-items: center;
+//                 // flex-shrink: 1; // Allow second element to shrink first
+
+//                 output {
+//                     margin-right: 1rem;
+//                     min-width: 3ch;
+//                 }
+//             }
+
+//             // Validation warning
+//             >p.invalid-feedback {
+//                 width: 15%;
+//                 margin-left: auto;
+//                 justify-self: center;
+//             }
+//         }
+//     }
+
+//     // Custom images fix
+//     #Custom-Images {
+//         table tr[data-schematype="object"] {
+//             height: 100px;
+
+//             td {
+//                 height: 100%;
+
+//                 &:nth-child(2) {
+//                     div.form-group {
+//                         height: 100%;
+
+//                         input[aria-label="Symbol Name"] {
+//                             margin: 0;
+//                             max-width: 100%;
+//                         }
+//                     }
+//                 }
+
+//                 &:last-child {
+//                     span.btn-group {
+//                         height: 100%;
+//                         align-items: center;
+//                         float: right;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }

@@ -1,0 +1,9 @@
+.vscode/
+node_modules/
+dist/
+extra/
+
+types/*
+!types/symbols.d.ts
+
+public/data/symbols.json
