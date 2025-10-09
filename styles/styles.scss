@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "WHA-Title";
+    src: url("/wha-title.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: "WHA-Title", serif;
+}
+
 body {
     margin: 0;
     overflow: hidden;
@@ -59,6 +70,10 @@ span.card-title>span:nth-child(2) {
 }
 
 
+
+.je-object__title {
+    padding-bottom: 1rem;
+}
 
 .card {
     --bs-card-spacer-x: 0.6rem !important;
