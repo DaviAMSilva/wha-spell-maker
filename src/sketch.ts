@@ -21,23 +21,33 @@ const sketch = (p: p5) => {
     let centerX = 500;
     let centerY = 500;
 
-    // #region PRELOAD
-    p.preload = () => {
-        brushBuddy = p.loadImage("images/brushbuddy.webp");
+
+
+    // #region SETUP
+    p.setup = async () => {
+        const canvas = p.createCanvas(1000, 1000);
+        const sealContainer = document.querySelector("#spell-container");
+
+        if (sealContainer)
+            canvas.parent(sealContainer);
+
+
+        brushBuddy = await p.loadImage("images/brushbuddy.webp");
 
         // Loading image data
-        p.loadJSON("data/symbols.json", (data: Symbols) => {
+        await p.loadJSON("data/symbols.json", async (data: Symbols) => {
             if (typeof data == "object" && data.sigils && data.signs) {
                 for (const sigil_name in data.sigils) {
-                    symbolsImages.sigils["sigil_" + sigil_name] = p.loadImage(data.sigils[sigil_name]);
+                    symbolsImages.sigils["sigil_" + sigil_name] = await p.loadImage(data.sigils[sigil_name]);
                 }
                 for (const sign_name in data.signs) {
-                    symbolsImages.signs["sign_" + sign_name] = p.loadImage(data.signs[sign_name]);
+                    symbolsImages.signs["sign_" + sign_name] = await p.loadImage(data.signs[sign_name]);
                 }
             }
         });
 
-        p.loadJSON("schemas/spell.json", (spellSchema: any) => {
+        // Loading default values from schema
+        await p.loadJSON("schemas/spell.json", (spellSchema: any) => {
             if (typeof spellSchema == "object") {
                 // Typically angle 0 is right, now it's up
                 defaults.globalRingOffsetAngle = 270;
@@ -104,18 +114,6 @@ const sketch = (p: p5) => {
                 };
             }
         });
-    }
-    // #endregion PRELOAD
-
-
-
-    // #region SETUP
-    p.setup = () => {
-        const canvas = p.createCanvas(1000, 1000);
-        const sealContainer = document.querySelector("#spell-container");
-
-        if (sealContainer)
-            canvas.parent(sealContainer);
 
         centerX = p.width / 2;
         centerY = p.height / 2;
@@ -237,7 +235,7 @@ const sketch = (p: p5) => {
                 if (symbolsImages[symbolImageType] && symbolsImages[symbolImageType][symbolName]) {
                     symbolImage = symbolsImages[symbolImageType][symbolName];
                 } else {
-                    continue
+                    continue;
                 };
 
 
@@ -246,7 +244,18 @@ const sketch = (p: p5) => {
                 // to mask with the symbol image alpha channel
                 // and that can be reused in the loop below
                 const colorImage = p.createImage(1, 1);
-                colorImage.set(0, 0, p.color(symbolColor));
+
+                // symbolColor: "#rrggbb"
+                const r = parseInt((symbolColor as string).substring(1, 3), 16);
+                const g = parseInt((symbolColor as string).substring(3, 5), 16);
+                const b = parseInt((symbolColor as string).substring(5, 7), 16);
+                colorImage.set(0, 0, [r, g, b, 255]);
+
+                // colorImage.set(0, 0, p.color(symbolColor));
+                // Doesn't work because of the error:
+                // An error with message "p5 is not defined" occurred inside the p5js library when set was called.
+                // Potentially caused by https://github.com/processing/p5.js/issues/8302
+
                 colorImage.updatePixels();
                 colorImage.resize(symbolImage.width, symbolImage.height);
 

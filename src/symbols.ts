@@ -20,12 +20,12 @@ export function rebuildAvailableSymbols(schema: any, symbols: SymbolsImages, las
     }
 
     const customKeys = customImages.map((i: any) => i.name);
-    customImages.forEach((img: any) => {
+    customImages.forEach(async (img: any) => {
         if (img.file && img.name) {
-            const symbolImage = myp5.loadImage(img.file);
+            const symbolImage = await myp5.loadImage(img.file);
             symbolImage.resize(
-                Math.min(100, symbolImage.width),
-                Math.min(100, symbolImage.height)
+                myp5.constrain(symbolImage.width, 100, 1000),
+                myp5.constrain(symbolImage.height, 100, 1000)
             );
             symbolsImages.customs["custom_" + img.name] = symbolImage;
         }
