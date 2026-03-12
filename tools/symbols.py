@@ -7,11 +7,12 @@ def images_to_json(base_folder, subfolders, output_file="images.json"):
     result = {}
 
     for sub in subfolders:
+        result[sub] = {}
+
         sub_path = os.path.join(base_folder, sub)
         if not os.path.isdir(sub_path):
             continue
 
-        result[sub] = {}
         for file in sorted(os.listdir(sub_path)):
             file_path = os.path.join(sub_path, file)
 
@@ -29,5 +30,5 @@ def images_to_json(base_folder, subfolders, output_file="images.json"):
 
 if __name__ == "__main__":
     base_folder = "symbols"
-    subfolders = ["sigils", "signs"]
-    images_to_json(base_folder, subfolders, "public/data/symbols.json")
+    subfolders = ["sigils", "signs", "customs"]
+    images_to_json(base_folder, subfolders, "src/data/symbols.json")

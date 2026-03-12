@@ -4,11 +4,14 @@ import { JSONEditor } from "@json-editor/json-editor";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
-import { WitchHatAtelierSpellEditor as SpellSchema } from "../types/spell";
-import { SymbolsImages } from "../types/symbols";
+import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import { Symbols } from "../types/symbols";
 import { setOptGroups } from "./optgroups";
 import { myp5 } from "./sketch";
-import { rebuildAvailableSymbols } from "./symbols";
+import { loadCustomImages, rebuildAvailableSymbols } from "./symbols";
+
+import symbols from "./data/symbols.json";
+import schema from "./schemas/spell.json";
 
 
 
@@ -24,7 +27,7 @@ Handlebars.registerHelper("titleWithoutNumber", function (title) {
 
 
 
-function createJsonEditor(schema: any, symbols: SymbolsImages, currentSpell: SpellSchema) {
+function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType) {
     // Destroy previous editor if exists
     if (jsonEditor) {
         jsonEditor.destroy();
@@ -45,9 +48,19 @@ function createJsonEditor(schema: any, symbols: SymbolsImages, currentSpell: Spe
         use_default_values: true
     });
 
+    // Necessary for DOMPurify and Handlebars to be used by JSONEditor
+    window.DOMPurify = DOMPurify;
+    window.Handlebars = Handlebars;
+
+    // Not strictly necessary but useful
+    window.jsonEditor = jsonEditor;
+    window.JSONEditor = JSONEditor;
+
     // Adds groups to sigils and signs select lists
     jsonEditor.on("ready", () => {
         setOptGroups();
+        // Load custom images now that p5 and editor are ready
+        loadCustomImages(jsonEditor.getValue());
     });
     jsonEditor.on("addRow", () => setOptGroups());
 
@@ -91,11 +104,6 @@ function createJsonEditor(schema: any, symbols: SymbolsImages, currentSpell: Spe
             "rebuildEditor": () => {
                 rebuildAvailableSymbols(schema, symbols, jsonEditor.getValue());
                 createJsonEditor(schema, symbols, jsonEditor.getValue());
-
-                // Fix a bug where the images attempt to draw before fully loading
-                // Unfortunately causes a second redraw
-                // Probably possible to mitigate when p5.js v2 becomes stable
-                setTimeout(() => myp5.redraw(), 500);
             }
         }
     };
@@ -103,34 +111,16 @@ function createJsonEditor(schema: any, symbols: SymbolsImages, currentSpell: Spe
 
 
 
-// Loads initially the data and the form
-// TODO?: Load on build instead of runtime
-Promise.all([
-    fetch("schemas/spell.json").then(res => res.json()),
-    fetch("data/symbols.json").then(res => res.json())
-]).then(([schema, symbols]) => {
-    let lastSpell: SpellSchema = { version: "000" };
+let lastSpell: SpellType = { version: "000" };
 
-    try {
-        lastSpell = JSON.parse(localStorage.getItem("lastSpell") ?? "0");
-    } catch {
-        console.error("Failed to load last spell from localStorage");
-    }
+try {
+    lastSpell = JSON.parse(localStorage.getItem("lastSpell") ?? "0");
+} catch {
+    console.error("Failed to load last spell from localStorage");
+}
 
-    rebuildAvailableSymbols(schema, symbols, lastSpell);
-
-    createJsonEditor(schema, symbols, lastSpell);
-}).catch((e) => {
-    console.error("Failed to load json files");
-    throw e;
-});
-
-
-
-window.jsonEditor = jsonEditor;
-window.JSONEditor = JSONEditor;
-window.DOMPurify = DOMPurify;
-window.Handlebars = Handlebars;
+rebuildAvailableSymbols(schema, symbols, lastSpell);
+createJsonEditor(schema, symbols, lastSpell);
 
 
 

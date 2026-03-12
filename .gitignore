@@ -6,4 +6,4 @@ extra/
 types/*
 !types/symbols.d.ts
 
-public/data/symbols.json
+src/data/symbols.json
