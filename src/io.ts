@@ -13,8 +13,6 @@ type propertiesType = { [key: string]: objectType };
 
 
 
-// TODO: Refactor such that it creates a new object instead
-// For some reason deleting causes the editor to get confused
 function deleteRedundantValue(
     object: objectType,
     properties: propertiesType,
@@ -43,7 +41,6 @@ function deleteRedundantValue(
 
 
 
-(window as any).shrinkSpell = shrinkSpell;
 
 function shrinkSpell(originalSpell: SpellType) {
     // Cloning, otherwise JSONEditor acts weird
@@ -126,4 +123,26 @@ function shrinkSpell(originalSpell: SpellType) {
 
 
     return spell;
+}
+
+
+
+
+
+async function base64urlDeflateRawEncode(input: string): Promise<string> {
+    const stream = new Response(input).body!.pipeThrough(new CompressionStream("deflate-raw"));
+    const buffer = await new Response(stream).arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+    const binary = Array.from(bytes, byte => String.fromCharCode(byte)).join("");
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+}
+
+async function base64urlDeflateRawDecode(input: string): Promise<string> {
+    const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, "=");
+    const binary = atob(padded);
+    const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
+    const stream = new Response(bytes).body!.pipeThrough(new DecompressionStream("deflate-raw"));
+    const decompressed = await new Response(stream).arrayBuffer();
+    return new TextDecoder().decode(decompressed);
 }
