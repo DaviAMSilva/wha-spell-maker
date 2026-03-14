@@ -43,8 +43,11 @@ function deleteRedundantValue(
 
 
 
+(window as any).shrinkSpell = shrinkSpell;
 
-function shrinkSpell(spell: SpellType) {
+function shrinkSpell(originalSpell: SpellType) {
+    // Cloning, otherwise JSONEditor acts weird
+    const spell = structuredClone(originalSpell);
     const spellProperties = spellJson.properties;
 
 
