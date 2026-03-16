@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { Symbols } from "../types/symbols";
+import updateDynamicTabs from "./html";
 import { setOptGroups } from "./optgroups";
 import { myp5 } from "./sketch";
 import { loadCustomImages, rebuildAvailableSymbols } from "./symbols";
@@ -61,6 +62,8 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
         setOptGroups();
         // Load custom images now that p5 and editor are ready
         loadCustomImages(jsonEditor.getValue());
+
+        updateDynamicTabs();
     });
     jsonEditor.on("addRow", () => setOptGroups());
 

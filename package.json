@@ -5,11 +5,11 @@
         "bootstrap": "^5.3.8",
         "dompurify": "^3.3.2",
         "handlebars": "^4.7.8",
+        "mini-jsx": "^4.0.0",
         "p5": "^2.2.2"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@types/jquery": "^4.0.0",
         "@types/p5": "^1.7.7",
         "eslint": "^10.0.3",
         "json-schema-to-typescript": "^15.0.4",

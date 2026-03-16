@@ -8,6 +8,15 @@
     "options": {
         "disable_collapse": true
     },
+    "required": [
+        "version",
+        "name",
+        "description",
+        "seals",
+        "custom",
+        "about",
+        "io"
+    ],
     "properties": {
         "version": {
             "type": "string",
@@ -364,6 +373,24 @@
                         }
                     }
                 }
+            }
+        },
+        "io": {
+            "type": "object",
+            "format": "info",
+            "title": "Import / Export",
+            "description": "<div id='import-export-container'></div>",
+            "options": {
+                "titleHidden": true
+            }
+        },
+        "about": {
+            "type": "object",
+            "format": "info",
+            "title": "About",
+            "description": "<div id='about-container'></div>",
+            "options": {
+                "titleHidden": true
             }
         }
     },
