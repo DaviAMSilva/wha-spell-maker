@@ -3,7 +3,7 @@ import { jsonEditor } from "./form";
 
 // Example provided by json-editor collaborator pmk65 in https://github.com/json-editor/json-editor/issues/345
 // Convert "select" list "option" tags with value prefixed by ### into "optgroup" tags
-export function setOptGroups() {
+export default function updateOptGroups() {
     // Get array of editor keys where input_type = "select" and attribute "optgrup" not set
     const selectEditorKeys = Object.keys(jsonEditor.editors).filter(function (ed) {
         return jsonEditor.editors[ed] && jsonEditor.editors[ed].input_type === "select" && !jsonEditor.editors[ed].input.getAttribute("optgroup");

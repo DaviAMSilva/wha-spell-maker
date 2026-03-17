@@ -6,8 +6,8 @@ import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { Symbols } from "../types/symbols";
-import updateDynamicTabs from "./html";
-import { setOptGroups } from "./optgroups";
+import updateCustomTabs from "./html";
+import updateOptGroups from "./optgroups";
 import { myp5 } from "./sketch";
 import { loadCustomImages, rebuildAvailableSymbols } from "./symbols";
 
@@ -59,13 +59,20 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
 
     // Adds groups to sigils and signs select lists
     jsonEditor.on("ready", () => {
-        setOptGroups();
+        // Update select groups
+        updateOptGroups();
+
         // Load custom images now that p5 and editor are ready
         loadCustomImages(jsonEditor.getValue());
 
-        updateDynamicTabs();
+        // Fixing title formatting
+        document.querySelector(".je-object__title")?.classList.remove("h3")
+        document.querySelector(".je-object__title")?.classList.remove("card-title")
+
+        // Update custom tabs HTML contents
+        updateCustomTabs();
     });
-    jsonEditor.on("addRow", () => setOptGroups());
+    jsonEditor.on("addRow", () => updateOptGroups());
 
     jsonEditor.on("change", () => {
         // Redrawing the p5 canvas
