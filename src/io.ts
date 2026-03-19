@@ -1,4 +1,5 @@
 import type { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import { jsonEditor } from "./form";
 
 import spellJson from "./schemas/spell.json";
 
@@ -8,6 +9,8 @@ import spellJson from "./schemas/spell.json";
 
 type objectType = { [key: string]: any };
 type propertiesType = { [key: string]: objectType };
+
+const spellBase64ParamName = "spell";
 
 
 
@@ -42,7 +45,7 @@ function deleteRedundantValue(
 
 
 
-function shrinkSpell(originalSpell: SpellType) {
+export function shrinkSpell(originalSpell: SpellType) {
     // Cloning, otherwise JSONEditor acts weird
     const spell = structuredClone(originalSpell);
     const spellProperties = spellJson.properties;
@@ -104,13 +107,6 @@ function shrinkSpell(originalSpell: SpellType) {
 
 
 
-        // Deleting empty objects
-        seal.rings = seal.rings?.filter(o => Object.keys(o).length !== 0);
-        seal.sigils = seal.sigils?.filter(o => Object.keys(o).length !== 0);
-        seal.signs = seal.signs?.filter(o => Object.keys(o).length !== 0);
-
-
-
         // Deleting empty lists
         if (seal.rings?.length === 0)
             delete seal.rings;
@@ -129,7 +125,7 @@ function shrinkSpell(originalSpell: SpellType) {
 
 
 
-async function base64urlDeflateRawEncode(input: string): Promise<string> {
+export async function base64urlDeflateRawEncode(input: string): Promise<string> {
     const stream = new Response(input).body!.pipeThrough(new CompressionStream("deflate-raw"));
     const buffer = await new Response(stream).arrayBuffer();
     const bytes = new Uint8Array(buffer);
@@ -137,7 +133,7 @@ async function base64urlDeflateRawEncode(input: string): Promise<string> {
     return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }
 
-async function base64urlDeflateRawDecode(input: string): Promise<string> {
+export async function base64urlDeflateRawDecode(input: string): Promise<string> {
     const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
     const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, "=");
     const binary = atob(padded);
@@ -145,4 +141,109 @@ async function base64urlDeflateRawDecode(input: string): Promise<string> {
     const stream = new Response(bytes).body!.pipeThrough(new DecompressionStream("deflate-raw"));
     const decompressed = await new Response(stream).arrayBuffer();
     return new TextDecoder().decode(decompressed);
+}
+
+
+
+
+
+
+
+
+
+
+// Functions called by buttons presses
+
+export function btn_downloadImage() {
+    const spellName = jsonEditor.getValue().name as string;
+    const canvas = document.getElementById('spell-canvas') as HTMLCanvasElement;
+
+    const dataURL = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = spellName && spellName.length > 0 ? spellName + ".png" : "spell.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+export function btn_loadSpellJSON() {
+    const spellJson = document.getElementById('spell-json') as HTMLTextAreaElement;
+
+    try {
+        const spellJSON = JSON.parse(spellJson.value);
+        jsonEditor.setValue(spellJSON);
+    } catch (e) {
+        console.error("Failed to load spell:", e);
+    }
+}
+
+export async function btn_downloadSpellJSON() {
+    const spellText = JSON.stringify(shrinkSpell(jsonEditor.getValue()), null, 2);
+    const spellName = jsonEditor.getValue().name as string;
+    const fileName = spellName && spellName.length > 0 ? spellName + ".json" : "spell.json";
+
+    try {
+        const handle = await (window as any).showSaveFilePicker({
+            suggestedName: fileName,
+            types: [{ description: 'JSON Files', accept: { 'application/json': ['.json'] } }],
+        });
+        const writable = await handle.createWritable();
+        await writable.write(spellText);
+        await writable.close();
+    } catch (e: any) {
+        if ((e as Error).name === 'AbortError') return; // User cancelled
+
+        // Fallback to quick download if save dialog is unsupported (*cough* Firefox *cough*)
+        console.warn("Activating download fallback:", e);
+
+        const link = document.createElement('a');
+        const blob = new Blob([spellText], { type: 'application/json' });
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+export async function btn_uploadSpellJson() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+
+    input.onchange = async (e) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+
+        const text = await file.text();
+        try {
+            const spell = JSON.parse(text);
+            jsonEditor.setValue(spell);
+        } catch (e) {
+            console.error('Invalid JSON file:', e);
+        }
+    };
+
+    input.click();
+}
+
+
+
+// Functions for updating the UI
+
+export async function updateSpellLink() {
+    const spellLink = document.getElementById('spell-link') as HTMLAnchorElement;
+
+    const encodedData = await base64urlDeflateRawEncode(JSON.stringify(shrinkSpell(jsonEditor.getValue())));
+
+    spellLink.href = `${window.location.origin}${window.location.pathname}?${spellBase64ParamName}=${encodedData}`;
+    spellLink.textContent = spellLink.href;
+}
+
+export function updateSpellJson() {
+    const spellJson = document.getElementById('spell-json') as HTMLTextAreaElement;
+
+    const spellJsonText = JSON.stringify(shrinkSpell(jsonEditor.getValue()), null, 2);
+    spellJson.value = spellJsonText;
 }

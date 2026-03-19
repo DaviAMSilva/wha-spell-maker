@@ -27,10 +27,10 @@ const sketch = (p: p5) => {
     // #region SETUP
     p.setup = async () => {
         const canvas = p.createCanvas(1000, 1000);
-        const sealContainer = document.querySelector("#spell-container");
+        canvas.id("spell-canvas");
 
-        if (sealContainer)
-            canvas.parent(sealContainer);
+        const sealContainer = document.getElementById("spell-container");
+        if (sealContainer) canvas.parent(sealContainer);
 
 
         brushBuddy = await p.loadImage("images/brushbuddy.webp");

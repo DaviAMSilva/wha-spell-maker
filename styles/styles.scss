@@ -9,6 +9,18 @@
     font-family: "WHA-Title", serif;
 }
 
+textarea#spell-json {
+    font-size: 0.75em;
+    font-family: monospace;
+    min-height: 23.5em;
+    max-height: 45vh;
+}
+
+textarea#root\[description\] {
+    min-height: 8.5em;
+    max-height: 40vh;
+}
+
 body {
     margin: 0;
     overflow: hidden;

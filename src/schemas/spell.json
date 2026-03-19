@@ -3,7 +3,7 @@
     "type": "object",
     "format": "categories",
     "basicCategoryTitle": "Spell Information",
-    "title": "<h1>Witch Hat Atelier Spell Editor</h1>",
+    "title": "Witch Hat Atelier Spell Editor",
     "description": "A spell editor for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.",
     "options": {
         "disable_collapse": true
@@ -343,7 +343,7 @@
                     "type": "array",
                     "format": "table",
                     "title": "Custom Images",
-                    "description": "Upload pictures here for them to become available in the editor.<br>Preferably images need to be square shaped and transparent<br>After uploading your images, click the <i class='fa fa-upload'></i> <b>Load Custom Images</b> button above to load the images into the editor.",
+                    "description": "Upload pictures here for them to become available in the editor.<br>Preferably images need to be square shaped and transparent.<br>After uploading your images, click the <i class='fa fa-upload'></i> <b>Load Custom Images</b> button above to load the images into the editor.",
                     "options": {
                         "enable_array_copy": false,
                         "titleHidden": true

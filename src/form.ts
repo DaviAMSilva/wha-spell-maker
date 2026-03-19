@@ -6,10 +6,11 @@ import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { Symbols } from "../types/symbols";
-import updateCustomTabs from "./html";
+import { updateSpellJson, updateSpellLink } from "./io";
 import updateOptGroups from "./optgroups";
 import { myp5 } from "./sketch";
 import { loadCustomImages, rebuildAvailableSymbols } from "./symbols";
+import updateCustomTabs from "./tabs";
 
 import symbols from "./data/symbols.json";
 import schema from "./schemas/spell.json";
@@ -80,6 +81,10 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
 
         // Saving changes to localStorage
         localStorage.setItem("lastSpell", JSON.stringify(jsonEditor.getValue()));
+
+        // Updating dynamic fields
+        updateSpellJson();
+        updateSpellLink();
 
         // Fix some elements with incorrect light mode
         document.querySelectorAll(".bg-light").forEach(el => el.classList.remove("bg-light"));
