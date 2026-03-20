@@ -12,10 +12,13 @@
         "version",
         "name",
         "description",
+        "grid",
+        "background",
+        "backgroundColor",
         "seals",
         "custom",
-        "about",
-        "io"
+        "io",
+        "about"
     ],
     "properties": {
         "version": {

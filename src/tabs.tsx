@@ -1,4 +1,4 @@
-import { jsonEditor } from "./form";
+import { createJsonEditor } from "./form";
 import { btn_downloadImage, btn_downloadSpellJSON, btn_loadSpellJSON, btn_uploadSpellJson } from "./io";
 
 export default function updateCustomTabs() {
@@ -17,7 +17,7 @@ export default function updateCustomTabs() {
             <button id="download-image" title="Download the current spell as an image" type="button" class="btn btn-primary my-2" onclick={btn_downloadImage}>
                 <i class="fas fa-download" /> Download Image
             </button>
-            <button id="clear-spell" title="Will clear the editor to an empty spell" type="button" class="btn btn-danger my-2 ms-2" onclick={() => jsonEditor.setValue({})}>
+            <button id="clear-spell" title="Will clear the editor to an empty spell" type="button" class="btn btn-danger my-2 ms-2" onclick={() => createJsonEditor(null)}>
                 <i class="fas fa-triangle-exclamation" /> Clear Spell
             </button>
             <div class="btn-group col-md-12 my-4" role="group">

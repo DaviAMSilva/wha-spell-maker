@@ -146,8 +146,8 @@ const sketch = (p: p5) => {
         const spell: SpellType = jsonEditor.getValue();
 
         // Spell version is the field that indicates the JSON is a valid spell
-        if (spell.version === undefined) {
-            console.error("Spell version undefined");
+        if (!spell?.version) {
+            console.error("Spell version invalid:", spell?.version);
             p.clear();
             p.image(brushBuddy, centerX, centerY, 800, 800);
             return;

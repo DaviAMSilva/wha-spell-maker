@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
-import { Symbols } from "../types/symbols";
 import { updateSpellJson, updateSpellLink } from "./io";
 import updateOptGroups from "./optgroups";
 import { myp5 } from "./sketch";
@@ -29,15 +28,14 @@ Handlebars.registerHelper("titleWithoutNumber", function (title) {
 
 
 
-function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType) {
+export function createJsonEditor(currentSpell?: SpellType | null) {
     // Destroy previous editor if exists
     if (jsonEditor) {
         jsonEditor.destroy();
     }
 
-    jsonEditor = new JSONEditor(document.getElementById("jsoneditor-container"), {
+    const options: {[key: string]: any} = {
         schema: schema,
-        startval: (currentSpell && currentSpell.version) ? currentSpell : { version: "000" },
         theme: "bootstrap5",
         iconlib: "fontawesome5",
         template: "handlebars",
@@ -48,7 +46,14 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
         disable_properties: true,
         required_by_default: true,
         use_default_values: true
-    });
+    };
+
+    // Using a starting value if available
+    if (currentSpell) options.startval = currentSpell;
+
+    jsonEditor = new JSONEditor(document.getElementById("jsoneditor-container"), options);
+
+
 
     // Necessary for DOMPurify and Handlebars to be used by JSONEditor
     window.DOMPurify = DOMPurify;
@@ -57,6 +62,8 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
     // Not strictly necessary but useful
     window.jsonEditor = jsonEditor;
     window.JSONEditor = JSONEditor;
+
+
 
     // Adds groups to sigils and signs select lists
     jsonEditor.on("ready", () => {
@@ -68,19 +75,20 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
 
         // Fixing title formatting
         document.querySelector(".je-object__title")?.classList.remove("h3")
-        document.querySelector(".je-object__title")?.classList.remove("card-title")
+        document.querySelector(".je-object__title")?.classList.add("h1")
 
         // Update custom tabs HTML contents
         updateCustomTabs();
     });
+
     jsonEditor.on("addRow", () => updateOptGroups());
 
     jsonEditor.on("change", () => {
-        // Redrawing the p5 canvas
-        if (myp5) myp5.redraw();
-
         // Saving changes to localStorage
         localStorage.setItem("lastSpell", JSON.stringify(jsonEditor.getValue()));
+
+        // Redrawing the p5 canvas
+        if (myp5) myp5.redraw();
 
         // Updating dynamic fields
         updateSpellJson();
@@ -118,7 +126,7 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
         "button": {
             "rebuildEditor": () => {
                 rebuildAvailableSymbols(schema, symbols, jsonEditor.getValue());
-                createJsonEditor(schema, symbols, jsonEditor.getValue());
+                createJsonEditor(jsonEditor.getValue());
             }
         }
     };
@@ -126,7 +134,7 @@ function createJsonEditor(schema: any, symbols: Symbols, currentSpell: SpellType
 
 
 
-let lastSpell: SpellType = { version: "000" };
+let lastSpell: SpellType | null = null;
 
 try {
     lastSpell = JSON.parse(localStorage.getItem("lastSpell") ?? "0");
@@ -135,7 +143,7 @@ try {
 }
 
 rebuildAvailableSymbols(schema, symbols, lastSpell);
-createJsonEditor(schema, symbols, lastSpell);
+createJsonEditor(lastSpell);
 
 
 

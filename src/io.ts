@@ -49,6 +49,10 @@ export function shrinkSpell(originalSpell: SpellType) {
     // Cloning, otherwise JSONEditor acts weird
     const spell = structuredClone(originalSpell);
     const spellProperties = spellJson.properties;
+    const sealProperties = spellJson.properties.seals.items.properties;
+    const ringProperties = sealProperties.rings.items.properties;
+    const sigilProperties = sealProperties.sigils.items.properties;
+    const signProperties = sealProperties.signs.items.properties;
 
 
 
@@ -62,14 +66,12 @@ export function shrinkSpell(originalSpell: SpellType) {
 
 
     // Deleting custom images if none are present
-    if (spell.custom?.images.length === 0)
+    if (spell.custom?.images?.length === 0)
         delete spell?.custom;
 
 
 
     for (const seal of spell?.seals ?? []) {
-        const sealProperties = spellJson.properties.seals.items.properties;
-
         // Ignoring: rings, sigils, signs
         deleteRedundantValue(seal, sealProperties, "visible")
         deleteRedundantValue(seal, sealProperties, "name")
@@ -82,25 +84,23 @@ export function shrinkSpell(originalSpell: SpellType) {
 
         // Deleting items in the lists
         for (const ring of seal?.rings ?? []) {
-            const ringProperties = sealProperties.rings.items.properties;
-
             for (const valueName in ring) {
                 deleteRedundantValue(ring, ringProperties, valueName);
             }
         }
 
         for (const sigil of seal?.sigils ?? []) {
-            const sigilProperties: propertiesType = sealProperties.sigils.items.properties;
-
             for (const valueName in sigil) {
+                // Skipping "name" since it shouldn't really have a default value
+                if (valueName === "name") continue;
                 deleteRedundantValue(sigil, sigilProperties, valueName);
             }
         }
 
         for (const sign of seal?.signs ?? []) {
-            const signProperties: propertiesType = sealProperties.signs.items.properties;
-
             for (const valueName in sign) {
+                // Skipping "name" since it shouldn't really have a default value
+                if (valueName === "name") continue;
                 deleteRedundantValue(sign, signProperties, valueName);
             }
         }
