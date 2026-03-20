@@ -167,7 +167,7 @@ export function btn_downloadImage() {
     document.body.removeChild(link);
 }
 
-export function btn_loadSpellJSON() {
+export function btn_loadSpellJson() {
     const spellJson = document.getElementById('spell-json') as HTMLTextAreaElement;
 
     try {
@@ -178,7 +178,7 @@ export function btn_loadSpellJSON() {
     }
 }
 
-export async function btn_downloadSpellJSON() {
+export async function btn_downloadSpellJson() {
     const spellText = JSON.stringify(shrinkSpell(jsonEditor.getValue()), null, 2);
     const spellName = jsonEditor.getValue().name as string;
     const fileName = spellName && spellName.length > 0 ? spellName + ".json" : "spell.json";

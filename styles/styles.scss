@@ -13,7 +13,7 @@ textarea#spell-json {
     font-size: 0.75em;
     font-family: monospace;
     min-height: 23.5em;
-    max-height: 45vh;
+    max-height: 50vh;
 }
 
 textarea#root\[description\] {
@@ -55,6 +55,13 @@ body {
     height: 94vh;
     width: 100%;
     overflow: auto;
+}
+
+
+
+#copy-link {
+    // Fix d-flex btn-group conflict
+    flex: unset;
 }
 
 

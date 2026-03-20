@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
-import { updateSpellJson, updateSpellLink } from "./io";
+import { base64urlDeflateRawDecode, updateSpellJson, updateSpellLink } from "./io";
 import updateOptGroups from "./optgroups";
 import { myp5 } from "./sketch";
 import { loadCustomImages, rebuildAvailableSymbols } from "./symbols";
@@ -84,7 +84,7 @@ export function createJsonEditor(currentSpell?: SpellType | null) {
     jsonEditor.on("addRow", () => updateOptGroups());
 
     jsonEditor.on("change", () => {
-        // Saving changes to localStorage
+        // Saving spell to localStorage
         localStorage.setItem("lastSpell", JSON.stringify(jsonEditor.getValue()));
 
         // Redrawing the p5 canvas
@@ -134,13 +134,32 @@ export function createJsonEditor(currentSpell?: SpellType | null) {
 
 
 
+// Trying to load the spell previously saved on localStorage or from the url query param
 let lastSpell: SpellType | null = null;
 
 try {
-    lastSpell = JSON.parse(localStorage.getItem("lastSpell") ?? "0");
+    let spellText;
+
+    // Getting the spell param from the url
+    const urlParams = new URLSearchParams(window.location.search);
+    const spellParam = urlParams.get("spell");
+
+    // Clear spell params immediately after loading the page
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    // Trying first to load from query param, then from localStorage
+    if (spellParam) {
+        spellText = await base64urlDeflateRawDecode(spellParam);
+    } else {
+        spellText = localStorage.getItem("lastSpell");
+    }
+
+    if (spellText) lastSpell = JSON.parse(spellText);
 } catch {
-    console.error("Failed to load last spell from localStorage");
+    console.error("Failed to load spell");
 }
+
+
 
 rebuildAvailableSymbols(schema, symbols, lastSpell);
 createJsonEditor(lastSpell);
