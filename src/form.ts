@@ -28,7 +28,10 @@ Handlebars.registerHelper("titleWithoutNumber", function (title) {
 
 
 
-export function createJsonEditor(currentSpell?: SpellType | null) {
+export function createJsonEditor(newSpell: SpellType | null) {
+    // It's better to do this every time a new editor is created
+    rebuildAvailableSymbols(schema, symbols, newSpell);
+
     // Destroy previous editor if exists
     if (jsonEditor) {
         jsonEditor.destroy();
@@ -49,8 +52,9 @@ export function createJsonEditor(currentSpell?: SpellType | null) {
     };
 
     // Using a starting value if available
-    if (currentSpell) options.startval = currentSpell;
+    if (newSpell) options.startval = newSpell;
 
+    // Creating the editor
     jsonEditor = new JSONEditor(document.getElementById("jsoneditor-container"), options);
 
 
@@ -132,7 +136,6 @@ export function createJsonEditor(currentSpell?: SpellType | null) {
     JSONEditor.defaults.callbacks = {
         "button": {
             "rebuildEditor": () => {
-                rebuildAvailableSymbols(schema, symbols, jsonEditor.getValue());
                 createJsonEditor(jsonEditor.getValue());
             }
         }
@@ -168,7 +171,6 @@ try {
 
 
 
-rebuildAvailableSymbols(schema, symbols, lastSpell);
 createJsonEditor(lastSpell);
 
 

@@ -1,9 +1,9 @@
-import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import { CustomImage, WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { Symbols } from "../types/symbols";
 
 import { myp5, symbolsImages } from "./sketch";
 
-function getCustomImages(lastSpell: SpellType | null): any[] {
+function getCustomImages(lastSpell: SpellType | null): CustomImage[] {
     if (lastSpell && lastSpell.custom && Array.isArray(lastSpell.custom.images)) {
         return lastSpell.custom.images;
     }
@@ -11,8 +11,10 @@ function getCustomImages(lastSpell: SpellType | null): any[] {
 }
 
 export async function loadCustomImages(lastSpell: SpellType | null) {
+    if (!lastSpell) return;
+
     const customImages = getCustomImages(lastSpell);
-    
+
     for (const img of customImages) {
         if (img.file && img.name && myp5) {
             try {

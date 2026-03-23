@@ -1,8 +1,6 @@
 import type { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { createJsonEditor, jsonEditor } from "./form";
-import { rebuildAvailableSymbols } from "./symbols";
 
-import symbols from "./data/symbols.json";
 import schema from "./schemas/spell.json";
 
 
@@ -175,7 +173,6 @@ export function btn_loadSpellJson() {
     try {
         const newSpell = JSON.parse(spellJson.value);
 
-        rebuildAvailableSymbols(schema, symbols, newSpell);
         createJsonEditor(newSpell);
     } catch (e) {
         console.error("Failed to load spell:", e);
@@ -195,7 +192,7 @@ export async function btn_downloadSpellJson() {
         const writable = await handle.createWritable();
         await writable.write(spellText);
         await writable.close();
-    } catch (e: any) {
+    } catch (e) {
         if ((e as Error).name === 'AbortError') return; // User cancelled
 
         // Fallback to quick download if save dialog is unsupported (*cough* Firefox *cough*)
@@ -225,7 +222,6 @@ export async function btn_uploadSpellJson() {
         try {
             const newSpell = JSON.parse(spellText);
 
-            rebuildAvailableSymbols(schema, symbols, newSpell);
             createJsonEditor(newSpell);
         } catch (e) {
             console.error('Invalid JSON file:', e);
@@ -263,7 +259,7 @@ export function updateSpellJson() {
 
 // Copy to clipboard
 export async function copyToClipboard(text?: string) {
-    if (text && text.length > 0) {
+    if (text) {
         try {
             await navigator.clipboard.writeText(text);
         } catch (e) {
