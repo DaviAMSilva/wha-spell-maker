@@ -66,19 +66,26 @@ export function createJsonEditor(currentSpell?: SpellType | null) {
 
 
     // Adds groups to sigils and signs select lists
-    jsonEditor.on("ready", () => {
+    jsonEditor.on("ready", async () => {
         // Update select groups
         updateOptGroups();
 
         // Load custom images now that p5 and editor are ready
-        loadCustomImages(jsonEditor.getValue());
+        await loadCustomImages(jsonEditor.getValue());
+
+        // Redrawing the p5 canvas
+        if (myp5) myp5.redraw();
+
+        // Update custom tabs HTML contents
+        updateCustomTabs();
+
+        // Updating dynamic fields
+        updateSpellJson();
+        updateSpellLink();
 
         // Fixing title formatting
         document.querySelector(".je-object__title")?.classList.remove("h3")
         document.querySelector(".je-object__title")?.classList.add("h1")
-
-        // Update custom tabs HTML contents
-        updateCustomTabs();
     });
 
     jsonEditor.on("addRow", () => updateOptGroups());

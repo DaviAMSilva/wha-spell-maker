@@ -1,7 +1,9 @@
 import type { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
-import { jsonEditor } from "./form";
+import { createJsonEditor, jsonEditor } from "./form";
+import { rebuildAvailableSymbols } from "./symbols";
 
-import spellJson from "./schemas/spell.json";
+import symbols from "./data/symbols.json";
+import schema from "./schemas/spell.json";
 
 
 
@@ -21,7 +23,7 @@ function deleteRedundantValue(
     properties: propertiesType,
     valueName: string
 ) {
-    const definitionsJson: propertiesType = spellJson.definitions;
+    const definitionsJson: propertiesType = schema.definitions;
     const propertiesValue = properties[valueName];
 
     // Get the default expected value of the object
@@ -48,8 +50,8 @@ function deleteRedundantValue(
 export function shrinkSpell(originalSpell: SpellType) {
     // Cloning, otherwise JSONEditor acts weird
     const spell = structuredClone(originalSpell);
-    const spellProperties = spellJson.properties;
-    const sealProperties = spellJson.properties.seals.items.properties;
+    const spellProperties = schema.properties;
+    const sealProperties = schema.properties.seals.items.properties;
     const ringProperties = sealProperties.rings.items.properties;
     const sigilProperties = sealProperties.sigils.items.properties;
     const signProperties = sealProperties.signs.items.properties;
@@ -171,8 +173,10 @@ export function btn_loadSpellJson() {
     const spellJson = document.getElementById('spell-json') as HTMLTextAreaElement;
 
     try {
-        const spellJSON = JSON.parse(spellJson.value);
-        jsonEditor.setValue(spellJSON);
+        const newSpell = JSON.parse(spellJson.value);
+
+        rebuildAvailableSymbols(schema, symbols, newSpell);
+        createJsonEditor(newSpell);
     } catch (e) {
         console.error("Failed to load spell:", e);
     }
@@ -216,10 +220,13 @@ export async function btn_uploadSpellJson() {
         const file = (e.target as HTMLInputElement).files?.[0];
         if (!file) return;
 
-        const text = await file.text();
+        const spellText = await file.text();
+
         try {
-            const spell = JSON.parse(text);
-            jsonEditor.setValue(spell);
+            const newSpell = JSON.parse(spellText);
+
+            rebuildAvailableSymbols(schema, symbols, newSpell);
+            createJsonEditor(newSpell);
         } catch (e) {
             console.error('Invalid JSON file:', e);
         }
@@ -235,15 +242,32 @@ export async function btn_uploadSpellJson() {
 export async function updateSpellLink() {
     const spellLink = document.getElementById('spell-link') as HTMLAnchorElement;
 
-    const encodedData = await base64urlDeflateRawEncode(JSON.stringify(shrinkSpell(jsonEditor.getValue())));
+    if (spellLink) {
+        const encodedData = await base64urlDeflateRawEncode(JSON.stringify(shrinkSpell(jsonEditor.getValue())));
 
-    spellLink.href = `${window.location.origin}${window.location.pathname}?${spellBase64ParamName}=${encodedData}`;
-    spellLink.textContent = spellLink.href;
+        spellLink.href = `${window.location.origin}${window.location.pathname}?${spellBase64ParamName}=${encodedData}`;
+        spellLink.textContent = spellLink.href;
+    }
 }
 
 export function updateSpellJson() {
     const spellJson = document.getElementById('spell-json') as HTMLTextAreaElement;
 
-    const spellJsonText = JSON.stringify(shrinkSpell(jsonEditor.getValue()), null, 2);
-    spellJson.value = spellJsonText;
+    if (spellJson) {
+        const spellText = JSON.stringify(shrinkSpell(jsonEditor.getValue()), null, 2);
+        spellJson.value = spellText;
+    }
+}
+
+
+
+// Copy to clipboard
+export async function copyToClipboard(text?: string) {
+    if (text && text.length > 0) {
+        try {
+            await navigator.clipboard.writeText(text);
+        } catch (e) {
+            console.error('Failed to copy:', e);
+        }
+    }
 }

@@ -3,8 +3,8 @@ import type { Sign as SignType, WitchHatAtelierSpellEditor as SpellType } from "
 import type { SymbolsImages } from "../types/symbols";
 import { jsonEditor } from "./form";
 
-import symbolsJson from "./data/symbols.json";
-import spellJson from "./schemas/spell.json";
+import symbols from "./data/symbols.json";
+import schema from "./schemas/spell.json";
 
 // Stores the symbols images
 const symbolsImages: SymbolsImages = {
@@ -36,56 +36,56 @@ const sketch = (p: p5) => {
         brushBuddy = await p.loadImage("images/brushbuddy.webp");
 
         // Loading image data
-        if (typeof symbolsJson == "object" && symbolsJson.sigils && symbolsJson.signs) {
-            for (const sigil_name in symbolsJson.sigils) {
-                symbolsImages.sigils["sigil_" + sigil_name] = await p.loadImage(symbolsJson.sigils[sigil_name as keyof typeof symbolsJson.sigils]);
+        if (typeof symbols == "object" && symbols.sigils && symbols.signs) {
+            for (const sigil_name in symbols.sigils) {
+                symbolsImages.sigils["sigil_" + sigil_name] = await p.loadImage(symbols.sigils[sigil_name as keyof typeof symbols.sigils]);
             }
-            for (const sign_name in symbolsJson.signs) {
-                symbolsImages.signs["sign_" + sign_name] = await p.loadImage(symbolsJson.signs[sign_name as keyof typeof symbolsJson.signs]);
+            for (const sign_name in symbols.signs) {
+                symbolsImages.signs["sign_" + sign_name] = await p.loadImage(symbols.signs[sign_name as keyof typeof symbols.signs]);
             }
         }
 
         // Loading default values from schema
-        if (typeof spellJson == "object") {
+        if (typeof schema == "object") {
             // Typically angle 0 is right, now it's up
             defaults.globalRingOffsetAngle = 270;
 
             defaults.spell = {
-                background: spellJson.properties.background.default,
-                backgroundColor: spellJson.properties.backgroundColor.default,
-                color: spellJson.definitions.color.default,
-                weight: spellJson.definitions.weight.default
+                background: schema.properties.background.default,
+                backgroundColor: schema.properties.backgroundColor.default,
+                color: schema.definitions.color.default,
+                weight: schema.definitions.weight.default
             };
 
             defaults.seal = {
-                visible: spellJson.definitions.visible.default,
-                color: spellJson.definitions.color.default,
-                angle: spellJson.definitions.angle.default,
-                scale: spellJson.definitions.scale.default,
-                weight: spellJson.definitions.weight.default,
-                offsetX: spellJson.definitions.offset.default,
-                offsetY: spellJson.definitions.offset.default
+                visible: schema.definitions.visible.default,
+                color: schema.definitions.color.default,
+                angle: schema.definitions.angle.default,
+                scale: schema.definitions.scale.default,
+                weight: schema.definitions.weight.default,
+                offsetX: schema.definitions.offset.default,
+                offsetY: schema.definitions.offset.default
             };
 
             defaults.ring = {
-                visible: spellJson.definitions.visible.default,
-                color: spellJson.definitions.color.default,
-                radius: spellJson.definitions.radius.default,
-                weight: spellJson.definitions.weight.default,
-                openingSize: spellJson.definitions.angle.default,
-                openingAngle: spellJson.definitions.angle.default,
-                offsetX: spellJson.definitions.offset.default,
-                offsetY: spellJson.definitions.offset.default
+                visible: schema.definitions.visible.default,
+                color: schema.definitions.color.default,
+                radius: schema.definitions.radius.default,
+                weight: schema.definitions.weight.default,
+                openingSize: schema.definitions.angle.default,
+                openingAngle: schema.definitions.angle.default,
+                offsetX: schema.definitions.offset.default,
+                offsetY: schema.definitions.offset.default
             };
 
             defaults.sigil = {
-                visible: spellJson.definitions.visible.default,
-                tinted: spellJson.properties.seals.items.properties.sigils.items.properties.tinted.default,
-                color: spellJson.definitions.color.default,
-                size: spellJson.properties.seals.items.properties.sigils.items.properties.size.default,
-                angle: spellJson.definitions.angle.default,
-                offsetX: spellJson.definitions.offset.default,
-                offsetY: spellJson.definitions.offset.default,
+                visible: schema.definitions.visible.default,
+                tinted: schema.properties.seals.items.properties.sigils.items.properties.tinted.default,
+                color: schema.definitions.color.default,
+                size: schema.properties.seals.items.properties.sigils.items.properties.size.default,
+                angle: schema.definitions.angle.default,
+                offsetX: schema.definitions.offset.default,
+                offsetY: schema.definitions.offset.default,
 
                 // These aren't actually present in sigils,
                 // but we loop them together so we need these
@@ -97,18 +97,18 @@ const sketch = (p: p5) => {
             };
 
             defaults.sign = {
-                visible: spellJson.definitions.visible.default,
-                tinted: spellJson.properties.seals.items.properties.signs.items.properties.tinted.default,
-                color: spellJson.definitions.color.default,
-                size: spellJson.properties.seals.items.properties.signs.items.properties.size.default,
-                angle: spellJson.definitions.angle.default,
-                offsetX: spellJson.definitions.offset.default,
-                offsetY: spellJson.definitions.offset.default,
-                offsetStrafe: spellJson.definitions.offset.default,
-                amount: spellJson.properties.seals.items.properties.signs.items.properties.amount.default,
-                amountSkip: spellJson.properties.seals.items.properties.signs.items.properties.amountSkip.default,
-                rotation: spellJson.definitions.angle.default,
-                radius: spellJson.properties.seals.items.properties.signs.items.properties.radius.default
+                visible: schema.definitions.visible.default,
+                tinted: schema.properties.seals.items.properties.signs.items.properties.tinted.default,
+                color: schema.definitions.color.default,
+                size: schema.properties.seals.items.properties.signs.items.properties.size.default,
+                angle: schema.definitions.angle.default,
+                offsetX: schema.definitions.offset.default,
+                offsetY: schema.definitions.offset.default,
+                offsetStrafe: schema.definitions.offset.default,
+                amount: schema.properties.seals.items.properties.signs.items.properties.amount.default,
+                amountSkip: schema.properties.seals.items.properties.signs.items.properties.amountSkip.default,
+                rotation: schema.definitions.angle.default,
+                radius: schema.properties.seals.items.properties.signs.items.properties.radius.default
             };
         }
 
