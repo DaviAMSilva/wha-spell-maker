@@ -37,7 +37,7 @@ export default function updateCustomTabs() {
                 <button id="upload-json" title="Upload from JSON file" type="button" class="btn btn-sm btn-success" onclick={btn_uploadSpellJson}><i class="fas fa-upload" /> Upload</button>
             </div>
 
-            <textarea id="spell-json" class="mt-3 form-control" placeholder="Spell JSON Code Here" rows={10} />
+            <textarea id="spell-json" class="mt-3 form-control" placeholder="Spell JSON Code Here" rows={12} />
         </div>
     );
 
@@ -45,7 +45,7 @@ export default function updateCustomTabs() {
         <div id="about-container">
             <p class="h3">About</p>
             <p>A spell editor for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.</p>
-            <p>Created by <a href="http://www.reddit.com/user/DaviAMSilva" target="_blank" rel="noopener noreferrer">u/DaviAMSilva</a>.</p>
+            <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva">u/DaviAMSilva</a>.</p>
             <br />
             <p class="h3">How to use:</p>
             <p>Instructions</p>

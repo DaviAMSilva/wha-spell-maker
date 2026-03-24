@@ -1,7 +1,4 @@
-import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
-import "@fortawesome/fontawesome-free/css/solid.min.css";
 import { JSONEditor } from "@json-editor/json-editor";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { base64urlDeflateRawDecode, updateSpellJson, updateSpellLink } from "./io";
