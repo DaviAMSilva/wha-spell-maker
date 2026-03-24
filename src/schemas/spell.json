@@ -4,7 +4,6 @@
     "format": "categories",
     "basicCategoryTitle": "Spell Information",
     "title": "Witch Hat Atelier Spell Editor",
-    "description": "A spell editor for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.",
     "options": {
         "disable_collapse": true
     },
@@ -332,21 +331,10 @@
                 "images"
             ],
             "properties": {
-                "reload": {
-                    "format": "button",
-                    "options": {
-                        "button": {
-                            "text": "Load Custom Images",
-                            "icon": "upload",
-                            "action": "rebuildEditor"
-                        }
-                    }
-                },
                 "images": {
                     "type": "array",
                     "format": "table",
                     "title": "Custom Images",
-                    "description": "Upload pictures here for them to become available in the editor.<br>Preferably images need to be square shaped and transparent.<br>After uploading your images, click the <i class='fa fa-upload'></i> <b>Load Custom Images</b> button above to load the images into the editor.",
                     "options": {
                         "enable_array_copy": false,
                         "titleHidden": true
@@ -375,6 +363,16 @@
                             }
                         }
                     }
+                },
+                "reload": {
+                    "format": "button",
+                    "options": {
+                        "button": {
+                            "text": "Load Custom Images",
+                            "icon": "upload",
+                            "action": "rebuildEditor"
+                        }
+                    }
                 }
             }
         },
@@ -382,7 +380,6 @@
             "type": "object",
             "format": "info",
             "title": "Import / Export",
-            "description": "<div id='import-export-container'></div>",
             "options": {
                 "titleHidden": true
             }
@@ -391,7 +388,6 @@
             "type": "object",
             "format": "info",
             "title": "About",
-            "description": "<div id='about-container'></div>",
             "options": {
                 "titleHidden": true
             }

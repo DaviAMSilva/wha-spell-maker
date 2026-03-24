@@ -9,16 +9,16 @@
     font-family: "WHA-Title", serif;
 }
 
+textarea#root\[description\] {
+    min-height: 2.6lh;
+    max-height: 30vh;
+}
+
 textarea#spell-json {
     font-size: 0.75em;
     font-family: monospace;
-    min-height: 23.5em;
-    max-height: 50vh;
-}
-
-textarea#root\[description\] {
-    min-height: 8.5em;
-    max-height: 30vh;
+    min-height: 7lh;
+    max-height: 55vh;
 }
 
 body {
@@ -91,7 +91,7 @@ span.card-title>span:nth-child(2) {
 
 
 .je-object__title {
-    padding-bottom: 1rem;
+    padding-bottom: 0;
 }
 
 .card {

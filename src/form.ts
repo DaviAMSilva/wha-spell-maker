@@ -2,7 +2,6 @@ import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/solid.min.css";
 import { JSONEditor } from "@json-editor/json-editor";
 import "bootstrap/dist/css/bootstrap.min.css";
-import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
 import { base64urlDeflateRawDecode, updateSpellJson, updateSpellLink } from "./io";
@@ -59,13 +58,11 @@ export function createJsonEditor(newSpell: SpellType | null) {
 
 
 
-    // Necessary for DOMPurify and Handlebars to be used by JSONEditor
-    window.DOMPurify = DOMPurify;
+    // Necessary for Handlebars to be used by JSONEditor
     window.Handlebars = Handlebars;
 
     // Not strictly necessary but useful
     window.jsonEditor = jsonEditor;
-    window.JSONEditor = JSONEditor;
 
 
 
