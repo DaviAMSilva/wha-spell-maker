@@ -16,28 +16,54 @@ export default function updateCustomTabs() {
     divIO?.appendChild(
         <div id="io-container">
             <p class="h3 mb-3">Import / Export</p>
-            <button id="download-image" title="Download the current spell as an image" type="button" class="btn btn-sm btn-sm btn-primary me-2" onclick={btn_downloadImage}><i class="fas fa-download" /> Download Image</button>
-            <button id="clear-spell" title="Will clear the editor to an empty spell, including custom images" type="button" class="btn btn-sm btn-danger me-2" onclick={() => createJsonEditor(null)}><i class="fas fa-triangle-exclamation" /> Clear Spell</button>
 
-            <div class="d-flex btn-group col-md-12 my-3" role="group">
-                <a id="spell-link" class="btn btn-sm btn-outline-secondary text text-start text-truncate flex-grow-1" href="#" target="_blank" rel="noopener noreferrer"></a>
-                <button id="copy-link" type="button" class="btn btn-sm btn-secondary flex-shrink-1"
-                    onclick={async () => await copyToClipboard((document.getElementById("spell-link") as HTMLAnchorElement)?.href)}
-                ><i class="fas fa-copy"></i></button>
+            <div class="d-flex mb-4">
+                <button id="download-image" type="button" class="btn btn-sm btn-primary"
+                    title="Download the current spell as an image"
+                    onclick={btn_downloadImage}>
+                    <i class="fas fa-download me-1" /> Download Spell Image
+                </button>
+                <button id="clear-spell" type="button" class="btn btn-sm btn-outline-danger ms-2"
+                    title="Reset the editor to a blank spell, including clearing all custom images"
+                    onclick={() => createJsonEditor(null)}>
+                    <i class="fas fa-triangle-exclamation me-1" /> Reset to Blank Spell
+                </button>
             </div>
 
-            <div class="btn-group" role="group">
-                <button id="copy-json" title="Copy JSON to clipboard" type="button" class="btn btn-sm btn-success"
-                    onclick={async () => await copyToClipboard((document.getElementById("spell-json") as HTMLTextAreaElement)?.value)}
-                ><i class="fas fa-copy"></i> Copy</button>
-                <button id="load-json" title="Load JSON into the editor" type="button" class="btn btn-sm btn-success me-2" onclick={btn_loadSpellJson}><i class="fas fa-upload"></i> Load</button>
-            </div>
-            <div class="btn-group" role="group">
-                <button id="download-json" title="Download to JSON file" type="button" class="btn btn-sm btn-success" onclick={btn_downloadSpellJson}><i class="fas fa-download" /> Download</button>
-                <button id="upload-json" title="Upload from JSON file" type="button" class="btn btn-sm btn-success" onclick={btn_uploadSpellJson}><i class="fas fa-upload" /> Upload</button>
+            <p class="fw-semibold mb-2">Shareable Link</p>
+            <div class="input-group input-group-sm mb-4">
+                <button id="copy-link" type="button" class="btn btn-sm btn-outline-info"
+                    title="Copy shareable link to clipboard"
+                    onclick={async () => await copyToClipboard((document.getElementById("spell-link") as HTMLAnchorElement)?.href)}>
+                    <i class="fas fa-copy me-1" /> Copy Link
+                </button>
+                <a id="spell-link" class="form-control text-truncate border-info" href="#" target="_blank" rel="noopener noreferrer" />
             </div>
 
-            <textarea id="spell-json" class="mt-3 form-control" placeholder="Spell JSON Code Here" rows={12} />
+            <p class="fw-semibold mb-2">Spell JSON</p>
+            <div class="btn-group w-100" role="group">
+                <button id="copy-json" type="button" class="btn btn-sm btn-secondary rounded-bottom-0"
+                    title="Copy the JSON below to your clipboard"
+                    onclick={async () => await copyToClipboard((document.getElementById("spell-json") as HTMLTextAreaElement)?.value)}>
+                    <i class="fas fa-copy me-1" /> Copy JSON to Clipboard
+                </button>
+                <button id="load-json" type="button" class="btn btn-sm btn-secondary rounded-bottom-0"
+                    title="Load the JSON below into the editor"
+                    onclick={btn_loadSpellJson}>
+                    <i class="fas fa-paste me-1" /> Load JSON into Editor
+                </button>
+                <button id="download-json" type="button" class="btn btn-sm btn-secondary rounded-bottom-0"
+                    title="Save the current spell as a JSON file"
+                    onclick={btn_downloadSpellJson}>
+                    <i class="fas fa-download me-1" /> Save to File
+                </button>
+                <button id="upload-json" type="button" class="btn btn-sm btn-secondary rounded-bottom-0"
+                    title="Load a spell from a JSON file"
+                    onclick={btn_uploadSpellJson}>
+                    <i class="fas fa-upload me-1" /> Load from File
+                </button>
+            </div>
+            <textarea id="spell-json" class="form-control rounded-top-0 border-secondary" placeholder="Spell JSON here…" />
         </div>
     );
 
@@ -46,9 +72,18 @@ export default function updateCustomTabs() {
             <p class="h3">About</p>
             <p>A spell editor for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.</p>
             <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva">u/DaviAMSilva</a>.</p>
+
             <br />
-            <p class="h3">How to use:</p>
+
+            <p class="h4">How to use:</p>
             <p>Instructions</p>
+
+            <br />
+
+            <p class="h4">Import / Export</p>
+            <p>The JSON editor reflects spell changes in real time and can be edited directly. After editing, press <strong>Load&nbsp;into&nbsp;Editor</strong> to apply any changes made.</p>
+            <p>A shareable link is generated from the current state of the editor, including custom images, which can be used to restore or share your spell. Note that complex spells may exceed the maximum URL size allowed by some browsers.</p>
+            <p><strong>Copy&nbsp;JSON&nbsp;to&nbsp;Clipboard</strong> copies the spell code and <strong>Reset&nbsp;to&nbsp;Empty&nbsp;Spell</strong> permanently clears the editor, including custom images.</p>
         </div>
     );
 }

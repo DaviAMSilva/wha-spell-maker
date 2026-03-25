@@ -240,9 +240,8 @@ export async function updateSpellLink() {
 
     if (spellLink) {
         const encodedData = await base64urlDeflateRawEncode(JSON.stringify(shrinkSpell(jsonEditor.getValue())));
-
-        spellLink.href = `${window.location.origin}${window.location.pathname}?${spellBase64ParamName}=${encodedData}`;
-        spellLink.textContent = spellLink.href;
+        const href = `${window.location.origin}?${spellBase64ParamName}=${encodedData}`;
+        spellLink.href = spellLink.textContent = href;
     }
 }
 

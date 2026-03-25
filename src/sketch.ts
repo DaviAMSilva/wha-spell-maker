@@ -147,10 +147,15 @@ const sketch = (p: p5) => {
 
         // Spell version is the field that indicates the JSON is a valid spell
         if (!spell?.version) {
-            console.error("Spell version invalid:", spell?.version);
+            console.error("Spell version invalid or not present:", spell?.version);
             p.clear();
             p.image(brushBuddy, centerX, centerY, 800, 800);
             return;
+        }
+
+        // Currently only version 100 exists
+        if (spell.version !== "100") {
+            console.warn("Spell version different from expected value (100):", spell.version);
         }
 
 

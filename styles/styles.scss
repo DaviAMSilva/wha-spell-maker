@@ -15,15 +15,17 @@
 }
 
 textarea#root\[description\] {
-    min-height: 2.6lh;
-    max-height: 30vh;
+    height: calc(1.5em * 2 + 1.75rem);
+    min-height: calc(1.5em * 1 + 1.75rem);
+    max-height: 50vh;
 }
 
 textarea#spell-json {
     font-size: 0.75em;
     font-family: monospace;
-    min-height: 7lh;
-    max-height: 55vh;
+    height: calc(1.5em * 12 + 1.75rem);
+    min-height: calc(1.5em * 6 + 1.75rem);
+    max-height: 70vh;
 }
 
 body {
@@ -64,17 +66,11 @@ body {
 
 
 
-#copy-link {
-    // Fix d-flex btn-group conflict
-    flex: unset;
-}
-
-
-
 // Removing unnecessary titles
 #Spell-Seals {
     .je-object__title {
         display: none !important;
+        padding-bottom: 0;
     }
 
     .je-object__controls {
@@ -88,17 +84,14 @@ body {
 
 
 
-// Weird lack of spacing in object title
+// Fixing weird spacing in object title
 span.card-title>span:nth-child(2) {
     margin-right: 1ch;
 }
 
 
 
-.je-object__title {
-    padding-bottom: 0;
-}
-
+// Bootstrap changes
 .card {
     --bs-card-spacer-x: 0.6rem !important;
     --bs-card-spacer-y: 0.6rem !important;
