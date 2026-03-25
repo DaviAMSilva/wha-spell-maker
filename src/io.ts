@@ -1,4 +1,4 @@
-import type { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import type { WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { createJsonEditor, jsonEditor } from "./form";
 
 import schema from "./schemas/spell.json";
@@ -67,6 +67,7 @@ export function shrinkSpell(originalSpell: SpellType) {
 
     // Deleting custom images if none are present
     if (spell.custom?.images?.length === 0)
+        // @ts-expect-error ts(2790) spell.custom is automatically generated to be required, even thought it is not
         delete spell?.custom;
 
 

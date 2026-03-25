@@ -3,7 +3,7 @@
     "type": "object",
     "format": "categories",
     "basicCategoryTitle": "Spell Information",
-    "title": "Witch Hat Atelier Spell Editor",
+    "title": "Witch Hat Atelier Spell Maker",
     "options": {
         "disable_collapse": true
     },

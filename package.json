@@ -25,6 +25,6 @@
         "clean": "rm -fr dist",
         "make": "npm run symbols && npm run types",
         "symbols": "python3 tools/symbols.py",
-        "types": "for f in schemas/*.json; do npx json2ts \"$f\" > \"types/$(basename \"${f%.json}.d.ts\")\"; done"
+        "types": "for f in src/schemas/*.json; do npx json2ts \"$f\" > \"types/$(basename \"${f%.json}.d.ts\")\"; done"
     }
 }

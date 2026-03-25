@@ -1,6 +1,6 @@
 import { JSONEditor } from "@json-editor/json-editor";
 import Handlebars from "handlebars";
-import { WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import { WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { base64urlDeflateRawDecode, updateSpellJson, updateSpellLink } from "./io";
 import updateOptGroups from "./optgroups";
 import { myp5 } from "./sketch";

@@ -70,7 +70,7 @@ export default function updateCustomTabs() {
     divAbout?.appendChild(
         <div id="about-container">
             <p class="h3">About</p>
-            <p>A spell editor for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.</p>
+            <p>A spell maker for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.</p>
             <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva">u/DaviAMSilva</a>.</p>
 
             <br />

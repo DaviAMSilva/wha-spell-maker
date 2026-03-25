@@ -1,4 +1,4 @@
-import { CustomImage, WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import { CustomImage, WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { Symbols } from "../types/symbols";
 
 import { myp5, symbolsImages } from "./sketch";

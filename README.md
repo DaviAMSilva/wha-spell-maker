@@ -1,3 +1,3 @@
-# Witch Hat Atelier Spell Generator
+# Witch Hat Atelier Spell Maker
 
-A spell editor for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.
+A spell maker for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.

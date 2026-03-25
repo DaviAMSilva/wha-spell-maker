@@ -1,5 +1,5 @@
 import p5 from "p5";
-import type { Sign as SignType, WitchHatAtelierSpellEditor as SpellType } from "../types/spell";
+import type { Sign as SignType, WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import type { SymbolsImages } from "../types/symbols";
 import { jsonEditor } from "./form";
 
