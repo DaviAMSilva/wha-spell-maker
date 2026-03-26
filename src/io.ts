@@ -51,6 +51,7 @@ export function shrinkSpell(originalSpell: SpellType) {
     const spellProperties = schema.properties;
     const sealProperties = schema.properties.seals.items.properties;
     const ringProperties = sealProperties.rings.items.properties;
+    const lineProperties = sealProperties.lines.items.properties;
     const sigilProperties = sealProperties.sigils.items.properties;
     const signProperties = sealProperties.signs.items.properties;
 
@@ -89,6 +90,18 @@ export function shrinkSpell(originalSpell: SpellType) {
             }
         }
 
+        for (const line of seal?.lines ?? []) {
+            for (const valueName in line) {
+                deleteRedundantValue(line, lineProperties, valueName);
+
+                // Redundant coordinates
+                for (const linePoint of line.points ?? []) {
+                    deleteRedundantValue(linePoint, lineProperties.points.items.properties, "x");
+                    deleteRedundantValue(linePoint, lineProperties.points.items.properties, "y");
+                }
+            }
+        }
+
         for (const sigil of seal?.sigils ?? []) {
             for (const valueName in sigil) {
                 // Skipping "name" since it shouldn't really have a default value
@@ -110,6 +123,8 @@ export function shrinkSpell(originalSpell: SpellType) {
         // Deleting empty lists
         if (seal.rings?.length === 0)
             delete seal.rings;
+        if (seal.lines?.length === 0)
+            delete seal.lines;
         if (seal.sigils?.length === 0)
             delete seal.sigils;
         if (seal.signs?.length === 0)

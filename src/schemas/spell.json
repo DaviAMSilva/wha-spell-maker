@@ -313,6 +313,61 @@
                                 }
                             }
                         }
+                    },
+                    "lines": {
+                        "type": "array",
+                        "format": "tabs-top",
+                        "title": "Seal Lines",
+                        "options": {
+                            "enable_array_copy": true
+                        },
+                        "items": {
+                            "title": "Line",
+                            "headerTemplate": "{{#if self.name}}{{self.name}} {{titleWithoutNumber title}}{{else}}{{title}}{{/if}}",
+                            "properties": {
+                                "visible": {
+                                    "$ref": "#/definitions/visible",
+                                    "title": "Line Visible"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "Line Name",
+                                    "options": {
+                                        "infoText": "Optional line name"
+                                    }
+                                },
+                                "color": {
+                                    "$ref": "#/definitions/color",
+                                    "title": "Line Color"
+                                },
+                                "weight": {
+                                    "$ref": "#/definitions/weight",
+                                    "title": "Line Weight"
+                                },
+                                "points": {
+                                    "type": "array",
+                                    "format": "table",
+                                    "title": "Points",
+                                    "minItems": 2,
+                                    "options": {
+                                        "infoText": "A list of points to be connected into one or more line segments"
+                                    },
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "$ref": "#/definitions/offset",
+                                                "title": "Point X"
+                                            },
+                                            "y": {
+                                                "$ref": "#/definitions/offset",
+                                                "title": "Point Y"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

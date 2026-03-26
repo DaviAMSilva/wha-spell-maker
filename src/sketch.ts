@@ -110,6 +110,14 @@ const sketch = (p: p5) => {
                 rotation: schema.definitions.angle.default,
                 radius: schema.properties.seals.items.properties.signs.items.properties.radius.default
             };
+
+            defaults.line = {
+                visible: schema.definitions.visible.default,
+                color: schema.definitions.color.default,
+                weight: schema.definitions.weight.default,
+                x: schema.definitions.offset.default,
+                y: schema.definitions.offset.default
+            }
         }
 
         centerX = p.width / 2;
@@ -313,6 +321,27 @@ const sketch = (p: p5) => {
 
 
 
+            // Drawing the lines
+            // #region LINES
+            for (const line of seal.lines ?? []) {
+                const lineDefaults = defaults.line;
+                if (!(typeof line.visible === "undefined" ? lineDefaults.visible : line.visible))
+                    continue;
+
+                p.stroke(line.color ?? defaults.spell.color);
+                p.strokeWeight(line.weight ?? defaults.spell.weight);
+
+                // Creating a continuum of one or more line segments
+                p.beginShape();
+                for (const point of line.points ?? []) {
+                    p.vertex(point.x ?? defaults.line.x, point.y ?? defaults.line.y);
+                }
+                p.endShape();
+            }
+            // #endregion LINES
+
+
+
             // Drawing the rings
             // #region RINGS
             for (const ring of seal.rings ?? []) {
@@ -330,7 +359,6 @@ const sketch = (p: p5) => {
 
                 p.translate(ringOffsetX, ringOffsetY);
 
-                // Using the stroke from the seal, the ring or default
                 p.stroke(ring.color ?? defaults.spell.color);
                 p.strokeWeight(ring.weight ?? defaults.spell.weight);
 
