@@ -143,19 +143,15 @@ const sketch = (p: p5) => {
             return;
         };
 
-        const spell: SpellType = jsonEditor.getValue();
-
-        // Spell version is the field that indicates the JSON is a valid spell
-        if (!spell?.version) {
-            console.error("Spell version invalid or not present:", spell?.version);
+        let spell: SpellType;
+        try {
+            spell = jsonEditor.getValue();
+            if (!spell || typeof spell !== "object") throw new Error("Spell is not valid");
+        } catch (e) {
+            console.error(e);
             p.clear();
             p.image(brushBuddy, centerX, centerY, 800, 800);
             return;
-        }
-
-        // Currently only version 100 exists
-        if (spell.version !== "100") {
-            console.warn("Spell version different from expected value (100):", spell.version);
         }
 
 

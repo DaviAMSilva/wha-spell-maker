@@ -17,7 +17,6 @@
 textarea#root\[description\] {
     height: calc(1.5em * 2 + 1.75rem);
     min-height: calc(1.5em * 1 + 1.75rem);
-    max-height: 50vh;
 }
 
 textarea#spell-json {
@@ -25,7 +24,6 @@ textarea#spell-json {
     font-family: monospace;
     height: calc(1.5em * 12 + 1.75rem);
     min-height: calc(1.5em * 6 + 1.75rem);
-    max-height: 70vh;
 }
 
 body {

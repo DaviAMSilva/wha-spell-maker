@@ -8,7 +8,6 @@
         "disable_collapse": true
     },
     "required": [
-        "version",
         "name",
         "description",
         "grid",
@@ -20,12 +19,6 @@
         "about"
     ],
     "properties": {
-        "version": {
-            "type": "string",
-            "default": "100",
-            "title": "Format Version",
-            "readOnly": true
-        },
         "name": {
             "type": "string",
             "default": "",

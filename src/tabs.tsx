@@ -30,10 +30,10 @@ export default function updateCustomTabs() {
                 </button>
             </div>
 
-            <p class="fw-semibold mb-2">Shareable Link</p>
+            <p class="fw-semibold mb-2">Spell Link</p>
             <div class="input-group input-group-sm mb-4">
                 <button id="copy-link" type="button" class="btn btn-sm btn-outline-info"
-                    title="Copy shareable link to clipboard"
+                    title="Copy spell link to clipboard"
                     onclick={async () => await copyToClipboard((document.getElementById("spell-link") as HTMLAnchorElement)?.href)}>
                     <i class="fas fa-copy me-1" /> Copy Link
                 </button>
@@ -82,7 +82,7 @@ export default function updateCustomTabs() {
 
             <p class="h4">Import / Export</p>
             <p>The JSON editor reflects spell changes in real time and can be edited directly. After editing, press <strong>Load&nbsp;into&nbsp;Editor</strong> to apply any changes made.</p>
-            <p>A shareable link is generated from the current state of the editor, including custom images, which can be used to restore or share your spell. Note that complex spells may exceed the maximum URL size allowed by some browsers.</p>
+            <p>A link is generated from the current state of the editor, including custom images, which can be used to restore or share your spell. Note that complex spells may exceed the maximum URL size allowed by some browsers.</p>
             <p><strong>Copy&nbsp;JSON&nbsp;to&nbsp;Clipboard</strong> copies the spell code and <strong>Reset&nbsp;to&nbsp;Empty&nbsp;Spell</strong> permanently clears the editor, including custom images.</p>
         </div>
     );

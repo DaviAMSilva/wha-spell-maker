@@ -56,7 +56,6 @@ export function shrinkSpell(originalSpell: SpellType) {
 
 
 
-    // Ignoring: version
     deleteRedundantValue(spell, spellProperties, "name")
     deleteRedundantValue(spell, spellProperties, "description")
     deleteRedundantValue(spell, spellProperties, "grid")
