@@ -43,7 +43,7 @@ export default function updateCustomTabs() {
             <p class="fw-semibold mb-2">Spell JSON</p>
             <div class="btn-group w-100" role="group">
                 <button id="copy-json" type="button" class="btn btn-sm btn-secondary rounded-bottom-0"
-                    title="Copy the JSON below to your clipboard"
+                    title="Copy the JSON below to the clipboard"
                     onclick={async () => await copyToClipboard((document.getElementById("spell-json") as HTMLTextAreaElement)?.value)}>
                     <i class="fas fa-copy me-1" /> Copy JSON to Clipboard
                 </button>
@@ -70,19 +70,62 @@ export default function updateCustomTabs() {
     divAbout?.appendChild(
         <div id="about-container">
             <p class="h3">About</p>
-            <p>A spell maker for creating custom spells based on the Witch Hat Atelier manga series by Kamome Shirahama.</p>
-            <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva">u/DaviAMSilva</a>.</p>
+            <div class="fs-5 text-center mb-4">
+                <p style="margin-bottom: 0;">
+                    Created by <strong>DaviAMSilva</strong> <img src="images/profile.gif" alt="Profile picture" style="width: 1.4em; height: 1.4em; margin-top: -0.1em;" />
+                    &#10;—&#10;
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/DaviAMSilva/wha-spell-maker"><i className="fab fa-github" /> GitHub</a>
+                    &#10;—&#10;
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva"><i className="fab fa-reddit" /> Reddit</a>
+                </p>
+                <p class="fs-6">Sigils and Signs images sourced from the <strong><a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki">Independent Witch Hat Atelier Wiki <img src="images/wha-wiki.ico" alt="Wiki icon" style="width: 1.2em; height: 1.2em; margin-top: -0.2em;" /></a></strong></p>
+            </div>
 
-            <br />
+            <p>This project intends to provide a way for fans to digitally create and share spells based on the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">magic system</a> of the manga series <a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki">Witch Hat Atelier</a>, created by <a href="https://witchhatatelier.telepedia.net/wiki/Kamome_Shirahama">Kamome Shirahama</a>.</p>
+            <p>The editor allows fans to brainstorm new spell by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
+            <p>It is very easy to use if the spell follows the standard ring → sigil → signs structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload custom images to use as symbols in a spell.</p>
+            <p>The current spell is automatically saved locally on the browser, but fans may also choose to save their creations as a JSON file for backup or even generate a link to easily share their creation with others.</p>
 
-            <p class="h4">How to use:</p>
-            <p>Instructions</p>
+            <p class="h4 mt-4">Definitions:</p>
+            <p>This project defines the parts of a spell as such:</p>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Spell:</strong> An abstract representation, comprised of a design, name and description. A spell design contains one or move seals.</li>
+                <li class="list-group-item"><strong>Seal:</strong> A physical realization of a spell, in the form of a drawing. A seal may contain rings, sigils, signs and lines.</li>
+                <li class="list-group-item"><strong>Ring:</strong> A circle, usually enclosing the sigils and signs of the spell. Can be closed or open.</li>
+                <li class="list-group-item"><strong>Sigil:</strong> A symbol that controls the type of the spell. Usually placed at the center of the spell.</li>
+                <li class="list-group-item"><strong>Sign:</strong> A symbol that controls the form of the spell. Usually placed around the center of the spell.</li>
+                <li class="list-group-item"><strong>Line:</strong> A path containing or more connected line segments. This part was exclusively defined for this project.</li>
+            </ul>
 
-            <br />
+            <p class="h4 mt-4">How to use:</p>
+            <p>The best way to learn to use the editor is by adding rings, sigils, signs and lines with the <i className="fas fa-plus" /> buttons, then altering the default values provided and watching the live updates to the canvas to understand what each option changes.</p>
+            <p>The editor elements have names that mostly describe what which of them do, but also a few of them have a <span title="Helpful information">ⓘ</span> button that can be hovered for additional helpful information.</p>
 
-            <p class="h4">Import / Export</p>
+            <p>A few other quick tips:</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Angles range from 0 to 360 degrees.</li>
+                <li class="list-group-item">Offsets allows moving elements vertically or horizontally relative to their original center.</li>
+                <li class="list-group-item">Scaling uses percentages with a default of 100 and minimum of 1.</li>
+                <li class="list-group-item">When changing values in a numeric element it is possible to use the arrow keys for better fine-tune control.</li>
+                <li class="list-group-item">Symbols names for Sigils and Signs are separated in groups of names Custom, Sigils, Signs and Others for easier browsing.</li>
+                <li class="list-group-item">Using the arrows keys it is possible to quickly iterate over all possible symbols for Sigils and Signs.</li>
+                <li class="list-group-item">Elements that are part of a list can be duplicated with <i class="fas fa-copy" /> or reordered with <i class="fas fa-arrow-left" /> or <i class="fas fa-arrow-right" />.</li>
+                <li class="list-group-item">It is possible to toggle a element visibility to quickly identify where in the spell it is present.</li>
+            </ul>
+
+            <p class="h4 mt-4">Custom Images</p>
+            <p>Custom images can be loaded into the editor to be used as symbols for Sigils and Signs within the spell currently being created. Just to be clear, this is not a general catalog of images, they are specific to the current spell and will be deleted if the spell is cleared or overwritten.</p>
+            <p>To add custom images there are three steps to be followed:</p>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">First use the <i className="fas fa-plus" /> button to allocate as many images as necessary and give each one a unique name.</li>
+                <li class="list-group-item">Then for each of the allocated images click the <i className="fas fa-upload" /> upload button to upload an image from your device.<br />Preferably the image should be a square with transparent background and not larger than 500×500px.</li>
+                <li class="list-group-item">Finally click the <i className="fas fa-upload" /> load button on the bottom to reload the editor with the updated custom images list.</li>
+            </ol>
+            <p>Once the above steps were completed custom images will become an option when choosing the symbols for Sigils and Signs, under the custom name given to each one.</p>
+
+            <p class="h4 mt-4">Import / Export</p>
             <p>The JSON editor reflects spell changes in real time and can be edited directly. After editing, press <strong>Load&nbsp;into&nbsp;Editor</strong> to apply any changes made.</p>
-            <p>A link is generated from the current state of the editor, including custom images, which can be used to restore or share your spell. Note that complex spells may exceed the maximum URL size allowed by some browsers.</p>
+            <p>A link is generated from the current state of the editor, including custom images, which can be used to restore or share the spell. Note that complex spells may exceed the maximum URL size allowed by some browsers.</p>
             <p><strong>Copy&nbsp;JSON&nbsp;to&nbsp;Clipboard</strong> copies the spell code and <strong>Reset&nbsp;to&nbsp;Empty&nbsp;Spell</strong> permanently clears the editor, including custom images.</p>
         </div>
     );

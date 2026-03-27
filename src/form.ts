@@ -82,8 +82,8 @@ export function createJsonEditor(newSpell: SpellType | null) {
         updateSpellLink();
 
         // Fixing title formatting
-        document.querySelector(".je-object__title")?.classList.remove("h3")
-        document.querySelector(".je-object__title")?.classList.add("h1")
+        document.querySelector(".je-object__title")?.classList.remove("h3");
+        document.querySelector(".je-object__title")?.classList.add("h1");
     });
 
     jsonEditor.on("addRow", () => updateOptGroups());
