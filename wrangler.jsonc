@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wha-spell-maker",
+  "compatibility_date": "2026-03-17",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "directory": "dist"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}

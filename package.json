@@ -10,6 +10,7 @@
         "p5": "^2.2.2"
     },
     "devDependencies": {
+        "@cloudflare/vite-plugin": "^1.30.2",
         "@eslint/js": "^10.0.1",
         "@types/p5": "^1.7.7",
         "eslint": "^10.0.3",
@@ -24,10 +25,11 @@
     "scripts": {
         "dev": "vite",
         "build": "npm run make && vite build",
-        "preview": "vite preview",
+        "preview": "npm run build && wrangler dev",
         "clean": "rm -fr dist",
         "make": "npm run symbols && npm run types",
         "symbols": "python3 tools/symbols.py",
-        "types": "for f in src/schemas/*.json; do npx json2ts \"$f\" > \"types/$(basename \"${f%.json}.d.ts\")\"; done"
+        "types": "for f in src/schemas/*.json; do npx json2ts \"$f\" > \"types/$(basename \"${f%.json}.d.ts\")\"; done",
+        "deploy": "npm run build && wrangler deploy"
     }
 }
