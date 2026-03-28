@@ -63,7 +63,7 @@ export default function updateCustomTabs() {
                     <i class="fas fa-upload me-1" /> Load from File
                 </button>
             </div>
-            <textarea id="spell-json" class="form-control rounded-top-0 border-secondary" placeholder="Spell JSON here…" />
+            <textarea id="spell-json" class="form-control rounded-top-0 border-secondary" placeholder="Spell JSON here…" spellcheck={false} autocorrect={false} ></textarea>
         </div>
     );
 
