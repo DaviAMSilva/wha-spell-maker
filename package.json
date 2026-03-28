@@ -22,7 +22,7 @@
     },
     "scripts": {
         "dev": "vite",
-        "build": "npm make && vite build",
+        "build": "npm run make && vite build",
         "preview": "vite preview",
         "clean": "rm -fr dist",
         "make": "npm run symbols && npm run types",
