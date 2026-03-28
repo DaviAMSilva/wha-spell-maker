@@ -1,4 +1,5 @@
 {
+    "name": "wha-spell-maker",
     "dependencies": {
         "@fortawesome/fontawesome-free": "^7.2.0",
         "@json-editor/json-editor": "^2.16.0",
@@ -16,11 +17,12 @@
         "sass": "^1.97.3",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.56.1",
-        "vite": "^7.3.1"
+        "vite": "^7.3.1",
+        "wrangler": "^4.78.0"
     },
     "scripts": {
         "dev": "vite",
-        "build": "npm run symbols && npm run types && vite build",
+        "build": "npm make && vite build",
         "preview": "vite preview",
         "clean": "rm -fr dist",
         "make": "npm run symbols && npm run types",
