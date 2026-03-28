@@ -1,5 +1,6 @@
 {
     "name": "wha-spell-maker",
+    "type": "module",
     "dependencies": {
         "@fortawesome/fontawesome-free": "^7.2.0",
         "@json-editor/json-editor": "^2.16.0",
