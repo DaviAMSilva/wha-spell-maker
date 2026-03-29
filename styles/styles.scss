@@ -75,6 +75,12 @@ body {
         max-height: 90svh !important;
         align-self: center;
     }
+
+    // Center title on mobile
+    .je-object__title {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 #jsoneditor-container {
