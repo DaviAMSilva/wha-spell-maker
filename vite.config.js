@@ -1,2 +1,6 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
-export default {}
+export default {
+  build: {
+    minify: "terser"
+  }
+}

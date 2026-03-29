@@ -17,6 +17,7 @@
         "json-schema-to-typescript": "^15.0.4",
         "json-to-ts": "^2.1.0",
         "sass": "^1.97.3",
+        "terser": "^5.46.1",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.56.1",
         "vite": "^7.3.1",
