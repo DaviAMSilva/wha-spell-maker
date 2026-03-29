@@ -3,6 +3,8 @@
 @import "@fortawesome/fontawesome-free/css/brands.min.css";
 @import "bootstrap/dist/css/bootstrap.css";
 
+$mobile-breakpoint: 991.98px;
+
 @font-face {
     font-family: "WHA-Title";
     src: url("/wha-title.ttf") format("truetype");
@@ -28,31 +30,50 @@ textarea#spell-json {
 
 body {
     margin: 0;
-    overflow: hidden;
-    height: 100vh;
-
     display: flex;
     flex-flow: row;
     align-items: center;
+    height: 100vh;
+    overflow: hidden;
 
     >div {
         margin: 3vh;
     }
+
+    @media (max-width: $mobile-breakpoint) {
+        flex-flow: column;
+        align-items: stretch;
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        >div {
+            margin: 2vw;
+        }
+    }
 }
 
 
-
 #spell-container {
-    height: 94vh !important;
-    width: 94vh !important;
+    width: min(94vh, 50vw) !important;
+    height: min(94vh, 50vw) !important;
     flex-shrink: 0;
 
     canvas {
-        height: 94vh !important;
-        width: 94vh !important;
-
+        width: 100% !important;
+        height: 100% !important;
         background-image: url("/images/background.webp");
         background-size: contain;
+    }
+}
+
+@media (max-width: $mobile-breakpoint) {
+    #spell-container, #spell-container canvas {
+        width: min(90vw, 90svh) !important;
+        height: min(90vw, 90svh) !important;
+        max-width: 100vw !important;
+        max-height: 90svh !important;
+        align-self: center;
     }
 }
 
@@ -60,9 +81,13 @@ body {
     height: 94vh;
     width: 100%;
     overflow: auto;
+
+    @media (max-width: $mobile-breakpoint) {
+        height: auto;
+        width: unset;
+        min-height: 60vh;
+    }
 }
-
-
 
 // Removing unnecessary titles
 #Spell-Seals {
@@ -89,10 +114,15 @@ span.card-title>span:nth-child(2) {
 
 
 
-// Bootstrap changes
+// Bootstrap overrides
 .card {
-    --bs-card-spacer-x: 0.6rem !important;
-    --bs-card-spacer-y: 0.6rem !important;
+    --bs-card-spacer-x: 0.5rem !important;
+    --bs-card-spacer-y: 0.5rem !important;
+
+    @media (max-width: $mobile-breakpoint) {
+        --bs-card-spacer-x: 0.3rem !important;
+        --bs-card-spacer-y: 0.3rem !important;
+    }
 }
 
 
