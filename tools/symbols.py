@@ -30,6 +30,6 @@ def images_to_json(base_folder, subfolders, output_file="images.json"):
 
 if __name__ == "__main__":
     base_folder = "symbols"
-    subfolders = ["sigils", "signs", "customs"]
+    subfolders = ["sigils", "signs", "customs", "tohs", "others"]
     os.makedirs("src/data/", exist_ok=True)
     images_to_json(base_folder, subfolders, "src/data/symbols.json")

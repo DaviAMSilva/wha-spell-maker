@@ -82,24 +82,24 @@ export default function updateCustomTabs() {
             </div>
 
             <p class="mb-5 text-center w-75 mx-auto">This project intends to provide a way for fans to digitally create and share spells based on the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">magic system</a> of the manga series <a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki">Witch Hat Atelier</a>, created by <a href="https://witchhatatelier.telepedia.net/wiki/Kamome_Shirahama">Kamome Shirahama</a>.</p>
-            <p>The editor allows fans to brainstorm new spell by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
+            <p>The editor allows fans to brainstorm new spells by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
             <p>It is very easy to use if the spell follows the standard ring → sigil → signs structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload custom images to use as symbols in a spell.</p>
             <p>The current spell is automatically saved locally on the browser, but fans may also choose to save their creations as a JSON file for backup or even generate a link to easily share their creation with others.</p>
 
             <p class="h4 mt-5 mb-3">Definitions:</p>
             <p>This project defines the parts of a spell as such:</p>
             <dl class="row">
-                <dt class="col-sm-1 text-nowrap" style="min-width: fit-content;">Spell</dt>
+                <dt class="col-sm-1 text-nowrap">Spell</dt>
                 <dd class="col-sm-11">An abstract representation, comprised of a design, name and description. A spell design contains one or more seals.</dd>
-                <dt class="col-sm-1 text-nowrap" style="min-width: fit-content;">Seal</dt>
+                <dt class="col-sm-1 text-nowrap">Seal</dt>
                 <dd class="col-sm-11">A physical realization of a spell, in the form of a drawing. A seal may contain rings, sigils, signs and lines.</dd>
-                <dt class="col-sm-1 text-nowrap" style="min-width: fit-content;">Ring</dt>
+                <dt class="col-sm-1 text-nowrap">Ring</dt>
                 <dd class="col-sm-11">A circle, usually enclosing the sigils and signs of the spell. Can be closed or open.</dd>
-                <dt class="col-sm-1 text-nowrap" style="min-width: fit-content;">Sigil</dt>
+                <dt class="col-sm-1 text-nowrap">Sigil</dt>
                 <dd class="col-sm-11">A symbol that controls the type of the spell. Usually placed at the center of the spell.</dd>
-                <dt class="col-sm-1 text-nowrap" style="min-width: fit-content;">Sign</dt>
+                <dt class="col-sm-1 text-nowrap">Sign</dt>
                 <dd class="col-sm-11">A symbol that controls the form of the spell. Usually placed around the center of the spell.</dd>
-                <dt class="col-sm-1 text-nowrap" style="min-width: fit-content;">Line</dt>
+                <dt class="col-sm-1 text-nowrap">Line</dt>
                 <dd class="col-sm-11">A path containing one or more connected line segments. This part was exclusively defined for this project.</dd>
             </dl>
 
@@ -133,7 +133,7 @@ export default function updateCustomTabs() {
             <p>The JSON editor reflects spell changes in real time to reflect the spell, but can also be edited directly. After editing, press <span className="badge bg-secondary"><i class="fas fa-paste" />&nbsp;Load&nbsp;JSON&nbsp;Into&nbsp;Editor</span> button to apply into the editor any changes made.</p>
             <p>A link is generated from the current state of the editor, including custom images, which can be used to restore or share the spell. Note that very complex spells may exceed the maximum URL size allowed by some browsers.</p>
             <p>The <span className="badge bg-secondary"><i class="fas fa-copy" />&nbsp;Copy&nbsp;JSON&nbsp;to&nbsp;Clipboard</span> button copies the spell code to the clipboard</p>
-            <p>The <span className="badge bg-primary"><i class="fas fa-download" />&nbsp;Download&nbsp;Spell&nbsp;Image</span> button downloads a PNG image of the current spell.</p>
+            <p>The <span className="badge bg-primary"><i class="fas fa-download" />&nbsp;Download&nbsp;Spell&nbsp;Image</span> button downloads a 1000×1000px PNG image of the current spell.</p>
             <p>The <span className="badge bg-danger"><i class="fas fa-triangle-exclamation" />&nbsp;Reset&nbsp;to&nbsp;Blank&nbsp;Spell</span> permanently clears the editor, including custom images.</p>
         </div>
     );
