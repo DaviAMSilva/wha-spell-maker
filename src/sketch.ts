@@ -8,9 +8,11 @@ import schema from "./schemas/spell.json";
 
 // Stores the symbols images
 const symbolsImages: SymbolsImages = {
+    customs: {},
     sigils: {},
     signs: {},
-    customs: {}
+    tohs: {},
+    others: {}
 };
 
 const sketch = (p: p5) => {
@@ -42,6 +44,12 @@ const sketch = (p: p5) => {
             }
             for (const sign_name in symbols.signs) {
                 symbolsImages.signs["sign_" + sign_name] = await p.loadImage(symbols.signs[sign_name as keyof typeof symbols.signs]);
+            }
+            for (const toh_name in symbols.tohs) {
+                symbolsImages.tohs["toh_" + toh_name] = await p.loadImage(symbols.tohs[toh_name as keyof typeof symbols.tohs]);
+            }
+            for (const other_name in symbols.others) {
+                symbolsImages.others["other_" + other_name] = await p.loadImage(symbols.others[other_name as keyof typeof symbols.others]);
             }
         }
 
