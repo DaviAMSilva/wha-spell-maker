@@ -155,7 +155,7 @@ const sketch = (p: p5) => {
         if (!jsonEditor) {
             console.warn("Editor not loaded yet. Drawing skipped");
             p.clear();
-            p.image(brushBuddy, centerX, centerY, 800, 800);
+            p.image(brushBuddy, centerX, centerY, 1000, 1000);
             return;
         };
 
@@ -166,7 +166,7 @@ const sketch = (p: p5) => {
         } catch (e) {
             console.error(e);
             p.clear();
-            p.image(brushBuddy, centerX, centerY, 800, 800);
+            p.image(brushBuddy, centerX, centerY, 1000, 1000);
             return;
         }
 
