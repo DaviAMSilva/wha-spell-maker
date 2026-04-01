@@ -78,6 +78,8 @@ const sketch = (p: p5) => {
             defaults.ring = {
                 visible: schema.definitions.visible.default,
                 color: schema.definitions.color.default,
+                filled: schema.properties.seals.items.properties.rings.items.properties.filled.default,
+                fillColor: schema.properties.seals.items.properties.rings.items.properties.fillColor.default,
                 radius: schema.definitions.radius.default,
                 weight: schema.definitions.weight.default,
                 openingSize: schema.definitions.angle.default,
@@ -138,7 +140,7 @@ const sketch = (p: p5) => {
         p.angleMode(p.DEGREES);
 
         p.colorMode(p.RGB);
-        p.strokeCap(p.SQUARE);
+        p.strokeCap(p.ROUND);
         p.strokeJoin(p.ROUND);
 
         p.noFill();
@@ -211,6 +213,34 @@ const sketch = (p: p5) => {
             p.translate(centerX + sealOffsetX, centerY + sealOffsetY);
             p.scale(sealScale);
             p.rotate(sealAngle);
+
+
+
+            // Drawing the rings fills
+            // #region RINGS (FILL)
+            for (const ring of seal.rings ?? []) {
+                const ringDefaults = defaults.ring;
+                if (!(typeof ring.visible === "undefined" ? ringDefaults.visible : ring.visible))
+                    continue;
+                if (!(typeof ring.filled === "undefined" ? ringDefaults.filled : ring.filled))
+                    continue;
+
+                const ringOffsetX = ring.offsetX ?? ringDefaults.offsetX;
+                const ringOffsetY = ring.offsetY ?? ringDefaults.offsetY;
+                const ringRadius = ring.radius ?? ringDefaults.radius;
+                const ringFillColor = ring.fillColor ?? ringDefaults.fillColor;
+
+                p.push(); // RING
+
+                p.translate(ringOffsetX, ringOffsetY);
+
+                p.noStroke();
+                p.fill(ringFillColor);
+                p.circle(0, 0, ringRadius);
+
+                p.pop(); // RING
+            }
+            // #endregion RINGS (FILL)
 
 
 
@@ -350,8 +380,8 @@ const sketch = (p: p5) => {
 
 
 
-            // Drawing the rings
-            // #region RINGS
+            // Drawing the rings strokes
+            // #region RINGS (STROKE)
             for (const ring of seal.rings ?? []) {
                 const ringDefaults = defaults.ring;
                 if (!(typeof ring.visible === "undefined" ? ringDefaults.visible : ring.visible))
@@ -382,7 +412,7 @@ const sketch = (p: p5) => {
 
                 p.pop(); // RING
             }
-            // #endregion RINGS
+            // #endregion RINGS (STROKE)
 
             p.pop(); // SEAL
         }

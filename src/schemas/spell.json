@@ -139,7 +139,25 @@
                                 },
                                 "color": {
                                     "$ref": "#/definitions/color",
-                                    "title": "Ring Color"
+                                    "title": "Ring Stroke Color"
+                                },
+                                "filled": {
+                                    "$ref": "#/definitions/boolean",
+                                    "title": "Ring Filled In",
+                                    "default": false,
+                                    "options": {
+                                        "infoText": "Fill is drawn behind the symbols"
+                                    }
+                                },
+                                "fillColor": {
+                                    "$ref": "#/definitions/color",
+                                    "title": "Ring Fill Color",
+                                    "default": "#ffffff",
+                                    "options": {
+                                        "dependencies": {
+                                            "filled": true
+                                        }
+                                    }
                                 },
                                 "radius": {
                                     "$ref": "#/definitions/radius",
