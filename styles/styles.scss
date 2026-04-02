@@ -1,9 +1,52 @@
+// From Witch Hat Atelier Grimoire Edition
+$grimoire-yellow: #e6b900;
+$grimoire-dark-blue: #001c32;
+
+// From The Art of Witch Hat Atelier
+$wha-art-red: #bb324e;
+
+// From Qifrey's Atelier uniform color
+$atelier-blue: #65a6a5;
+
+// Standard Bootstrap colors overridden
+$primary: $grimoire-yellow;
+$secondary: $grimoire-yellow;
+$danger: $wha-art-red;
+$info: $atelier-blue;
+$body-color-dark: #dbfeff;
+
+// Colors chosen by converting gray-xxx into oklch,
+// then adjusting lightness chroma and hue with the
+// values from the grimoire edition blue background
+$gray-100: #dbfeff;
+$gray-200: #bddffe;
+$gray-300: #a0c2df;
+$gray-400: #84a5c1;
+$gray-500: #6989a4;
+$gray-600: #4f6e88;
+$gray-700: #36546d;
+$gray-800: #1d3b53;
+$gray-900: #001c32; // <--- Literally the shade of dark blue of the grimoire edition
+
+// It's easier to manually change these elements colors this way
+.h3,
+.h4,
+.card th,
+.card-title,
+a.nav-link.active,
+label.form-label,
+label.form-check-label {
+    color: $grimoire-yellow !important;
+}
+
+@import "bootstrap/scss/bootstrap";
+
 @import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 @import "@fortawesome/fontawesome-free/css/solid.min.css";
 @import "@fortawesome/fontawesome-free/css/brands.min.css";
-@import "bootstrap/dist/css/bootstrap.css";
 
-$mobile-breakpoint: 991.98px;
+// The width where it switches to portrait mode
+$mobile-breakpoint: 992px;
 
 @font-face {
     font-family: "WHA-Title";
@@ -64,11 +107,18 @@ body {
         height: 100% !important;
         background-image: url("/images/background.webp");
         background-size: contain;
+
+        border-style: ridge;
+        border-color: $grimoire-yellow;
+        border-radius: 0.75rem;
+        border-width: 0.375rem;
     }
 }
 
 @media (max-width: $mobile-breakpoint) {
-    #spell-container, #spell-container canvas {
+
+    #spell-container,
+    #spell-container canvas {
         width: min(90vw, 90svh) !important;
         height: min(90vw, 90svh) !important;
         max-width: 100vw !important;
@@ -120,7 +170,7 @@ span.card-title>span:nth-child(2) {
 
 
 
-// Bootstrap overrides
+// Bootstrap manual overrides
 .card {
     --bs-card-spacer-x: 0.5rem !important;
     --bs-card-spacer-y: 0.5rem !important;
@@ -130,100 +180,3 @@ span.card-title>span:nth-child(2) {
         --bs-card-spacer-y: 0.3rem !important;
     }
 }
-
-
-
-// This formatting needs more work to function properly
-// .je-object__container {
-//     div.row {
-//         div.form-group {
-//             display: flex;
-//             align-items: center;
-
-//             // Field name
-//             >label {
-//                 display: inline-block;
-//                 width: 33%;
-//                 flex-shrink: 0; // Prevent label from shrinking
-//                 margin-bottom: 0;
-
-//                 // Only if a button does not exist
-//                 &:not(:has(+ button)) {
-//                     margin-right: 1rem;
-//                 }
-//             }
-
-//             // Info hover
-//             >button {
-//                 width: 3%;
-//             }
-
-//             // Fixes the case where the button is not present
-//             &:not(:has(button)) {
-
-//                 >input,
-//                 >select,
-//                 >textarea,
-//                 .je-range-control {
-//                     margin-left: 3%;
-//                 }
-//             }
-
-//             // Actual input
-//             >input,
-//             >select,
-//             >textarea,
-//             .je-range-control {
-//                 width: 40%;
-//                 min-width: 7ch;
-//                 display: flex;
-//                 // margin-left: auto;
-//                 margin-right: 0;
-//                 align-items: center;
-//                 // flex-shrink: 1; // Allow second element to shrink first
-
-//                 output {
-//                     margin-right: 1rem;
-//                     min-width: 3ch;
-//                 }
-//             }
-
-//             // Validation warning
-//             >p.invalid-feedback {
-//                 width: 15%;
-//                 margin-left: auto;
-//                 justify-self: center;
-//             }
-//         }
-//     }
-
-//     // Custom images fix
-//     #Custom-Images {
-//         table tr[data-schematype="object"] {
-//             height: 100px;
-
-//             td {
-//                 height: 100%;
-
-//                 &:nth-child(2) {
-//                     div.form-group {
-//                         height: 100%;
-
-//                         input[aria-label="Symbol Name"] {
-//                             margin: 0;
-//                             max-width: 100%;
-//                         }
-//                     }
-//                 }
-
-//                 &:last-child {
-//                     span.btn-group {
-//                         height: 100%;
-//                         align-items: center;
-//                         float: right;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
