@@ -139,7 +139,9 @@ export default function updateCustomTabs() {
     );
 
     // Inserting it from JS to prevent it from appearing before the rest of the dynamic elements
-    document.body.appendChild(
-        <img src="images/coco-canvas.webp" alt="Coco holding the spell canvas" id="coco-canvas"/>
-    )
+    if (!document.getElementById("coco-canvas")) {
+        document.body.appendChild(
+            <img id="coco-canvas" src="images/coco-canvas.webp" alt="Coco holding the spell canvas" />
+        )
+    }
 }
