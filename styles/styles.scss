@@ -39,14 +39,27 @@ label.form-check-label {
     color: $grimoire-yellow !important;
 }
 
+// Making every background transparent except for the body and first card
+$body-bg-dark: transparent;
+
+body {
+    background-color: $grimoire-dark-blue !important;
+}
+
+#jsoneditor-container>div.je-object__container>div.card {
+    background-color: rgba($grimoire-dark-blue, 0.95);
+
+    @media (orientation: portrait) {
+        // For the Coco sitting image
+        background-color: rgba($grimoire-dark-blue, 0.8);
+    }
+}
+
 @import "bootstrap/scss/bootstrap";
 
 @import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 @import "@fortawesome/fontawesome-free/css/solid.min.css";
 @import "@fortawesome/fontawesome-free/css/brands.min.css";
-
-// The width where it switches to portrait mode
-$mobile-breakpoint: 992px;
 
 @font-face {
     font-family: "WHA-Title";
@@ -83,12 +96,18 @@ body {
         margin: 3vh;
     }
 
-    @media (max-width: $mobile-breakpoint) {
+    @media (orientation: portrait) {
         flex-flow: column;
         align-items: stretch;
         height: auto;
         overflow-y: auto;
         overflow-x: hidden;
+
+        // Image for mobile only (since canvas Coco is not available in mobile)
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        background-image: url("/images/coco-sitting.webp");
 
         >div {
             margin: 2vw;
@@ -96,11 +115,25 @@ body {
     }
 }
 
+#coco-canvas {
+    height: min(94vh, 45vw);
+    position: absolute;
+    left: min(94vh, 45vw);
+    margin-left: calc(3vh + -0.055 * min(94vh, 45vw));
+    z-index: 20;
+    // border-color: red;
+    // border-style:  solid;
+
+    @media (orientation: portrait) {
+        display: none;
+    }
+}
 
 #spell-container {
-    width: min(94vh, 50vw) !important;
-    height: min(94vh, 50vw) !important;
+    width: min(94vh, 45vw) !important;
+    height: min(94vh, 45vw) !important;
     flex-shrink: 0;
+    z-index: 10;
 
     canvas {
         width: 100% !important;
@@ -115,7 +148,7 @@ body {
     }
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media (orientation: portrait) {
 
     #spell-container,
     #spell-container canvas {
@@ -136,9 +169,11 @@ body {
 #jsoneditor-container {
     height: 94vh;
     width: 100%;
+    margin-left: 5vw;
     overflow: auto;
+    z-index: 30;
 
-    @media (max-width: $mobile-breakpoint) {
+    @media (orientation: portrait) {
         height: auto;
         width: unset;
         min-height: 60vh;
@@ -175,7 +210,7 @@ span.card-title>span:nth-child(2) {
     --bs-card-spacer-x: 0.5rem !important;
     --bs-card-spacer-y: 0.5rem !important;
 
-    @media (max-width: $mobile-breakpoint) {
+    @media (orientation: portrait) {
         --bs-card-spacer-x: 0.3rem !important;
         --bs-card-spacer-y: 0.3rem !important;
     }
