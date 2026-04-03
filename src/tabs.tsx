@@ -137,4 +137,9 @@ export default function updateCustomTabs() {
             <p>The <span className="badge bg-danger"><i class="fas fa-triangle-exclamation" />&nbsp;Reset&nbsp;to&nbsp;Blank&nbsp;Spell</span> permanently clears the editor, including custom images.</p>
         </div>
     );
+
+    // Inserting it from JS to prevent it from appearing before the rest of the dynamic elements
+    document.body.appendChild(
+        <img src="images/coco-canvas.webp" alt="Coco holding the spell canvas" id="coco-canvas"/>
+    )
 }
