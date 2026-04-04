@@ -85,6 +85,7 @@ export default function updateCustomTabs() {
             <p>The editor allows fans to brainstorm new spells by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
             <p>It is very easy to use if the spell follows the standard ring → sigil → signs structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload <a href="#about-custom-images">custom images</a> to use as symbols in a spell.</p>
             <p>The current spell is automatically saved locally on the browser, but fans may also choose to <a href="#about-import-export">save their creations</a> as a JSON file for backup or even generate a link to easily share their creation with others.</p>
+            <p>And just be clear: this project is not meant to be a replacement for traditional hand drawn spells, but rather a way to make spells easier to make, more accessible, standardized and easier to share.</p>
 
             <p id="about-how-to-use" class="h4 mt-5 mb-3">How to Use:</p>
             <p>The best way to learn is by experimenting! Try adding rings, sigils, signs and lines by navigating to each tab under "Spell&nbsp;Seals" and pressing the <i title="Add" class="fas fa-plus" /> buttons, tweaking the default values of the elements, and watching the canvas update in real time.</p>
