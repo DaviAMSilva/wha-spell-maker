@@ -38,7 +38,7 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
     const sigilKeys = Object.keys(symbols.sigils);
     const signKeys = Object.keys(symbols.signs);
     const tohKeys = Object.keys(symbols.tohs);
-    const otherKeys = Object.keys(symbols.others);
+    const shapeKeys = Object.keys(symbols.shapes);
 
     const customImages = getCustomImages(lastSpell);
     const customKeys = customImages.map((i: any) => i.name);
@@ -50,7 +50,7 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
             "###Sigils", ...sigilKeys.map(s => "sigil_" + s),
             "###Signs", ...signKeys.map(s => "sign_" + s),
             "###The Owl House", ...tohKeys.map(s => "toh_" + s),
-            "###Others", ...otherKeys.map(s => "other_" + s)
+            "###Shapes", ...shapeKeys.map(s => "shape_" + s)
         ],
         options: {
             enum_titles: [
@@ -58,7 +58,7 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
                 "###Sigils", ...sigilKeys,
                 "###Signs", ...signKeys,
                 "###The Owl House", ...tohKeys,
-                "###Other", ...otherKeys
+                "###Shape", ...shapeKeys
             ]
         }
     });
@@ -68,7 +68,7 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
             "###Signs", ...signKeys.map(s => "sign_" + s),
             "###Sigils", ...sigilKeys.map(s => "sigil_" + s),
             "###The Owl House", ...tohKeys.map(s => "toh_" + s),
-            "###Others", ...otherKeys.map(s => "other_" + s)
+            "###Shapes", ...shapeKeys.map(s => "shape_" + s)
         ],
         options: {
             enum_titles: [
@@ -76,7 +76,7 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
                 "###Signs", ...signKeys,
                 "###Sigils", ...sigilKeys,
                 "###The Owl House", ...tohKeys,
-                "###Other", ...otherKeys
+                "###Shape", ...shapeKeys
             ]
         }
     });

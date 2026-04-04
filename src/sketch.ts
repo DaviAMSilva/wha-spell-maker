@@ -12,7 +12,7 @@ const symbolsImages: SymbolsImages = {
     sigils: {},
     signs: {},
     tohs: {},
-    others: {}
+    shapes: {}
 };
 
 const sketch = (p: p5) => {
@@ -48,8 +48,8 @@ const sketch = (p: p5) => {
             for (const toh_name in symbols.tohs) {
                 symbolsImages.tohs["toh_" + toh_name] = await p.loadImage(symbols.tohs[toh_name as keyof typeof symbols.tohs]);
             }
-            for (const other_name in symbols.others) {
-                symbolsImages.others["other_" + other_name] = await p.loadImage(symbols.others[other_name as keyof typeof symbols.others]);
+            for (const shape_name in symbols.shapes) {
+                symbolsImages.shapes["shape_" + shape_name] = await p.loadImage(symbols.shapes[shape_name as keyof typeof symbols.shapes]);
             }
         }
 
