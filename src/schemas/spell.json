@@ -161,7 +161,8 @@
                                 },
                                 "radius": {
                                     "$ref": "#/definitions/radius",
-                                    "title": "Ring Radius"
+                                    "title": "Ring Radius",
+                                    "default": 450
                                 },
                                 "weight": {
                                     "$ref": "#/definitions/weight",
@@ -230,7 +231,7 @@
                                 "size": {
                                     "$ref": "#/definitions/size",
                                     "title": "Sigil Size",
-                                    "default": 450
+                                    "default": 400
                                 },
                                 "angle": {
                                     "$ref": "#/definitions/angle",
@@ -290,12 +291,12 @@
                                 "size": {
                                     "$ref": "#/definitions/size",
                                     "title": "Sign Size",
-                                    "default": 250
+                                    "default": 200
                                 },
                                 "angle": {
                                     "$ref": "#/definitions/angle",
                                     "title": "Sign Angle",
-                                    "default": 180
+                                    "default": 0
                                 },
                                 "offsetStrafe": {
                                     "$ref": "#/definitions/offset",
@@ -304,7 +305,7 @@
                                 "radius": {
                                     "$ref": "#/definitions/radius",
                                     "title": "Sign Circle Radius",
-                                    "default": 300
+                                    "default": 325
                                 },
                                 "amount": {
                                     "$ref": "#/definitions/amount",
