@@ -6,11 +6,13 @@ import { btn_downloadImage, btn_downloadSpellJson, btn_loadSpellJson, btn_upload
 import pokemon from "../examples/Pokémon.json";
 import sylphShoes from "../examples/Sylph Shoes.json";
 import washingMachine from "../examples/Washing Machine.json";
+import crystalPetalsPath from "../examples/Crystal Petals Path.json";
 
 const spellExamples: Record<string, SpellType> = {
     "pokemon": pokemon as SpellType,
     "sylph-shoes": sylphShoes as SpellType,
     "washing-machine": washingMachine as SpellType,
+    "crystal-petals-path": crystalPetalsPath as SpellType,
 }
 
 export default function updateCustomTabs() {
@@ -110,11 +112,12 @@ export default function updateCustomTabs() {
 
             <p id="about-examples" class="h4 mt-5 mb-3">Examples</p>
             <p>Click any example below to load it into the editor. Be aware that this <strong class="text-decoration-underline">will erase the current spell</strong>.</p>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
                 {[
                     { id: "sylph-shoes", label: "Sylph Shoes", description: "A simple classic spell from the series." },
-                    { id: "washing-machine", label: "Washing Machine", description: <>A complex spell by <a href="https://www.reddit.com/r/WitchHatAtelier/comments/1rj2wkx/washing_machine_spell_just_toss_your_clothes_in">u/ChromaticFlare1</a>.</> },
                     { id: "pokemon", label: "Pokémon", description: "A silly spell with custom images and colors." },
+                    { id: "washing-machine", label: "Washing Machine", description: <>A fan spell by <a href="https://www.reddit.com/r/WitchHatAtelier/comments/1rj2wkx/washing_machine_spell_just_toss_your_clothes_in">u/ChromaticFlare1</a>.</> },
+                    { id: "crystal-petals-path", label: "Crystal Petals Path", description: <>A fan spell by <a href="https://x.com/Okay668">@Okay668</a>. 🇧🇷</> },
                 ].map(({ id, label, description }) => (
                     <div class="col">
                         <button
@@ -186,7 +189,8 @@ export default function updateCustomTabs() {
                 <li class="list-group-item"><i class="me-2 fas fa-book" /><a href="https://theowlhouse.fandom.com/wiki/Glyph_Magic" target="_blank" rel="noopener noreferrer">The Owl House Wiki</a> for the images of the glyphs from the series. <a class="text-muted text-sm" href="https://x.com/DanaTerrace/status/1653190525720330241">(Kamome's TOH art)</a></li>
                 <li class="list-group-item"><i class="me-2 fab fa-discord" /><a href="https://discord.com/invite/witchhatatelier" target="_blank" rel="noopener noreferrer">Witch Hat Atelier Discord Server</a> for being a place where you can share your spell creations.</li>
                 <li class="list-group-item"><i class="me-2 fab fa-reddit" /><a href="https://www.reddit.com/r/WitchHatAtelier/" target="_blank" rel="noopener noreferrer">Witch Hat Atelier Subreddit</a> for being a place where you can share your spell creations.</li>
-                <li class="list-group-item"><i class="me-2 fab fa-reddit" /><a href="https://www.reddit.com/user/ChromaticFlare1" target="_blank" rel="noopener noreferrer">u/ChromaticFlare1</a> for allowing the use of the his Washing Machine spell as one of the examples.</li>
+                <li class="list-group-item"><i class="me-2 fab fa-x-twitter" /><a href="https://x.com/chromatic_flare" target="_blank" rel="noopener noreferrer">@chromatic_flare</a> for allowing the use of the his Washing Machine spell as one of the examples.</li>
+                <li class="list-group-item"><i class="me-2 fab fa-x-twitter" /><a href="https://x.com/Okay668" target="_blank" rel="noopener noreferrer">@Okay668</a> for allowing the use of the his Crystal Petals Path spell as one of the examples.</li>
                 <li class="list-group-item"><i class="me-2 fab fa-github" /><a href="https://github.com/json-editor/json-editor" target="_blank" rel="noopener noreferrer">JSON Editor</a> the library for editing the spell JSON.</li>
                 <li class="list-group-item"><i class="me-2 fab fa-square-js" /><a href="https://p5js.org" target="_blank" rel="noopener noreferrer">p5.js</a> the library for drawing the spells.</li>
             </ul>
