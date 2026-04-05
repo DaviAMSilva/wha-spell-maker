@@ -155,10 +155,11 @@ export default function updateCustomTabs() {
                 <li class="list-group-item">Offsets allow moving elements vertically or horizontally relative to their original center.</li>
                 <li class="list-group-item">Scaling uses percentages with a default of 100 and minimum of 1.</li>
                 <li class="list-group-item">When changing values in a numeric element it is possible to use the arrow keys for better fine-tune control.</li>
-                <li class="list-group-item">Symbol names for Sigils and Signs are separated in groups of names Custom, Sigils, Signs, The Owl House and Shapes for easier browsing.</li>
+                <li class="list-group-item">Symbol names for sigils and signs are separated in groups of names Custom, Sigils, Signs, The Owl House and Shapes for easier browsing.</li>
                 <li class="list-group-item">Using the arrow keys it is possible to quickly iterate over all possible symbols for Sigils and Signs.</li>
                 <li class="list-group-item">Elements that are part of a list can be duplicated with <i class="fas fa-copy" /> or reordered with <i class="fas fa-arrow-left" /> or <i class="fas fa-arrow-right" />.</li>
                 <li class="list-group-item">It is possible to toggle an element's visibility to quickly identify where in the spell it is located.</li>
+                <li class="list-group-item">For maximum compatibility custom images of sigils should have size 400×400px while signs should have size 200×200px. Both should have stroke widths of 10px.</li>
             </ul>
 
             <p id="about-custom-images" class="h4 mt-5 mb-3">Custom Images</p>
