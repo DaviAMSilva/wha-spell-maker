@@ -116,7 +116,7 @@ export default function updateCustomTabs() {
                     <div class="col">
                         <button
                             data-spell={id}
-                            class="btn btn-outline-secondary btn-sm w-100 text-start"
+                            class="btn btn-outline-secondary btn-sm w-100 text-start h-100 d-flex flex-column align-items-start"
                             onclick={() => {
                                 const spellExample = spellExamples[id];
                                 if (spellExample) createJsonEditor(spellExample);

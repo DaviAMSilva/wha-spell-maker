@@ -83,7 +83,7 @@
         {
           "name": "sign_Levitation",
           "size": 120,
-          "angle": 90,
+          "angle": 270,
           "radius": 225,
           "amount": 3,
           "rotation": 60
@@ -91,6 +91,7 @@
         {
           "name": "sign_Region",
           "size": 70,
+          "angle": 180,
           "radius": 245,
           "amount": 6,
           "rotation": 30
@@ -98,6 +99,7 @@
         {
           "name": "sign_Region",
           "size": 70,
+          "angle": 180,
           "radius": 335,
           "amount": 6,
           "rotation": 30
@@ -127,7 +129,7 @@
         {
           "name": "sign_Levitation",
           "size": 120,
-          "angle": 270,
+          "angle": 90,
           "radius": 310,
           "amount": 3
         },
@@ -206,19 +208,20 @@
         {
           "name": "sign_Radial",
           "size": 300,
-          "angle": 120,
+          "angle": 300,
           "amount": 2,
           "rotation": 60
         },
         {
           "name": "sign_Radial",
           "size": 300,
-          "angle": 240,
+          "angle": 60,
           "amount": 2,
           "rotation": 120
         },
         {
           "name": "sigil_Fire",
+          "angle": 180,
           "amount": 2,
           "rotation": 90
         }
@@ -250,19 +253,20 @@
         {
           "name": "sign_Radial",
           "size": 300,
-          "angle": 120,
+          "angle": 300,
           "amount": 2,
           "rotation": 60
         },
         {
           "name": "sign_Radial",
           "size": 300,
-          "angle": 240,
+          "angle": 60,
           "amount": 2,
           "rotation": 120
         },
         {
           "name": "sigil_Fire",
+          "angle": 180,
           "amount": 2,
           "rotation": 90
         }
