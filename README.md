@@ -24,7 +24,7 @@ And just to be clear: this project is **not meant to be a replacement for tradit
 
 ## Example Spells
 
-You can click the links below to instantly open the images into the editor:
+You can click the links below to instantly open the spells into the editor:
 
 <div align="center">
 
