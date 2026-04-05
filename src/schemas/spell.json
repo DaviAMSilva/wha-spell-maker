@@ -8,6 +8,7 @@
         "disable_collapse": true
     },
     "required": [
+        "disclaimer",
         "name",
         "description",
         "grid",
@@ -19,6 +20,13 @@
         "about"
     ],
     "properties": {
+        "disclaimer": {
+            "format": "info",
+            "description": "If this is your first time using this editor you should probably check out the About tab first and see the examples provided.",
+            "options": {
+                "titleHidden": true
+            }
+        },
         "name": {
             "type": "string",
             "default": "",
