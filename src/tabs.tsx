@@ -84,15 +84,16 @@ export default function updateCustomTabs() {
     divAbout?.appendChild(
         <div id="about-container">
             <p id="about-title" class="h3">About</p>
-            <div class="fs-5 text-center mb-4">
-                <p style="margin-bottom: 0;">
-                    Created&nbsp;by&nbsp;<strong>DaviAMSilva</strong>&nbsp;<img src="images/profile.gif" alt="Profile picture" style="width: 1.4em; height: 1.4em; margin-top: -0.1em;" />
-                    &nbsp;&mdash;&nbsp;
+            <div class="text-center mb-4">
+                <p class="fs-3 mb-1">Created&nbsp;by&nbsp;<strong>DaviAMSilva</strong>&nbsp;<img src="images/profile.gif" alt="Profile picture" style="width: 1.4em; height: 1.4em; margin-top: -0.1em;" /></p>
+                <p style="text-reset fs-6 margin-bottom: 0;">
                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/DaviAMSilva/wha-spell-maker"><i class="fab fa-github" /> GitHub</a>
                     &nbsp;&mdash;&nbsp;
                     <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva"><i class="fab fa-reddit" /> Reddit</a>
                     &nbsp;&mdash;&nbsp;
                     <a target="_blank" rel="noopener noreferrer" href="https://discord.com/users/526766336534249475"><i class="fab fa-discord" /> Discord</a>
+                    &nbsp;&mdash;&nbsp;
+                    <a target="_blank" rel="noopener noreferrer" href="https://x.com/daviamsilva"><i class="fab fa-x-twitter" /> Twitter</a>
                 </p>
             </div>
 
@@ -189,7 +190,7 @@ export default function updateCustomTabs() {
                 <li class="list-group-item"><i class="me-2 fab fa-square-js" /><a href="https://p5js.org" target="_blank" rel="noopener noreferrer">p5.js</a> the library for drawing the spells.</li>
             </ul>
             <p class="text-muted text-center small mt-5">
-                If you find any problems with the website or have a suggestion, feel free to contact me via a <a href="https://github.com/DaviAMSilva/wha-spell-maker">GitHub Issue</a>, <a href="https://www.reddit.com/user/DaviAMSilva/">Reddit</a> or <a href="https://discord.com/users/526766336534249475">Discord</a>.<br />
+                If you find any problems with the website or have a suggestion, feel free to contact me via a <a href="https://github.com/DaviAMSilva/wha-spell-maker">GitHub Issue</a>, <a href="https://www.reddit.com/user/DaviAMSilva/">Reddit</a>, <a href="https://discord.com/users/526766336534249475">Discord</a> or <a href="https://x.com/daviamsilva">Twitter</a>.<br />
                 Witch Hat Atelier manga is &copy; Kamome Shirahama / Kodansha. Witch Hat Atelier anime is &copy; BUG FILMS.<br />
                 This is an unofficial fan project, not affiliated with or endorsed by the creators or publishers.
             </p>
