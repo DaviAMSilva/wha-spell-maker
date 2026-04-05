@@ -1,0 +1,28 @@
+{
+  "name": "Sylph Shoes",
+  "description": "The sylph shoes seal contains a central wind underfoot sigil (a variant of the wind sigil) surrounded by an alternating pattern of convergence and levitation signs. So far, it has only been seen on sylph shoes contraptions which allow the user to float above the ground and fly whenever the two shoes are touched together. The seal is bisected, one half on each sole, and when the shoes touch together the seal completes and activates, allowing the user to fly.\n\nSource: Independent Witch Hat Atelier Wiki\nhttps://witchhatatelier.telepedia.net/wiki/Sylph_Shoes_Seal",
+  "seals": [
+    {
+      "rings": [
+        {
+          "name": "Main"
+        }
+      ],
+      "sigils": [
+        {
+          "name": "sigil_Wind Underfoot",
+          "size": 550
+        }
+      ],
+      "signs": [
+        {
+          "name": "sign_Convergence"
+        },
+        {
+          "name": "sign_Levitation",
+          "rotation": 22
+        }
+      ]
+    }
+  ]
+}

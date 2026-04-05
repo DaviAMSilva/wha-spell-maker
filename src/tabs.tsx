@@ -1,5 +1,17 @@
+import type { WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { createJsonEditor } from "./form";
 import { btn_downloadImage, btn_downloadSpellJson, btn_loadSpellJson, btn_uploadSpellJson, copyToClipboard } from "./io";
+
+// Example spells for demonstration of the different features and complexities available
+import pokemon from "../examples/Pokémon.json";
+import sylphShoes from "../examples/Sylph Shoes.json";
+import washingMachine from "../examples/Washing Machine.json";
+
+const spellExamples: Record<string, SpellType> = {
+    "pokemon": pokemon as SpellType,
+    "sylph-shoes": sylphShoes as SpellType,
+    "washing-machine": washingMachine as SpellType,
+}
 
 export default function updateCustomTabs() {
     const divIO = document.querySelector("div[data-schemapath='root.io']");
@@ -67,6 +79,8 @@ export default function updateCustomTabs() {
         </div>
     );
 
+
+
     divAbout?.appendChild(
         <div id="about-container">
             <p id="about-title" class="h3">About</p>
@@ -78,22 +92,45 @@ export default function updateCustomTabs() {
                     &nbsp;&mdash;&nbsp;
                     <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/DaviAMSilva"><i class="fab fa-reddit" /> Reddit</a>
                 </p>
-                <p class="fs-6">Sigils and Signs images sourced from the <strong><a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki">Independent Witch Hat Atelier Wiki <img src="images/wha-wiki.ico" alt="Wiki icon" style="width: 1.2em; height: 1.2em; margin-top: -0.2em;" /></a></strong></p>
             </div>
 
-            <p class="mb-5 text-center w-75 mx-auto">This project intends to provide a way for fans to digitally create and share spells based on the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">magic system</a> of the manga series <a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki">Witch Hat Atelier</a>, created by <a href="https://witchhatatelier.telepedia.net/wiki/Kamome_Shirahama">Kamome Shirahama</a>.</p>
+            <p class="mb-5 text-center w-75 mx-auto">This project intends to provide a way for fans to digitally create and share spells based on the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">magic system</a> of the manga series <a href="https://wikipedia.org/wiki/Witch_Hat_Atelier">Witch Hat Atelier</a>, created by <a href="https://witchhatatelier.telepedia.net/wiki/Kamome_Shirahama">Kamome Shirahama</a>.</p>
             <p>The editor allows fans to brainstorm new spells by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
-            <p>It is very easy to use if the spell follows the standard ring → sigil → signs structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload <a href="#about-custom-images">custom images</a> to use as symbols in a spell.</p>
+            <p>It is very easy to use if the spell follows the standard <em>ring with signs around sigil</em> structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload <a href="#about-custom-images">custom images</a> to use as symbols in a spell.</p>
             <p>The current spell is automatically saved locally on the browser, but fans may also choose to <a href="#about-import-export">save their creations</a> as a JSON file for backup or even generate a link to easily share their creation with others.</p>
-            <p>And just be clear: this project is not meant to be a replacement for traditional hand drawn spells, but rather a way to make spells easier to make, more accessible, standardized and easier to share.</p>
+            <p>And just be clear: this project is <strong>not meant to be a replacement for traditional hand drawn spells</strong>, but rather a way to make creating new spells more accessible, standardized and easier to share.</p>
 
             <p id="about-how-to-use" class="h4 mt-5 mb-3">How to Use:</p>
             <p>The best way to learn is by experimenting! Try adding rings, sigils, signs and lines by navigating to each tab under "Spell&nbsp;Seals" and pressing the <i title="Add" class="fas fa-plus" /> buttons, tweaking the default values of the elements, and watching the canvas update in real time.</p>
             <p>It is possible to change sizes, angles, colors, quantities and other properties of most elements, when relevant. It is also possible to duplicate, rearrange and delete elements and give them names for better organization.</p>
             <p>The editor elements have names that mostly describe what each does, but some also have a <span title="Information">ⓘ</span> button that can be hovered for additional information.</p>
 
+            <p id="about-examples" class="h4 mt-5 mb-3">Examples</p>
+            <p>Click any example below to load it into the editor. Be aware that this <strong class="text-decoration-underline">will erase the current spell</strong>.</p>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+                {[
+                    { id: "sylph-shoes", label: "Sylph Shoes", description: "A simple classic spell from the series." },
+                    { id: "washing-machine", label: "Washing Machine", description: <>A complex spell by <a href="https://www.reddit.com/r/WitchHatAtelier/comments/1rj2wkx/washing_machine_spell_just_toss_your_clothes_in">u/ChromaticFlare1</a>.</> },
+                    { id: "pokemon", label: "Pokémon", description: "A silly spell with custom images and colors." },
+                ].map(({ id, label, description }) => (
+                    <div class="col">
+                        <button
+                            data-spell={id}
+                            class="btn btn-outline-secondary btn-sm w-100 text-start"
+                            onclick={() => {
+                                const spellExample = spellExamples[id];
+                                if (spellExample) createJsonEditor(spellExample);
+                            }}
+                        >
+                            <strong>{label} Spell</strong>
+                            <span class="d-block text-white fw-normal">{description}</span>
+                        </button>
+                    </div>
+                ))}
+            </div>
+
             <p id="about-definitions" class="h4 mt-5 mb-3">Definitions:</p>
-            <p>This project defines the parts of a spell as such:</p>
+            <p>This project defines, for its own use, the following parts of a spell as such:</p>
             <dl class="row">
                 <dt class="col-sm-1 text-nowrap">Spell</dt>
                 <dd class="col-sm-11">An abstract representation, comprised of a design, name and description. A spell's design contains one or more seals.</dd>
@@ -115,16 +152,16 @@ export default function updateCustomTabs() {
                 <li class="list-group-item">Offsets allow moving elements vertically or horizontally relative to their original center.</li>
                 <li class="list-group-item">Scaling uses percentages with a default of 100 and minimum of 1.</li>
                 <li class="list-group-item">When changing values in a numeric element it is possible to use the arrow keys for better fine-tune control.</li>
-                <li class="list-group-item">Symbol names for Sigils and Signs are separated in groups of names Custom, Sigils, Signs and Others for easier browsing.</li>
+                <li class="list-group-item">Symbol names for Sigils and Signs are separated in groups of names Custom, Sigils, Signs, The Owl House and Shapes for easier browsing.</li>
                 <li class="list-group-item">Using the arrow keys it is possible to quickly iterate over all possible symbols for Sigils and Signs.</li>
                 <li class="list-group-item">Elements that are part of a list can be duplicated with <i class="fas fa-copy" /> or reordered with <i class="fas fa-arrow-left" /> or <i class="fas fa-arrow-right" />.</li>
-                <li class="list-group-item">It is possible to toggle an element's visibility to quickly identify where in the spell it is present.</li>
+                <li class="list-group-item">It is possible to toggle an element's visibility to quickly identify where in the spell it is located.</li>
             </ul>
 
             <p id="about-custom-images" class="h4 mt-5 mb-3">Custom Images</p>
             <p>Custom images can be loaded into the editor to be used as symbols for Sigils and Signs within the spell currently being created. Note that this is not a general catalog of images; they are tied to the current spell and will be lost if the spell is cleared or overwritten.</p>
             <p>To add custom images there are three steps to be followed:</p>
-            <ol class="list-group list-group-numbered">
+            <ol class="list-group list-group-flush list-group-numbered my-2">
                 <li class="list-group-item">First use the <span className="badge bg-secondary"><i class="fas fa-plus" />&nbsp;Custom&nbsp;Image</span> button to allocate as many images as necessary and give each one a unique name.</li>
                 <li class="list-group-item">Then for each of the allocated images click the <span className="badge bg-secondary"><i class="fas fa-upload" />&nbsp;Upload</span> button to upload an image from your device.<br />Preferably the image should be a square with a transparent background and not larger than 500×500px.</li>
                 <li class="list-group-item">Finally click the <span className="badge bg-secondary"><i class="fas fa-upload" />&nbsp;Load&nbsp;Custom&nbsp;Images</span> button at the bottom to reload the editor with the updated custom images list.</li>
@@ -137,6 +174,20 @@ export default function updateCustomTabs() {
             <p>The <span className="badge bg-secondary"><i class="fas fa-copy" />&nbsp;Copy&nbsp;JSON&nbsp;to&nbsp;Clipboard</span> button copies the spell code to the clipboard.</p>
             <p>The <span className="badge bg-secondary"><i class="fas fa-download" />&nbsp;Download&nbsp;Spell&nbsp;Image</span> button downloads a 1000×1000px PNG image of the current spell.</p>
             <p>The <span className="badge bg-danger"><i class="fas fa-triangle-exclamation" />&nbsp;Reset&nbsp;to&nbsp;Blank&nbsp;Spell</span> permanently clears the editor, including custom images.</p>
+
+            <p id="about-credits-tools-used" class="h4 mt-5 mb-3">Credits</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="me-2 fab fa-x-twitter" /><a href="https://x.com/shirahamakamome" target="_blank" rel="noopener noreferrer">Kamome Shirahama</a> for creating this amazing series, both the <a href="https://kmanga.kodansha.com/title/10065" target="_blank" rel="noopener noreferrer">manga</a> and <a href="https://tongari-anime.com/en/" target="_blank" rel="noopener noreferrer">anime</a>.</li>
+                <li class="list-group-item"><i class="me-2 fas fa-book" /><a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki" target="_blank" rel="noopener noreferrer">Independent Witch Hat Atelier Wiki</a> for listing and providing the base designs for the signs and sigils.</li>
+                <li class="list-group-item"><i class="me-2 fas fa-book" /><a href="https://theowlhouse.fandom.com/wiki/Glyph_Magic" target="_blank" rel="noopener noreferrer">The Owl House Wiki</a> for the images of the glyphs from the series. <a class="text-muted text-sm" href="https://x.com/DanaTerrace/status/1653190525720330241">(Kamome's TOH art)</a></li>
+                <li class="list-group-item"><i class="me-2 fab fa-reddit" /><a href="https://www.reddit.com/user/ChromaticFlare1" target="_blank" rel="noopener noreferrer">u/ChromaticFlare1</a> for allowing the use of the his Washing Machine spell as one of the examples.</li>
+                <li class="list-group-item"><i class="me-2 fab fa-github" /><a href="https://github.com/json-editor/json-editor" target="_blank" rel="noopener noreferrer">JSON Editor</a> the library for editing the spell JSON.</li>
+                <li class="list-group-item"><i class="me-2 fab fa-square-js" /><a href="https://p5js.org" target="_blank" rel="noopener noreferrer">p5.js</a> the library for drawing the spells.</li>
+            </ul>
+            <p class="text-muted text-center small mt-5">
+                Witch Hat Atelier manga is &copy; Kamome Shirahama / Kodansha. Witch Hat Atelier anime is &copy; BUG FILMS.<br />
+                This is an unofficial fan project, not affiliated with or endorsed by the creators or publishers.
+            </p>
         </div>
     );
 

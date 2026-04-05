@@ -138,6 +138,7 @@ const sketch = (p: p5) => {
         p.ellipseMode(p.CENTER);
         p.ellipseMode(p.RADIUS);
         p.angleMode(p.DEGREES);
+        p.rectMode(p.CENTER);
 
         p.colorMode(p.RGB);
         p.strokeCap(p.ROUND);
@@ -184,12 +185,13 @@ const sketch = (p: p5) => {
 
 
         // Drawing the optional grid with a opposite color as the background
+        const backgroundColor = (spell.grid ?? defaults.spell.grid) ? p.color(spell.backgroundColor ?? defaults.spell.backgroundColor) : p.color(defaults.spell.backgroundColor);
+        const oppositeColor = p.color(255 - p.red(backgroundColor), 255 - p.green(backgroundColor), 255 - p.blue(backgroundColor));
         if (spell.grid ?? defaults.spell.grid) {
-            const backgroundColor = (spell.grid ?? defaults.spell.grid) ? p.color(spell.backgroundColor ?? defaults.spell.backgroundColor) : p.color(defaults.spell.backgroundColor);
-            const oppositeColor = p.color(255 - p.red(backgroundColor), 255 - p.green(backgroundColor), 255 - p.blue(backgroundColor));
             p.stroke(oppositeColor);
-            p.strokeWeight(1);
-            for (let i = 0; i <= p.width; i += 100) {
+            for (let i = 50; i < p.width; i += 50) {
+                if (i % 100) p.strokeWeight(0.25);
+                else p.strokeWeight(1);
                 p.line(0, i, p.height, i);
                 p.line(i, 0, i, p.width);
             }
@@ -348,7 +350,8 @@ const sketch = (p: p5) => {
                     // p.stroke(255, 0, 0);
                     // p.strokeWeight(2);
                     // p.noFill();
-                    // p.rectMode(p.CENTER);
+                    // p.strokeWeight(1 / sealScale);
+                    // p.stroke(symbol.tinted && symbol.color ? symbol.color : defaults.spell.color);
                     // p.rect(0, 0, symbolSize, symbolSize);
 
                     p.pop(); // SIGILS & SIGNS
