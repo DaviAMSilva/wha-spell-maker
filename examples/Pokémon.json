@@ -1,0 +1,96 @@
+{
+  "name": "Pokémon",
+  "description": "Gotta cast 'em all!",
+  "seals": [
+    {
+      "name": "Fire",
+      "scale": 50,
+      "offsetY": -233,
+      "rings": [
+        {
+          "color": "#e01b24",
+          "filled": true,
+          "fillColor": "#fdd7d3"
+        }
+      ],
+      "sigils": [
+        {
+          "name": "custom_Charizard"
+        }
+      ],
+      "signs": [
+        {
+          "tinted": true,
+          "color": "#e01b24",
+          "name": "sigil_Fire"
+        }
+      ]
+    },
+    {
+      "name": "Water",
+      "scale": 50,
+      "offsetX": -250,
+      "offsetY": 200,
+      "rings": [
+        {
+          "color": "#3584e4",
+          "filled": true,
+          "fillColor": "#e5effb"
+        }
+      ],
+      "sigils": [
+        {
+          "name": "custom_Blastoise"
+        }
+      ],
+      "signs": [
+        {
+          "tinted": true,
+          "color": "#3584e4",
+          "name": "sigil_Water"
+        }
+      ]
+    },
+    {
+      "name": "Grass",
+      "scale": 50,
+      "offsetX": 250,
+      "offsetY": 200,
+      "rings": [
+        {
+          "color": "#33d17a",
+          "filled": true,
+          "fillColor": "#e3fbe8"
+        }
+      ],
+      "sigils": [
+        {
+          "name": "custom_Venosaur"
+        }
+      ],
+      "signs": [
+        {
+          "tinted": true,
+          "color": "#26a269",
+          "name": "sigil_Flower"
+        }
+      ]
+    }
+  ],
+  "custom": {
+    "images": [
+      {
+        "file": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAALVBMVEUAAAAAAAAIQVIgc5RiYmKDMRjNUkHNzc3mQRDugynutFru3nv2pBD/1RD////8tlCXAAAAAXRSTlMAQObYZgAABLNJREFUWMPtmD1r5EYYx2eOyGypWfAkcsDYc9hwZdYfIl3QBiROgYBl0ARdwGCISRd8nQq72IAG5q5y4SJKHwj7Ba7Z3oVVGPLS+TPkeWak3dXbxttdcVN4kff56fk/r6tdQj6dj/NcbWk/uhpth4yyLNvOxdbA6EO2ZRg32XbE6Pp+cYWqgmeZBxB1WX4AwCn8Z9ij1WhR3htAPgMIAchuSoybpvkpcYJgs58oJ6ObmzLDuD2tgkjrfJgIfEcDsFg8ZNcAcG2POh3Sr/NIJ2RUQggL1ITGQRBq1R+ME+HtTMwPWQlRA8DGQohQ617C2ANAbhZliQCJZmB+cjI5flec9gmaMW4AcAE+EBijPRLFXY+DX+F2HAFI68P9lQVenhgiVd0MabAXhxA0ya7LB9NMS+DkWHUFoQMhvBwnorxvA7pdDCcVS4CMvn9NyFoMqKkdtXNmgcO8qvezAePbsQrWgFd5u+kqQLyyQGJkAlClqRN1KNYBEkofsWHAkUIcfWuA3AKJTxwlloBopQmBMDZQbq+B4EamAYRoRY0hIADdI13rQibhMEBRkYzFkY6Bq1zEUqwBzTTRMwRcEUGYR5KZVomtIhuEEM2oKwAa9gW8hRki1LMOaqAZNQJc7kbwT3hLYhE8UDepNJlXG9taDDxQWrvkhThku1hlBZ1XAQcUXo7dZt0OUxi3GSEvmAeTBEFDzibm1icTQsY9AM7nzKXM7AlmgJfgDf4egIQ24Jx5ZqKnLLWbhWHIk8mxZGMEwEULiO0KyqWsdhHHBB1gOYTfAxCvWlpSWhcaF4YghEs5TvqBN7/l6RqAnYriJRwfg2gCVKtCXaIUOeWWmbExvgMusC4dIJQ6fjKrkdBdQ0R6ZipeuRi3JPFEf/UPRg0LPgFaK3Nh+1ZCP45b25KGSZCqKUx/mMg6VRo/GxzU5JNx3J7RFGXLJEAJNaDzqQGgj/hpe5HBid+a268yBcrcShN3u6tbfZFxAMKlfeDVQEJ2enY9yzIey2QpSCVOCGKsJtpVNCPgIQZRlT0ky6c14HccROAcAHcnTOfzP60HmVBQb4B2jjylzwF4G7rEm89XBK+BpAVQLZlLX+/nPv1xviQsAEGrDkAoI0HydzAj9L0B5sbFboSATlMp3e5nnIxxprm1Ny6mWBvIh1J9QBhKxnwbQuUCP9klTkqvB2Zb4Mv5ygVPPC2ndq66AGQwgPq8XwNmF6lCobpXErQpYWQFoKZE5zw29m96gOk+lDNqADpMphdo3ymcJaAN9AowebrMGdrL26HHJa1WADYtk9isvYrMSXX+ewPQEreALAaAHZixogb+qHocHQwpAkB/V7u4s0AMAzjkwAKF8VEUS+BdcTv4iIhzX1TnLrUdu1cMOrCTvVcBt0uAkU2AjGtAVgDb8JiLbSb3aiA1bcc2PRebrRTvVQAQsrft1obIzO/UEIEp2UAbNQAfBra4C4pnANWWwwcBKMct/3+Aylo0PNYH5krONj7d80aUeJWmm6L+7OIyXNOALpTaBHzz9U8/NwHYSZsA9u/+BXObIZ1vAiij64Wl/Ifwl/PHLb6isafHp78utvlSt+9+/si2AahL3U+/GHyM5z/tOd8zbwTGEwAAAABJRU5ErkJggg==",
+        "name": "Charizard"
+      },
+      {
+        "file": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAALVBMVEUAAAAIOWIQEBAgYqxKSkpaORhai82LYkGUlJSUrObNzdXVrErmxXP21Zz///+2pahRAAAAAXRSTlMAQObYZgAABBNJREFUWMPtlr9rI0cUx9cb5w+YXSMchwPvk/UDiRNZDQhC4JDFXmJ0cByCxYUqSWHAZQxChSuL41hcHASDQKV1vhCmEMTcccWcunTJFVbchS0cFDhUzN+QNyvZCSdrvF0avWab99nv+zVvxjBWtrKV/V9G5t/Pvorl7u0yYlBKjbUvfozjv87PWMNmjFH7oBkHyPFBKcGUJXoxAU4j/xZj327f728GnM8EGPs+nfJ9/9l9QHBWmgPNdGHqd9q+YQI80wBd5dxnjVIzXZTT/U7Hz7TF26US2SCN/gc9pirVlPLvTuewUxdiucReGtMtsSbHyFoFKVGhLd5pJCrdBpaUfcNfoYT1EiUydVGrL5cwdgmltpuRPykApESBt5DSSKwNKHW3MpJFQEG+zogagPfkTgmvYqyR15TdGCAw2W/veNnhxLsr/sIrYqdvvBOsBfBSTr+red2hlHKRMKsD2y3e/t5mLmTRcVLZUx8pywsAP6b2LdAIaREF0M6zOSmnlepkQQIItWmSOaoF5EH4h5UdRr+uVKUcACwA5oBYlIKDSbe+DMNwDCfBLtnAoHJ8WgF4Wl4IiViEOnjcXOUfXuwExzZrPZIShx5gZwEwcggQywKnPlIAZAMc9f4pxsR5BbxFwHQUkBdoHzCi/N4xzmG//0j+xXnX8xaTxqwdYoECxO+/wZsAgX4fJT5m+c+V6uCO1gECJBURtfybKCIFTCtZzs/vPLGmgyKKwAG9ChxSQqC3xR/jOC054XgeMSqAuhiNHazv1/0+Q8D3a8sPNkRpi3CsUj7t9+4FjAgYhekoA2z7Fgc9kIr8Q8cuzYDceU0LfD7yj9D/snRwihm0WIOf+ykdYIqwjSssgQFhBg1WPHnsY5V0gMDBuJxn0GCbz9UK1OxN80iNRjUaCwSaz/e6ekBVaXTFX5DEQa/F3J1KEAcY8w15jeeOWU9+DXhKD2SEeD+GqrymrOEIcYSXhh5Q8xqGTz9uDEtFIX4Ah/OUrm+mdaQaV4UNCQ///AVHluiB2bh+gPBq8CC8VGucbQ10Edlu3o8O3fhh2ElG90uD6/pGqSV8jEq8b+9fzPfmlrNcYg23Rl68w9LvC3ED4GFfSthUScwtOQcIbodlQBIVSP4ToKkHcDnN/C/sfwFNSC6uDrgBSnPAWl4ljNchBFTWhy6dSTRgWweAyhE6eOUW6UzC1Y6S8keDTOeQJiOJlhZwZv6W2lG0aCuC2hrAO54Bm+WoZJgFmgZYD4IZEJTnc6IuDFf7oLFOVAYwHyxF2EVtzjl+drtVkopwaPGeZxn8t+/K9IAJxieAuxnjOXcD4GOFFLkXFzBdaRO5wQexH8oFeT2UU4gdkpHDS1dOyvGf4uueAcP4Ac1bs22sbGUrW2L/AKyCBSohEpvAAAAAAElFTkSuQmCC",
+        "name": "Blastoise"
+      },
+      {
+        "file": "data:image/png;base64,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",
+        "name": "Venosaur"
+      }
+    ]
+  }
+}

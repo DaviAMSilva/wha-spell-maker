@@ -1,0 +1,272 @@
+{
+  "name": "Washing Machine",
+  "description": "First, the outermost spell makes a spherical region above the spell where water will reside. This is the same spell Qifrey shows Coco in chapter 53. The innermost spell, which can be found in vapor bubbles, then fills this area with water from the air, creating a bubble.\n\nNext are the two spinning spells, one clockwise and one counterclockwise. Region signs pointing in from the edges confine the spin of each spell to the space directly above them. They work together to flutter the clothes around, allowing them to wash evenly.\n\nLast are the heating spells off to the sides. They use crosshair to manifest warmth (fire weakened by radial) inside the water. This could potentially stop the vapor bubble spell from condensing water via cooling, so they should remain unlinked from the spell until the bubble forms.\n\nCreated by u/ChromaticFlare1\nhttps://www.reddit.com/r/WitchHatAtelier/comments/1rj2wkx/washing_machine_spell_just_toss_your_clothes_in",
+  "seals": [
+    {
+      "name": "Main",
+      "scale": 60,
+      "rings": [
+        {
+          "name": "First",
+          "weight": 5,
+          "openingSize": 7,
+          "openingAngle": 251
+        },
+        {
+          "name": "Second",
+          "radius": 360,
+          "weight": 5
+        },
+        {
+          "name": "Third",
+          "radius": 270,
+          "weight": 5
+        },
+        {
+          "name": "Fourth",
+          "radius": 180,
+          "weight": 5
+        },
+        {
+          "name": "Fifth",
+          "radius": 100,
+          "weight": 5
+        }
+      ],
+      "sigils": [
+        {
+          "name": "sigil_Water",
+          "size": 150
+        }
+      ],
+      "signs": [
+        {
+          "name": "sign_Gather",
+          "size": 100,
+          "radius": 97,
+          "amount": 2
+        },
+        {
+          "name": "sign_Column",
+          "size": 100,
+          "radius": 140,
+          "amount": 6
+        },
+        {
+          "name": "sign_Cool",
+          "size": 100,
+          "radius": 140,
+          "amount": 2,
+          "rotation": 150
+        },
+        {
+          "name": "sign_Cool",
+          "size": 100,
+          "radius": 140,
+          "amount": 2,
+          "rotation": 30
+        },
+        {
+          "name": "sigil_Aeriforms",
+          "size": 70,
+          "radius": 140,
+          "amount": 2,
+          "rotation": 90
+        },
+        {
+          "name": "sigil_Water",
+          "size": 90,
+          "angle": 90,
+          "radius": 220,
+          "amount": 3
+        },
+        {
+          "name": "sign_Levitation",
+          "size": 120,
+          "angle": 90,
+          "radius": 225,
+          "amount": 3,
+          "rotation": 60
+        },
+        {
+          "name": "sign_Region",
+          "size": 70,
+          "radius": 245,
+          "amount": 6,
+          "rotation": 30
+        },
+        {
+          "name": "sign_Region",
+          "size": 70,
+          "radius": 335,
+          "amount": 6,
+          "rotation": 30
+        },
+        {
+          "name": "sign_Region",
+          "size": 70,
+          "radius": 205,
+          "amount": 6,
+          "rotation": 30
+        },
+        {
+          "name": "sign_Region",
+          "size": 70,
+          "radius": 295,
+          "amount": 6,
+          "rotation": 30
+        },
+        {
+          "name": "sigil_Water",
+          "size": 90,
+          "angle": 90,
+          "radius": 315,
+          "amount": 3,
+          "rotation": 60
+        },
+        {
+          "name": "sign_Levitation",
+          "size": 120,
+          "angle": 270,
+          "radius": 310,
+          "amount": 3
+        },
+        {
+          "name": "sigil_Water",
+          "size": 90,
+          "angle": 270,
+          "radius": 405,
+          "amount": 4
+        },
+        {
+          "name": "sign_Column",
+          "size": 110,
+          "radius": 402,
+          "amount": 4,
+          "rotation": 30
+        },
+        {
+          "name": "sign_Orb",
+          "size": 100,
+          "radius": 403,
+          "amount": 4,
+          "rotation": 60
+        }
+      ],
+      "lines": [
+        {
+          "name": "Left",
+          "weight": 5,
+          "points": [
+            {
+              "x": -450
+            },
+            {
+              "x": -490
+            }
+          ]
+        },
+        {
+          "name": "Right",
+          "weight": 5,
+          "points": [
+            {
+              "x": 450
+            },
+            {
+              "x": 490
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Left",
+      "scale": 20,
+      "offsetX": -386,
+      "rings": [
+        {
+          "weight": 15,
+          "openingSize": 15,
+          "openingAngle": 193
+        }
+      ],
+      "sigils": [
+        {
+          "name": "sigil_Water"
+        }
+      ],
+      "signs": [
+        {
+          "name": "sign_Crosshair",
+          "size": 300,
+          "angle": 90,
+          "amount": 2
+        },
+        {
+          "name": "sign_Radial",
+          "size": 300,
+          "angle": 120,
+          "amount": 2,
+          "rotation": 60
+        },
+        {
+          "name": "sign_Radial",
+          "size": 300,
+          "angle": 240,
+          "amount": 2,
+          "rotation": 120
+        },
+        {
+          "name": "sigil_Fire",
+          "amount": 2,
+          "rotation": 90
+        }
+      ]
+    },
+    {
+      "name": "Right",
+      "scale": 20,
+      "offsetX": 386,
+      "rings": [
+        {
+          "weight": 15,
+          "openingSize": 15,
+          "openingAngle": 102
+        }
+      ],
+      "sigils": [
+        {
+          "name": "sigil_Water"
+        }
+      ],
+      "signs": [
+        {
+          "name": "sign_Crosshair",
+          "size": 300,
+          "angle": 90,
+          "amount": 2
+        },
+        {
+          "name": "sign_Radial",
+          "size": 300,
+          "angle": 120,
+          "amount": 2,
+          "rotation": 60
+        },
+        {
+          "name": "sign_Radial",
+          "size": 300,
+          "angle": 240,
+          "amount": 2,
+          "rotation": 120
+        },
+        {
+          "name": "sigil_Fire",
+          "amount": 2,
+          "rotation": 90
+        }
+      ]
+    }
+  ]
+}

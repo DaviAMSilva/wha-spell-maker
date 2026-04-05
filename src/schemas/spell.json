@@ -41,7 +41,7 @@
             "default": false,
             "title": "Grid",
             "options": {
-                "infoText": "Helps aligns your spell"
+                "infoText": "Helps align your spell"
             }
         },
         "background": {
