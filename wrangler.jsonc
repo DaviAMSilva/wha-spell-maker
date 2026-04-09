@@ -1,11 +1,16 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "wha-spell-maker",
+  "main": "functions/index.ts",
   "compatibility_date": "2026-03-17",
   "observability": {
     "enabled": true
   },
   "assets": {
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/"
+    ],
     "not_found_handling": "single-page-application",
     "directory": "dist"
   },
