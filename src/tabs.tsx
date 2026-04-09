@@ -96,10 +96,12 @@ export default function updateCustomTabs() {
                     <a target="_blank" rel="noopener noreferrer" href="https://discord.com/users/526766336534249475"><i class="fab fa-discord" /> Discord</a>
                     &nbsp;&mdash;&nbsp;
                     <a target="_blank" rel="noopener noreferrer" href="https://x.com/daviamsilva"><i class="fab fa-x-twitter" /> Twitter</a>
+                    &nbsp;&mdash;&nbsp;
+                    <a target="_blank" rel="noopener noreferrer" href="https://daviamsilva.dev"><i class="fas fa-globe" /> DaviAMSilva</a>
                 </p>
             </div>
 
-            <p class="mb-5 text-center w-75 mx-auto">This project intends to provide a way for fans to digitally create and share spells based on the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">magic system</a> of the manga series <a href="https://wikipedia.org/wiki/Witch_Hat_Atelier">Witch Hat Atelier</a>, created by <a href="https://witchhatatelier.telepedia.net/wiki/Kamome_Shirahama">Kamome Shirahama</a>.</p>
+            <p class="mb-5 text-center w-75 mx-auto">This spell maker intends to provide a way for fans to digitally create and share spells based on the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">magic system</a> of the manga series <a href="https://wikipedia.org/wiki/Witch_Hat_Atelier">Witch Hat Atelier</a> created by <a href="https://witchhatatelier.telepedia.net/wiki/Kamome_Shirahama">Kamome Shirahama</a>.</p>
             <p>The editor allows fans to brainstorm new spells by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
             <p>It is very easy to use if the spell follows the standard <em>ring with signs around sigil</em> structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload <a href="#about-custom-images">custom images</a> to use as symbols in a spell.</p>
             <p>The current spell is automatically saved locally on the browser, but fans may also choose to <a href="#about-import-export">save their creations</a> as a JSON file for backup or even generate a link to easily share their creation with others.</p>
