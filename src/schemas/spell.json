@@ -5,7 +5,8 @@
     "basicCategoryTitle": "Spell Information",
     "title": "Witch Hat Atelier Spell Maker",
     "options": {
-        "disable_collapse": true
+        "disable_collapse": true,
+        "titleHidden": true
     },
     "required": [
         "disclaimer",
