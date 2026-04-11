@@ -37,8 +37,9 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
 
     const sigilKeys = Object.keys(symbols.sigils);
     const signKeys = Object.keys(symbols.signs);
-    const tohKeys = Object.keys(symbols.tohs);
+    const forbiddenKeys = Object.keys(symbols.forbiddens);
     const shapeKeys = Object.keys(symbols.shapes);
+    const tohKeys = Object.keys(symbols.tohs);
 
     const customImages = getCustomImages(lastSpell);
     const customKeys = customImages.map((i: any) => i.name);
@@ -49,16 +50,18 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
             "###Customs", ...customKeys.map(s => "custom_" + s),
             "###Sigils", ...sigilKeys.map(s => "sigil_" + s),
             "###Signs", ...signKeys.map(s => "sign_" + s),
+            "###Forbidden", ...forbiddenKeys.map(s => "forbidden_" + s),
+            "###Shapes", ...shapeKeys.map(s => "shape_" + s),
             "###The Owl House", ...tohKeys.map(s => "toh_" + s),
-            "###Shapes", ...shapeKeys.map(s => "shape_" + s)
         ],
         options: {
             enum_titles: [
                 "###Custom", ...customKeys,
                 "###Sigils", ...sigilKeys,
                 "###Signs", ...signKeys,
+                "###Forbidden", ...forbiddenKeys,
+                "###Shapes", ...shapeKeys,
                 "###The Owl House", ...tohKeys,
-                "###Shape", ...shapeKeys
             ]
         }
     });
@@ -67,16 +70,18 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
             "###Customs", ...customKeys.map(s => "custom_" + s),
             "###Signs", ...signKeys.map(s => "sign_" + s),
             "###Sigils", ...sigilKeys.map(s => "sigil_" + s),
+            "###Forbidden", ...forbiddenKeys.map(s => "forbidden_" + s),
+            "###Shapes", ...shapeKeys.map(s => "shape_" + s),
             "###The Owl House", ...tohKeys.map(s => "toh_" + s),
-            "###Shapes", ...shapeKeys.map(s => "shape_" + s)
         ],
         options: {
             enum_titles: [
                 "###Custom", ...customKeys,
                 "###Signs", ...signKeys,
                 "###Sigils", ...sigilKeys,
+                "###Forbidden", ...forbiddenKeys,
+                "###Shapes", ...shapeKeys,
                 "###The Owl House", ...tohKeys,
-                "###Shape", ...shapeKeys
             ]
         }
     });

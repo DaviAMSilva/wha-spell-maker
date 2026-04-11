@@ -11,8 +11,9 @@ const symbolsImages: SymbolsImages = {
     customs: {},
     sigils: {},
     signs: {},
+    forbiddens: {},
+    shapes: {},
     tohs: {},
-    shapes: {}
 };
 
 const sketch = (p: p5) => {
@@ -45,11 +46,14 @@ const sketch = (p: p5) => {
             for (const sign_name in symbols.signs) {
                 symbolsImages.signs["sign_" + sign_name] = await p.loadImage(symbols.signs[sign_name as keyof typeof symbols.signs]);
             }
-            for (const toh_name in symbols.tohs) {
-                symbolsImages.tohs["toh_" + toh_name] = await p.loadImage(symbols.tohs[toh_name as keyof typeof symbols.tohs]);
-            }
             for (const shape_name in symbols.shapes) {
                 symbolsImages.shapes["shape_" + shape_name] = await p.loadImage(symbols.shapes[shape_name as keyof typeof symbols.shapes]);
+            }
+            for (const forbidden_name in symbols.forbiddens) {
+                symbolsImages.forbiddens["forbidden_" + forbidden_name] = await p.loadImage(symbols.forbiddens[forbidden_name as keyof typeof symbols.forbiddens]);
+            }
+            for (const toh_name in symbols.tohs) {
+                symbolsImages.tohs["toh_" + toh_name] = await p.loadImage(symbols.tohs[toh_name as keyof typeof symbols.tohs]);
             }
         }
 
