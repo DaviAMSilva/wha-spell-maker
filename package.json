@@ -21,7 +21,6 @@
         "eslint": "^10.0.3",
         "json-schema-to-typescript": "^15.0.4",
         "json-to-ts": "^2.1.0",
-        "puppeteer": "^25.7.0",
         "sass": "^1.97.3",
         "terser": "^5.46.1",
         "typescript": "^5.9.3",
