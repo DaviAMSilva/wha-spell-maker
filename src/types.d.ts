@@ -6,5 +6,6 @@ declare global {
         Handlebars: any;
         jsonEditor: any;
         JSONEditor: any;
+        __PRERENDER_READY__: boolean;
     }
 }

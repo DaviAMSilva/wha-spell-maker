@@ -210,4 +210,7 @@ export default function updateCustomTabs() {
             <img id="coco-canvas" src="images/coco-canvas.webp" alt="Coco holding the spell canvas" />
         )
     }
+
+    // Tells the pre-renderer that the page is ready
+    window.__PRERENDER_READY__ = true;
 }

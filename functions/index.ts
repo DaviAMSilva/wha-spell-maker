@@ -2,10 +2,59 @@
 
 interface Env { ASSETS: Fetcher }
 
+const CRAWLER_PATTERNS = [
+    /adsbot-google/i,
+    /ahrefsbot/i,
+    /applebot/i,
+    /baiduspider/i,
+    /bingbot/i,
+    /discordbot/i,
+    /dotbot/i,
+    /duckduckbot/i,
+    /exabot/i,
+    /facebookexternalhit/i,
+    /facebot/i,
+    /googlebot/i,
+    /linkedinbot/i,
+    /mediapartners-google/i,
+    /mj12bot/i,
+    /rogerbot/i,
+    /semrushbot/i,
+    /slackbot/i,
+    /slurp/i,
+    /sogou/i,
+    /telegrambot/i,
+    /twitterbot/i,
+    /whatsapp/i,
+    /yandexbot/i,
+];
+
+function isCrawler(request: Request): boolean {
+    const ua = request.headers.get("user-agent") ?? "";
+    return CRAWLER_PATTERNS.some(pattern => pattern.test(ua));
+}
+
 export default {
     async fetch(request: Request, env: Env): Promise<Response> {
         const url = new URL(request.url);
         const spellParam: string | null = url.searchParams.get("spell");
+        const accept = request.headers.get("accept") ?? "";
+        const isHtmlRequest = accept.includes("text/html");
+
+        // Serve pre-rendered HTML to crawlers hitting /
+        if (isCrawler(request) && isHtmlRequest && url.pathname === "/") {
+            const prerenderedUrl = new URL("/index-prerendered.html", url.origin);
+            const prerenderedRequest = new Request(prerenderedUrl.toString(), request);
+            const prerenderedResponse = await env.ASSETS.fetch(prerenderedRequest);
+
+            const newHeaders = new Headers(prerenderedResponse.headers);
+            newHeaders.set("Vary", "User-Agent");
+
+            return new Response(prerenderedResponse.body, {
+                status: prerenderedResponse.status,
+                headers: newHeaders,
+            });
+        }
 
         const response: Response = await env.ASSETS.fetch(request);
 
