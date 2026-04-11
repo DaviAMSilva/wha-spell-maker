@@ -34,6 +34,61 @@ function isCrawler(request: Request): boolean {
     return CRAWLER_PATTERNS.some(pattern => pattern.test(ua));
 }
 
+function rewriteTitles(response: Response, name: string): Response {
+    return new HTMLRewriter()
+        .on("title", {
+            _buffer: "",
+            text(chunk: Text): void {
+                this._buffer += chunk.text;
+                chunk.remove();
+                if (chunk.lastInTextNode) {
+                    chunk.after(`${name.trim()} Spell | ${this._buffer}`, { html: false });
+                    this._buffer = "";
+                }
+            },
+        } as any)
+        .on('meta[name="title"]', {
+            element(el: HTMLMetaElement): void {
+                const content: string = el.getAttribute("content") ?? "";
+                el.setAttribute("content", `${name.trim()} Spell | ${content}`);
+            },
+        })
+        .on('meta[property="og:title"]', {
+            element(el: HTMLMetaElement): void {
+                const content: string = el.getAttribute("content") ?? "";
+                el.setAttribute("content", `${name.trim()} Spell | ${content}`);
+            },
+        })
+        .on('meta[name="twitter:title"]', {
+            element(el: HTMLMetaElement): void {
+                const content: string = el.getAttribute("content") ?? "";
+                el.setAttribute("content", `${name.trim()} Spell | ${content}`);
+            },
+        })
+        .transform(response);
+}
+
+async function decodeSpellName(spellParam: string): Promise<string | null> {
+    try {
+        const base64: string = spellParam.replace(/-/g, "+").replace(/_/g, "/");
+        const binaryStr: string = atob(base64);
+        const bytes = new Uint8Array(Array.from(binaryStr, (c: string) => c.charCodeAt(0)));
+
+        const ds = new DecompressionStream("deflate-raw");
+        const writer = ds.writable.getWriter();
+        writer.write(bytes);
+        writer.close();
+        const decompressed: ArrayBuffer = await new Response(ds.readable).arrayBuffer();
+
+        const json = JSON.parse(new TextDecoder().decode(decompressed)) as { "name"?: string };
+        const name = json?.name;
+        if (!name || name.length > 30) return null;
+        return name;
+    } catch {
+        return null;
+    }
+}
+
 export default {
     async fetch(request: Request, env: Env): Promise<Response> {
         const url = new URL(request.url);
@@ -41,77 +96,28 @@ export default {
         const accept = request.headers.get("accept") ?? "";
         const isHtmlRequest = accept.includes("text/html");
 
+        const name = spellParam ? await decodeSpellName(spellParam) : null;
+
         // Serve pre-rendered HTML to crawlers hitting /
         if (isCrawler(request) && isHtmlRequest && url.pathname === "/") {
             const prerenderedUrl = new URL("/index-prerendered.html", url.origin);
-            const prerenderedRequest = new Request(prerenderedUrl.toString(), request);
+            const prerenderedRequest = new Request(prerenderedUrl.toString(), { redirect: "follow" });
             const prerenderedResponse = await env.ASSETS.fetch(prerenderedRequest);
 
-            const newHeaders = new Headers(prerenderedResponse.headers);
+            const rewritten = name ? rewriteTitles(prerenderedResponse, name) : prerenderedResponse;
+
+            // Then patch the Vary header on the already-transformed response
+            const newHeaders = new Headers(rewritten.headers);
             newHeaders.set("Vary", "User-Agent");
 
-            return new Response(prerenderedResponse.body, {
-                status: prerenderedResponse.status,
+            return new Response(rewritten.body, {
+                status: rewritten.status,
                 headers: newHeaders,
             });
         }
 
         const response: Response = await env.ASSETS.fetch(request);
 
-        if (!spellParam) return response;
-
-        try {
-            // 1. Decode base64url → bytes
-            const base64: string = spellParam.replace(/-/g, "+").replace(/_/g, "/");
-            const binaryStr: string = atob(base64);
-            const bytes = new Uint8Array(Array.from(binaryStr, (c: string) => c.charCodeAt(0)));
-
-            // 2. Decompress with deflate-raw
-            const ds = new DecompressionStream("deflate-raw");
-            const writer = ds.writable.getWriter();
-            writer.write(bytes);
-            writer.close();
-            const decompressed: ArrayBuffer = await new Response(ds.readable).arrayBuffer();
-
-            // 3. Parse JSON, validate shape, extract name
-            const json = JSON.parse(new TextDecoder().decode(decompressed)) as { "name"?: string };
-            const name = json?.name;
-            if (!name || name.length > 30) return response;
-
-            // 4. Rewrite title tags
-            return new HTMLRewriter()
-                .on("title", {
-                    _buffer: "",
-                    text(chunk: Text): void {
-                        this._buffer += chunk.text;
-                        chunk.remove();
-                        if (chunk.lastInTextNode) {
-                            chunk.after(`${name.trim()} Spell | ${this._buffer}`, { html: false });
-                            this._buffer = "";
-                        }
-                    },
-                } as any)
-                .on('meta[name="title"]', {
-                    element(el: HTMLMetaElement): void {
-                        const content: string = el.getAttribute("content") ?? "";
-                        el.setAttribute("content", `${name.trim()} Spell | ${content}`);
-                    },
-                })
-                .on('meta[property="og:title"]', {
-                    element(el: HTMLMetaElement): void {
-                        const content: string = el.getAttribute("content") ?? "";
-                        el.setAttribute("content", `${name.trim()} Spell | ${content}`);
-                    },
-                })
-                .on('meta[name="twitter:title"]', {
-                    element(el: HTMLMetaElement): void {
-                        const content: string = el.getAttribute("content") ?? "";
-                        el.setAttribute("content", `${name.trim()} Spell | ${content}`);
-                    },
-                })
-                .transform(response);
-        } catch {
-            return response;
-        }
+        return name ? rewriteTitles(response, name) : response;
     }
 } satisfies ExportedHandler<Env>;
