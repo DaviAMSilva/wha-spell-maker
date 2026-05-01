@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import { WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { base64urlDeflateRawDecode, updateSpellJson, updateSpellLink } from "./io";
 import updateOptGroups from "./optgroups";
-import { myp5 } from "./sketch";
+import { highlightInfo, myp5 } from "./sketch";
 import { loadCustomImages, rebuildAvailableSymbols } from "./symbols";
 import updateCustomTabs from "./tabs";
 
@@ -23,6 +23,66 @@ Handlebars.registerHelper("titleWithoutNumber", function (title) {
 
 
 
+// Observes the entire document body for any changes that involve activating (clicking) a tab
+const activeObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+        if (
+            mutation.attributeName === 'class' &&
+            (mutation.target as HTMLElement).classList.contains('active') &&
+            (mutation.target as HTMLElement).classList.contains('nav-link')
+        ) {
+            const changedSeal = document.querySelector("#Spell-Seals.active #Seal>li>a.nav-link.active");
+            const changedRing = document.querySelector("#Spell-Seals.active #Seal>.tab-pane.active #Seal-Rings.active .nav-link.active");
+            const changedSigil = document.querySelector("#Spell-Seals.active #Seal>.tab-pane.active #Seal-Sigils.active .nav-link.active");
+            const changedSign = document.querySelector("#Spell-Seals.active #Seal>.tab-pane.active #Seal-Signs.active .nav-link.active");
+            const changedLine = document.querySelector("#Spell-Seals.active #Seal>.tab-pane.active #Seal-Lines.active .nav-link.active");
+
+            const lastSeal = highlightInfo.seal;
+            const lastType = highlightInfo.type;
+            const lastIndex = highlightInfo.index;
+
+            if (changedSeal) {
+                const sealIndex = [...changedSeal?.parentElement?.parentElement?.children ?? []].indexOf(changedSeal?.parentElement as Element);
+
+                if (changedRing) {
+                    highlightInfo.seal = sealIndex;
+                    highlightInfo.type = "ring";
+                    highlightInfo.index = [...changedRing?.parentElement?.parentElement?.children ?? []].indexOf(changedRing?.parentElement as Element);
+                } else if (changedSigil) {
+                    highlightInfo.seal = sealIndex;
+                    highlightInfo.type = "sigil";
+                    highlightInfo.index = [...changedSigil?.parentElement?.parentElement?.children ?? []].indexOf(changedSigil?.parentElement as Element);
+                } else if (changedSign) {
+                    highlightInfo.seal = sealIndex;
+                    highlightInfo.type = "sign";
+                    highlightInfo.index = [...changedSign?.parentElement?.parentElement?.children ?? []].indexOf(changedSign?.parentElement as Element);
+                } else if (changedLine) {
+                    highlightInfo.seal = sealIndex;
+                    highlightInfo.type = "line";
+                    highlightInfo.index = [...changedLine?.parentElement?.parentElement?.children ?? []].indexOf(changedLine?.parentElement as Element);
+                } else {
+                    highlightInfo.seal = null;
+                    highlightInfo.type = null;
+                    highlightInfo.index = null;
+                }
+            } else {
+                highlightInfo.seal = null;
+                highlightInfo.type = null;
+                highlightInfo.index = null;
+            }
+
+            // Only need to redraw if any of these changed
+            if (lastSeal !== highlightInfo.seal || lastType !== highlightInfo.type || lastIndex !== highlightInfo.index) {
+                if (myp5) myp5.redraw();
+            }
+
+            // We only care to update once, so stop the loop
+            return;
+        }
+    }
+});
+
+
 
 export function createJsonEditor(newSpell: SpellType | null) {
     // It's better to do this every time a new editor is created
@@ -33,7 +93,7 @@ export function createJsonEditor(newSpell: SpellType | null) {
         jsonEditor.destroy();
     }
 
-    const options: {[key: string]: any} = {
+    const options: { [key: string]: any } = {
         schema: schema,
         theme: "bootstrap5",
         iconlib: "fontawesome5",
@@ -84,6 +144,10 @@ export function createJsonEditor(newSpell: SpellType | null) {
         // Fixing title formatting
         document.querySelector(".je-object__title")?.classList.remove("h3");
         document.querySelector(".je-object__title")?.classList.add("h1");
+
+        // Being efficient by only starting observing after it is built
+        activeObserver.disconnect();
+        activeObserver.observe(document.body, { subtree: true, attributeFilter: ['class'] });
     });
 
     jsonEditor.on("addRow", () => updateOptGroups());

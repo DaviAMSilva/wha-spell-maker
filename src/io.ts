@@ -59,7 +59,6 @@ export function shrinkSpell(originalSpell: SpellType) {
 
     deleteRedundantValue(spell, spellProperties, "name")
     deleteRedundantValue(spell, spellProperties, "description")
-    deleteRedundantValue(spell, spellProperties, "grid")
     deleteRedundantValue(spell, spellProperties, "background")
     deleteRedundantValue(spell, spellProperties, "backgroundColor")
 
@@ -130,6 +129,20 @@ export function shrinkSpell(originalSpell: SpellType) {
         if (seal.signs?.length === 0)
             delete seal.signs;
     }
+
+
+
+    // Deleting advanced options that are only to be used locally
+    // @ts-expect-error ts(2790)
+    delete spell.advanced
+    // @ts-expect-error ts(2790)
+    delete spell.highlight
+    // @ts-expect-error ts(2790)
+    delete spell.highlightColor
+    // @ts-expect-error ts(2790)
+    delete spell.grid
+    // @ts-expect-error ts(2790)
+    delete spell.symbolBorder
 
 
 

@@ -9,19 +9,24 @@
         "titleHidden": true
     },
     "required": [
-        "disclaimer",
+        "firstTimeInfo",
         "name",
+        "author",
         "description",
-        "grid",
         "background",
         "backgroundColor",
+        "advanced",
+        "highlight",
+        "highlightColor",
+        "grid",
+        "symbolBorder",
         "seals",
         "custom",
         "io",
         "about"
     ],
     "properties": {
-        "disclaimer": {
+        "firstTimeInfo": {
             "format": "info",
             "description": "If this is your first time using this editor you should probably check out the About tab first and see the examples provided.",
             "options": {
@@ -36,6 +41,14 @@
                 "infoText": "The name you give your spell"
             }
         },
+        "author": {
+            "type": "string",
+            "default": "",
+            "title": "Spell Author",
+            "options": {
+                "infoText": "The name of the author of the spell"
+            }
+        },
         "description": {
             "type": "string",
             "format": "textarea",
@@ -43,14 +56,6 @@
             "title": "Spell Description",
             "options": {
                 "infoText": "A description of what your spell does"
-            }
-        },
-        "grid": {
-            "$ref": "#/definitions/boolean",
-            "default": false,
-            "title": "Grid",
-            "options": {
-                "infoText": "Helps align your spell"
             }
         },
         "background": {
@@ -68,6 +73,55 @@
             "options": {
                 "dependencies": {
                     "background": true
+                }
+            }
+        },
+        "advanced": {
+            "$ref": "#/definitions/boolean",
+            "default": false,
+            "title": "Advanced Options",
+            "description": "These options help create new spells, but are only saved locally and not shared"
+        },
+        "highlight": {
+            "$ref": "#/definitions/boolean",
+            "default": false,
+            "title": "Highlight Current Element",
+            "options": {
+                "infoText": "Highlight the element currently being edited",
+                "dependencies": {
+                    "advanced": true
+                }
+            }
+        },
+        "highlightColor": {
+            "$ref": "#/definitions/color",
+            "title": "Highlight Color",
+            "default": "#ff0000",
+            "options": {
+                "dependencies": {
+                    "highlight": true
+                }
+            }
+        },
+        "grid": {
+            "$ref": "#/definitions/boolean",
+            "default": false,
+            "title": "Background Grid",
+            "options": {
+                "infoText": "Helps align your spell (each tiny square is 50×50px)",
+                "dependencies": {
+                    "advanced": true
+                }
+            }
+        },
+        "symbolBorder": {
+            "$ref": "#/definitions/boolean",
+            "default": false,
+            "title": "Show Symbol Borders",
+            "options": {
+                "infoText": "Helps align your symbols (sigils and signs)",
+                "dependencies": {
+                    "advanced": true
                 }
             }
         },
@@ -208,7 +262,7 @@
                         "items": {
                             "type": "object",
                             "title": "Sigil",
-                            "headerTemplate": "{{properties.name.enumTitle}} Sigil",
+                            "headerTemplate": "{{#if self.prefix}}{{self.prefix}} {{/if}}{{properties.name.enumTitle}} Sigil",
                             "properties": {
                                 "visible": {
                                     "$ref": "#/definitions/visible",
@@ -226,6 +280,14 @@
                                         "dependencies": {
                                             "tinted": true
                                         }
+                                    }
+                                },
+                                "prefix": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "Sigil Prefix",
+                                    "options": {
+                                        "infoText": "Optional sigil prefix"
                                     }
                                 },
                                 "name": {
@@ -268,7 +330,7 @@
                         "items": {
                             "type": "object",
                             "title": "Sign",
-                            "headerTemplate": "{{properties.name.enumTitle}} Sign",
+                            "headerTemplate": "{{#if self.prefix}}{{self.prefix}} {{/if}}{{properties.name.enumTitle}} Sign",
                             "properties": {
                                 "visible": {
                                     "$ref": "#/definitions/visible",
@@ -286,6 +348,14 @@
                                         "dependencies": {
                                             "tinted": true
                                         }
+                                    }
+                                },
+                                "prefix": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "Sign Prefix",
+                                    "options": {
+                                        "infoText": "Optional sign prefix"
                                     }
                                 },
                                 "name": {

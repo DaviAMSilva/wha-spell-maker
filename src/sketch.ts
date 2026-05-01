@@ -6,6 +6,8 @@ import { jsonEditor } from "./form";
 import symbols from "./data/symbols.json";
 import schema from "./schemas/spell.json";
 
+
+
 // Stores the symbols images
 const symbolsImages: SymbolsImages = {
     customs: {},
@@ -15,6 +17,11 @@ const symbolsImages: SymbolsImages = {
     shapes: {},
     tohs: {},
 };
+
+// Stores the information about which element to highlight
+export const highlightInfo: { seal: number | null, type: string | null, index: number | null } = { seal: null, type: null, index: null };
+
+
 
 const sketch = (p: p5) => {
     // Drawing defaults, for fallback purposes
@@ -66,7 +73,8 @@ const sketch = (p: p5) => {
                 background: schema.properties.background.default,
                 backgroundColor: schema.properties.backgroundColor.default,
                 color: schema.definitions.color.default,
-                weight: schema.definitions.weight.default
+                weight: schema.definitions.weight.default,
+                highlightColor: schema.properties.highlightColor.default
             };
 
             defaults.seal = {
@@ -205,7 +213,9 @@ const sketch = (p: p5) => {
 
         // Drawing the seals
         // #region SEALS
-        for (const seal of spell.seals ?? []) {
+        for (let sealIndex = 0; sealIndex < (spell.seals ?? []).length; sealIndex++) {
+            const seal = spell.seals![sealIndex];
+
             if (!(seal.visible ?? defaults.seal.visible))
                 continue;
 
@@ -257,7 +267,9 @@ const sketch = (p: p5) => {
             ];
 
             // Drawing the sigils and signs (collectively referred as symbols)
-            for (const symbol of allSymbols) {
+            for (let symbolIndex = 0; symbolIndex < allSymbols.length; symbolIndex++) {
+                const symbol = allSymbols[symbolIndex];
+
                 const symbolName = symbol.name ?? "";
                 const symbolDrawType = (symbol.type as string);
                 const symbolImageType = symbolName.split("_")[0] + "s";
@@ -290,27 +302,37 @@ const sketch = (p: p5) => {
 
 
 
-                // Creating a image that has a solid color
-                // to mask with the symbol image alpha channel
-                // and that can be reused in the loop below
-                const colorImage = p.createImage(1, 1);
+                // Because sigils and signs get combined will need to separate the indices
+                const localIndex = symbolIndex - (symbolDrawType === "sign" ? (seal.sigils?.length ?? 0) : 0);
+                const symbolHighlighted = spell.highlight && highlightInfo.seal === sealIndex && highlightInfo.type === symbolDrawType && highlightInfo.index === localIndex;
+                const tintColor = symbolHighlighted ? (spell.highlightColor ?? defaults.spell.highlightColor) : symbolColor;
 
-                // symbolColor: "#rrggbb"
-                const r = parseInt((symbolColor as string).substring(1, 3), 16);
-                const g = parseInt((symbolColor as string).substring(3, 5), 16);
-                const b = parseInt((symbolColor as string).substring(5, 7), 16);
-                colorImage.set(0, 0, [r, g, b, 255]);
 
-                // colorImage.set(0, 0, p.color(symbolColor));
-                // Doesn't work because of the error:
-                // An error with message "p5 is not defined" occurred inside the p5js library when set was called.
-                // Potentially caused by https://github.com/processing/p5.js/issues/8302
 
-                colorImage.updatePixels();
-                colorImage.resize(symbolImage.width, symbolImage.height);
+                let colorImage = null;
+                if (symbolTinted || highlightInfo) {
+                    // Creating a image that has a solid color
+                    // to mask with the symbol image alpha channel
+                    // and that can be reused in the loop below
+                    colorImage = p.createImage(1, 1);
 
-                // Masking the color image with the alpha channel of the symbol image
-                colorImage.mask(symbolImage);
+                    // symbolColor: "#rrggbb"
+                    const r = parseInt((tintColor as string).substring(1, 3), 16);
+                    const g = parseInt((tintColor as string).substring(3, 5), 16);
+                    const b = parseInt((tintColor as string).substring(5, 7), 16);
+                    colorImage.set(0, 0, [r, g, b, 255]);
+
+                    // colorImage.set(0, 0, p.color(symbolColor));
+                    // Doesn't work because of the error:
+                    // An error with message "p5 is not defined" occurred inside the p5js library when set was called.
+                    // Potentially caused by https://github.com/processing/p5.js/issues/8302
+
+                    colorImage.updatePixels();
+                    colorImage.resize(symbolImage.width, symbolImage.height);
+
+                    // Masking the color image with the alpha channel of the symbol image
+                    colorImage.mask(symbolImage);
+                }
 
 
 
@@ -342,21 +364,20 @@ const sketch = (p: p5) => {
                     // Rotate around the sigil/sign center
                     p.rotate(symbolAngle);
 
-                    // If the symbol is tinted, it uses the alpha channel and the color provided,
-                    // otherwise it uses the original original image as is
-                    if (symbolTinted) {
+                    if (colorImage) {
                         p.image(colorImage, 0, 0, symbolSize, symbolSize);
                     } else {
                         p.image(symbolImage, 0, 0, symbolSize, symbolSize);
                     }
 
-                    // Draw debug square around the image
-                    // p.stroke(255, 0, 0);
-                    // p.strokeWeight(2);
-                    // p.noFill();
-                    // p.strokeWeight(1 / sealScale);
-                    // p.stroke(symbol.tinted && symbol.color ? symbol.color : defaults.spell.color);
-                    // p.rect(0, 0, symbolSize, symbolSize);
+                    // Draw borders around the symbols
+                    if (spell.symbolBorder) {
+                        p.strokeWeight(2);
+                        p.noFill();
+                        p.strokeWeight(1 / sealScale);
+                        p.stroke(tintColor);
+                        p.rect(0, 0, symbolSize, symbolSize);
+                    }
 
                     p.pop(); // SIGILS & SIGNS
                 }
@@ -368,12 +389,16 @@ const sketch = (p: p5) => {
 
             // Drawing the lines
             // #region LINES
-            for (const line of seal.lines ?? []) {
+            for (let lineIndex = 0; lineIndex < (seal.lines ?? []).length; lineIndex++) {
+                const line = seal.lines![lineIndex];
+
+                const lineHighlighted = spell.highlight && highlightInfo.seal === sealIndex && highlightInfo.type === "line" && highlightInfo.index === lineIndex;
+
                 const lineDefaults = defaults.line;
                 if (!(typeof line.visible === "undefined" ? lineDefaults.visible : line.visible))
                     continue;
 
-                p.stroke(line.color ?? defaults.spell.color);
+                p.stroke(lineHighlighted ? spell.highlightColor ?? defaults.spell.highlightColor : line.color ?? defaults.spell.color);
                 p.strokeWeight(line.weight ?? defaults.spell.weight);
 
                 // Creating a continuum of one or more line segments
@@ -389,7 +414,9 @@ const sketch = (p: p5) => {
 
             // Drawing the rings strokes
             // #region RINGS (STROKE)
-            for (const ring of seal.rings ?? []) {
+            for (let ringIndex = 0; ringIndex < (seal.rings ?? []).length; ringIndex++) {
+                const ring = seal.rings![ringIndex];
+
                 const ringDefaults = defaults.ring;
                 if (!(typeof ring.visible === "undefined" ? ringDefaults.visible : ring.visible))
                     continue;
@@ -400,11 +427,13 @@ const sketch = (p: p5) => {
                 const ringOpeningSize = p.map(ring.openingSize ?? ringDefaults.openingSize, 0, 360, 0, 360, true);
                 const ringOpeningAngle = p.map((defaults.globalRingOffsetAngle + (ring.openingAngle ?? ringDefaults.openingAngle)) % 360, 0, 360, 0, 360, true);
 
+                const ringHighlighted = spell.highlight && highlightInfo.seal === sealIndex && highlightInfo.type === "ring" && highlightInfo.index === ringIndex;
+
                 p.push(); // RING
 
                 p.translate(ringOffsetX, ringOffsetY);
 
-                p.stroke(ring.color ?? defaults.spell.color);
+                p.stroke(ringHighlighted ? spell.highlightColor ?? defaults.spell.highlightColor : ring.color ?? defaults.spell.color);
                 p.strokeWeight(ring.weight ?? defaults.spell.weight);
 
                 // Fix artifact if ringOpeningSize == 360
