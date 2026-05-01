@@ -217,3 +217,16 @@ span.card-title>span:nth-child(2) {
         --bs-card-spacer-y: 0.3rem !important;
     }
 }
+
+
+
+// Fixing select background color
+select {
+    option {
+        background-color: $grimoire-dark-blue;
+    }
+    optgroup {
+        background-color: $gray-800;
+        font-size: 1.25em;
+    }
+}

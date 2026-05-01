@@ -136,6 +136,7 @@ export default function updateCustomTabs() {
                     </div>
                 ))}
             </div>
+            <p class="mt-3">Looking for more examples? Check out my <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/folders/1GHfbQhgnt68Fu2OzDTVO4u5DObrGkS-T">repository</a> of Witch Hat Atelier stuff where you can find the images and JSON&nbsp;files of every spell I've recreated so far.</p>
 
             <p id="about-definitions" class="h4 mt-5 mb-3">Definitions:</p>
             <p>This project defines, for its own use, the following parts of a spell as such:</p>
