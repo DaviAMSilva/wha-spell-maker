@@ -105,12 +105,14 @@ export default function updateCustomTabs() {
             <p>The editor allows fans to brainstorm new spells by easily and quickly adding, modifying and removing the different parts of a spell and watching the result update in real time!</p>
             <p>It is very easy to use if the spell follows the standard <em>ring with signs around sigil</em> structure. However, it also allows for more complex spells if they are willing to do more in-depth customization. It is even possible to upload <a href="#about-custom-images">custom images</a> to use as symbols in a spell.</p>
             <p>The current spell is automatically saved locally on the browser, but fans may also choose to <a href="#about-import-export">save their creations</a> as a JSON file for backup or even generate a link to easily share their creation with others.</p>
+            <p>This tool does not simulate or explain what any particular spell does, as that is up for subjetive interpretation, and requires basic familiarity with the magic system. To learn more about the magic system I recommend starting with the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">Magic page</a> on the Independent Witch Hat Atelier Wiki.</p>
             <p>And just be clear: this project is <strong>not meant to be a replacement for traditional hand drawn spells</strong>, but rather a way to make creating new spells more accessible, standardized and easier to share.</p>
 
             <p id="about-how-to-use" class="h4 mt-5 mb-3">How to Use:</p>
             <p>The best way to learn is by experimenting! Try adding rings, sigils, signs and lines by navigating to each tab under "Spell&nbsp;Seals" and pressing the <i title="Add" class="fas fa-plus" /> buttons, tweaking the default values of the elements, and watching the canvas update in real time.</p>
             <p>It is possible to change sizes, angles, colors, quantities and other properties of most elements, when relevant. It is also possible to duplicate, rearrange and delete elements and give them names for better organization.</p>
             <p>The editor elements have names that mostly describe what each does, but some also have a <span title="Information">ⓘ</span> button that can be hovered for additional information.</p>
+            <p>Advanced options are available on the bottom of the Spell Information tab to help users work with more complex spells. The main option available is the ability to highlight the current focused element in the editor.</p>
 
             <p id="about-examples" class="h4 mt-5 mb-3">Examples</p>
             <p>Click any example below to load it into the editor. Be aware that this <strong class="text-decoration-underline">will erase the current spell</strong>.</p>

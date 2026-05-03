@@ -28,10 +28,8 @@
     "properties": {
         "firstTimeInfo": {
             "format": "info",
-            "description": "If this is your first time using this editor you should probably check out the About tab first and see the examples provided.",
-            "options": {
-                "titleHidden": true
-            }
+            "title": "If this is your first time using the editor you should check out the About tab and read the information provided.",
+            "description": "To learn more about the magic system a good starting point is the Magic page on the Independent Witch Hat Atelier Wiki."
         },
         "name": {
             "type": "string",
