@@ -51,3 +51,25 @@ You can click the links below to instantly open the spell into the editor:
 [Crystal Petals Path](https://wha-spell-maker.daviamsilva.dev?spell=jVJNj9MwEP0rls8lykfTND0hLYIje4ATW1VuM02sTcaR7aqUVf87M3ZaAhQJRYrsmffezDzPm0Q1gNzIJ3txXvXiGcJf-U4uZAPuYPXotUGCfOm0E26Evhd80IPulRXeCN-B-NSbs_MGIXAjbCH2Jy80Og-qEeYoWkCwymtsRa_bjnL-FgMnDrEF_QMaMXIbjpSVFzCAbUEcrRlCqRM2YBG4DF9DVWIb9Eoja4coMP_cARIAxpE0DSYv-NXdEFM5GqTVvVDYhOiR5gAb63MKxdHYkNkrBzxEUI_jxaM6UHmNYg_-DFTvscxZk2_qcDDDYBqa9wajAUP-1oCF8dQ7cjyGyd5BvcJvomYUhoydepmi97b4cYJFNO0LPlkyiobfX8T7z6-r1ZqeNXgjN9_epCUzwum6pTAbEePTUoTIbloNJtLbyE1eptfFL0ynRtg9A7nf0prcQMuqnDTxT0ncfdDUqeUh7_giTRfSqkafCJ7XdFGDOaGXm5Lixqu4hMVqXpq1PrKFd5msmstUM5ksnetka-6u17Q5obvRaPTxeJGbdyTDdfi4LNLrli8zyHeOp-ukpt4CvMiTdcUgzmSrLFlVMVPmSVk85Nd1UucBlBUVgyZ2TpRqGRLFsmLZB-x_kP-L-3d7kfxgoG34fgI) by [@Ok668](https://x.com/Okay668)
 
 </div>
+
+## Local Setup
+
+To run this project locally you will first have to install [git](https://git-scm.com/install) and [Node.js](https://nodejs.org/en/download) (v22.18.0 or later) and download this repository with the following command in the terminal:
+
+```bash
+git clone https://github.com/DaviAMSilva/wha-spell-maker
+cd wha-spell-maker
+```
+
+Then, to install the dependencies and generate the required files, run the following commands:
+
+```bash
+npm install
+npm run make
+```
+
+Finally, to run it in development mode, use the command:
+
+```bash
+npm run dev
+```
