@@ -204,10 +204,9 @@ export function createJsonEditor(newSpell: SpellType | null) {
 
 // Trying to load the spell previously saved on localStorage or from the url query param
 let lastSpell: SpellType | null = null;
+let spellText: string | null = null;
 
 try {
-    let spellText;
-
     // Getting the spell param from the url
     const urlParams = new URLSearchParams(window.location.search);
     const spellParam = urlParams.get("spell");
@@ -215,8 +214,8 @@ try {
     // Clear spell params immediately after loading the page
     window.history.replaceState({}, document.title, window.location.pathname);
 
-    // Trying first to load from query param, then from localStorage
-    if (spellParam) {
+    // Trying first to load from query param (with confirmation), otherwise from localStorage
+    if (spellParam && confirm("Loading a spell from a link will erase your current spell.\nAre you sure you want to continue?")) {
         spellText = await base64urlDeflateRawDecode(spellParam);
     } else {
         spellText = localStorage.getItem("lastSpell");
@@ -224,7 +223,7 @@ try {
 
     if (spellText) lastSpell = JSON.parse(spellText);
 } catch {
-    console.error("Failed to load spell");
+    console.error("Failed to load spell: ", spellText);
 }
 
 

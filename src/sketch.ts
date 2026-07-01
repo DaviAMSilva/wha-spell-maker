@@ -309,29 +309,29 @@ const sketch = (p: p5) => {
 
 
 
-                let colorImage = null;
-                if (symbolTinted || highlightInfo) {
+                let tintedImage = null;
+                if (symbolTinted || symbolHighlighted) {
                     // Creating a image that has a solid color
                     // to mask with the symbol image alpha channel
                     // and that can be reused in the loop below
-                    colorImage = p.createImage(1, 1);
+                    tintedImage = p.createImage(1, 1);
 
                     // symbolColor: "#rrggbb"
                     const r = parseInt((tintColor as string).substring(1, 3), 16);
                     const g = parseInt((tintColor as string).substring(3, 5), 16);
                     const b = parseInt((tintColor as string).substring(5, 7), 16);
-                    colorImage.set(0, 0, [r, g, b, 255]);
+                    tintedImage.set(0, 0, [r, g, b, 255]);
 
                     // colorImage.set(0, 0, p.color(symbolColor));
                     // Doesn't work because of the error:
                     // An error with message "p5 is not defined" occurred inside the p5js library when set was called.
                     // Potentially caused by https://github.com/processing/p5.js/issues/8302
 
-                    colorImage.updatePixels();
-                    colorImage.resize(symbolImage.width, symbolImage.height);
+                    tintedImage.updatePixels();
+                    tintedImage.resize(symbolImage.width, symbolImage.height);
 
                     // Masking the color image with the alpha channel of the symbol image
-                    colorImage.mask(symbolImage);
+                    tintedImage.mask(symbolImage);
                 }
 
 
@@ -364,8 +364,8 @@ const sketch = (p: p5) => {
                     // Rotate around the sigil/sign center
                     p.rotate(symbolAngle);
 
-                    if (colorImage) {
-                        p.image(colorImage, 0, 0, symbolSize, symbolSize);
+                    if (tintedImage) {
+                        p.image(tintedImage, 0, 0, symbolSize, symbolSize);
                     } else {
                         p.image(symbolImage, 0, 0, symbolSize, symbolSize);
                     }

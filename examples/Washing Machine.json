@@ -1,5 +1,6 @@
 {
   "name": "Washing Machine",
+  "author": "ChromaticFlare",
   "description": "First, the outermost spell makes a spherical region above the spell where water will reside. This is the same spell Qifrey shows Coco in chapter 53. The innermost spell, which can be found in vapor bubbles, then fills this area with water from the air, creating a bubble.\n\nNext are the two spinning spells, one clockwise and one counterclockwise. Region signs pointing in from the edges confine the spin of each spell to the space directly above them. They work together to flutter the clothes around, allowing them to wash evenly.\n\nLast are the heating spells off to the sides. They use crosshair to manifest warmth (fire weakened by radial) inside the water. This could potentially stop the vapor bubble spell from condensing water via cooling, so they should remain unlinked from the spell until the bubble forms.\n\nCreated by u/ChromaticFlare1\nhttps://www.reddit.com/r/WitchHatAtelier/comments/1rj2wkx/washing_machine_spell_just_toss_your_clothes_in",
   "seals": [
     {
@@ -28,9 +29,18 @@
           "weight": 5
         },
         {
-          "name": "Fifth",
+          "name": "Fifth Right",
           "radius": 100,
-          "weight": 5
+          "weight": 5,
+          "openingSize": 210,
+          "openingAngle": 270
+        },
+        {
+          "name": "Fifth Left",
+          "radius": 100,
+          "weight": 5,
+          "openingSize": 210,
+          "openingAngle": 90
         }
       ],
       "sigils": [
@@ -201,20 +211,18 @@
       "signs": [
         {
           "name": "sign_Crosshair",
-          "size": 300,
+          "size": 250,
           "angle": 90,
           "amount": 2
         },
         {
           "name": "sign_Radial",
-          "size": 300,
           "angle": 300,
           "amount": 2,
           "rotation": 60
         },
         {
           "name": "sign_Radial",
-          "size": 300,
           "angle": 60,
           "amount": 2,
           "rotation": 120
@@ -246,20 +254,18 @@
       "signs": [
         {
           "name": "sign_Crosshair",
-          "size": 300,
+          "size": 250,
           "angle": 90,
           "amount": 2
         },
         {
           "name": "sign_Radial",
-          "size": 300,
           "angle": 300,
           "amount": 2,
           "rotation": 60
         },
         {
           "name": "sign_Radial",
-          "size": 300,
           "angle": 60,
           "amount": 2,
           "rotation": 120

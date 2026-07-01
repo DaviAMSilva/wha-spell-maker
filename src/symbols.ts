@@ -3,6 +3,10 @@ import { Symbols } from "../types/symbols";
 
 import { myp5, symbolsImages } from "./sketch";
 
+function smartSort(a: string, b: string): number {
+    return Number(a > b);
+}
+
 function getCustomImages(lastSpell: SpellType | null): CustomImage[] {
     if (lastSpell && lastSpell.custom && Array.isArray(lastSpell.custom.images)) {
         return lastSpell.custom.images;
@@ -35,11 +39,11 @@ export function rebuildAvailableSymbols(schema: any, symbols: Symbols, lastSpell
     const schemaSigils = schema.properties.seals.items.properties.sigils;
     const schemaSigns = schema.properties.seals.items.properties.signs;
 
-    const sigilKeys = Object.keys(symbols.sigils);
-    const signKeys = Object.keys(symbols.signs);
-    const forbiddenKeys = Object.keys(symbols.forbiddens);
-    const shapeKeys = Object.keys(symbols.shapes);
-    const tohKeys = Object.keys(symbols.tohs);
+    const sigilKeys = Object.keys(symbols.sigils).sort(smartSort);
+    const signKeys = Object.keys(symbols.signs).sort(smartSort);
+    const forbiddenKeys = Object.keys(symbols.forbiddens).sort(smartSort);
+    const shapeKeys = Object.keys(symbols.shapes).sort(smartSort);
+    const tohKeys = Object.keys(symbols.tohs).sort(smartSort);
 
     const customImages = getCustomImages(lastSpell);
     const customKeys = customImages.map((i: any) => i.name);
