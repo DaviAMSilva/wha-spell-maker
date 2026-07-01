@@ -1,6 +1,6 @@
 import type { WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { createJsonEditor } from "./form";
-import { btn_downloadImage, btn_downloadSpellJson, btn_loadSpellJson, btn_uploadSpellJson, copyToClipboard } from "./io";
+import { btn_downloadImage, btn_downloadSpellJson, btn_loadSpellJson, btn_resetSpell, btn_uploadSpellJson, copyToClipboard } from "./io";
 
 // Example spells for demonstration of the different features and complexities available
 import pokemon from "../examples/Pokémon.json";
@@ -39,7 +39,7 @@ export default function updateCustomTabs() {
                 </button>
                 <button id="clear-spell" type="button" class="btn btn-sm btn-outline-danger ms-2"
                     title="Reset the editor to a blank spell, including clearing all custom images"
-                    onclick={() => createJsonEditor(null)}>
+                    onclick={btn_resetSpell}>
                     <i class="fas fa-triangle-exclamation me-1" /> Reset to Blank Spell
                 </button>
             </div>
