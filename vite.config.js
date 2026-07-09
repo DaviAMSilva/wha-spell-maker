@@ -11,6 +11,21 @@ export default {
     }),
   ],
   build: {
+    target: "es2022",
     minify: "terser",
+    terserOptions: {
+      ecma: 2022,
+      module: true,
+      compress: {
+        passes: 2,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          p5: ["p5"],
+        },
+      },
+    },
   },
 };

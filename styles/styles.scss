@@ -66,10 +66,11 @@ body {
     src: url("/wha-title.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 * {
-    font-family: "WHA-Title", serif;
+    font-family: "WHA-Title", "Times New Roman", serif;
 }
 
 textarea#root\[description\] {
