@@ -13,22 +13,22 @@
         "p5": "^2.2.2"
     },
     "devDependencies": {
-        "@cloudflare/vite-plugin": "^1.47.0",
-        "@cloudflare/workers-types": "^4.20260408.1",
+        "@cloudflare/vite-plugin": "^1.52.1",
+        "@cloudflare/workers-types": "^5.20260815.1",
         "@eslint/js": "^10.0.1",
         "@types/node": "^25.6.0",
         "@types/p5": "^1.7.7",
         "eslint": "^10.0.3",
         "json-schema-to-typescript": "^15.0.4",
         "json-to-ts": "^2.1.0",
-        "puppeteer": "^24.40.0",
+        "puppeteer": "^25.7.0",
         "sass": "^1.97.3",
         "terser": "^5.46.1",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.56.1",
         "vite": "^7.3.1",
         "vite-plugin-sitemap": "^0.8.2",
-        "wrangler": "^4.114.0"
+        "wrangler": "^4.123.0"
     },
     "scripts": {
         "dev": "vite",
