@@ -129,7 +129,8 @@
             "title": "Spell Seals",
             "options": {
                 "disable_collapse": true,
-                "enable_array_copy": true
+                "enable_array_copy": true,
+                "titleHidden": true
             },
             "minItems": 1,
             "items": {
@@ -471,6 +472,9 @@
         "custom": {
             "type": "object",
             "title": "Custom Images",
+            "options": {
+                "titleHidden": true
+            },
             "required": [
                 "images"
             ],

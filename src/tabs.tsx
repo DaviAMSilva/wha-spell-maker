@@ -23,13 +23,15 @@ export default function updateCustomTabs() {
     if (divIO && divIO.firstChild) divIO.removeChild(divIO.firstChild);
     if (divAbout && divAbout.firstChild) divAbout.removeChild(divAbout.firstChild);
 
-    // Added for consistency with other tabs
-    document.getElementById("Spell-Information")?.prepend(<p class="h3 mb-3">Spell Information</p>);
+    // This is needed because JSONEditor uses p.h# instead of heading tags
+    document.getElementById("Spell-Information")?.prepend(<h2 class="h3 mb-3">Spell Information</h2>);
+    document.getElementById("Spell-Seals")?.prepend(<h2 class="h3 mb-3">Spell Seals</h2>);
+    document.getElementById("Custom-Images")?.prepend(<h2 class="h3 mb-0">Custom Images</h2>);
     document.querySelector("#Custom-Images .card.my-3")?.classList.remove("my-3");
 
     divIO?.appendChild(
         <div id="io-container">
-            <p class="h3 mb-3">Import / Export</p>
+            <h2 class="h3 mb-3">Import / Export</h2>
 
             <div class="d-flex mb-4">
                 <button id="download-image" type="button" class="btn btn-sm btn-secondary"
@@ -44,7 +46,7 @@ export default function updateCustomTabs() {
                 </button>
             </div>
 
-            <p class="h4 mb-2">Spell Link</p>
+            <h3 class="h4 mb-2">Spell Link</h3>
             <div class="input-group input-group-sm mb-4">
                 <button id="copy-link" type="button" class="btn btn-sm btn-outline-info"
                     title="Copy spell link to clipboard"
@@ -54,7 +56,7 @@ export default function updateCustomTabs() {
                 <a id="spell-link" class="form-control text-truncate border-info" href="#" target="_blank" rel="noopener noreferrer" />
             </div>
 
-            <p class="h4 mb-2">Spell JSON</p>
+            <h3 class="h4 mb-2">Spell JSON</h3>
             <div class="btn-group w-100" role="group">
                 <button id="copy-json" type="button" class="btn btn-sm btn-secondary rounded-bottom-0"
                     title="Copy the JSON below to the clipboard"
@@ -85,7 +87,7 @@ export default function updateCustomTabs() {
 
     divAbout?.appendChild(
         <div id="about-container">
-            <p id="about-title" class="h3">About</p>
+            <h2 id="about-title" class="h3">About</h2>
             <div class="text-center mb-4">
                 <p class="fs-3 mb-1">Created&nbsp;by&nbsp;<strong>DaviAMSilva</strong>&nbsp;<img src="images/profile.gif" alt="Profile picture" style="width: 1.4em; height: 1.4em; margin-top: -0.1em;" /></p>
                 <p style="text-reset fs-6 margin-bottom: 0;">
@@ -108,13 +110,13 @@ export default function updateCustomTabs() {
             <p>This tool does not simulate or explain what any particular spell does, as that is up for subjetive interpretation, and requires basic familiarity with the magic system. To learn more about the magic system I recommend starting with the <a href="https://witchhatatelier.telepedia.net/wiki/Magic">Magic page</a> on the Independent Witch Hat Atelier Wiki.</p>
             <p>And just be clear: this project is <strong>not meant to be a replacement for traditional hand drawn spells</strong>, but rather a way to make creating new spells more accessible, standardized and easier to share.</p>
 
-            <p id="about-how-to-use" class="h4 mt-5 mb-3">How to Use:</p>
+            <h3 id="about-how-to-use" class="h4 mt-5 mb-3">How to Use:</h3>
             <p>The best way to learn is by experimenting! Try adding rings, sigils, signs and lines by navigating to each tab under "Spell&nbsp;Seals" and pressing the <i title="Add" class="fas fa-plus" /> buttons, tweaking the default values of the elements, and watching the canvas update in real time.</p>
             <p>It is possible to change sizes, angles, colors, quantities and other properties of most elements, when relevant. It is also possible to duplicate, rearrange and delete elements and give them names for better organization.</p>
             <p>The editor elements have names that mostly describe what each does, but some also have a <span title="Information">ⓘ</span> button that can be hovered for additional information.</p>
             <p>Advanced options are available on the bottom of the Spell Information tab to help users work with more complex spells. The main option available is the ability to highlight the current focused element in the editor.</p>
 
-            <p id="about-examples" class="h4 mt-5 mb-3">Examples</p>
+            <h3 id="about-examples" class="h4 mt-5 mb-3">Examples</h3>
             <p>Click any example below to load it into the editor. Be aware that this <strong class="text-decoration-underline">will erase the current spell</strong>.</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
                 {[
@@ -140,7 +142,7 @@ export default function updateCustomTabs() {
             </div>
             <p class="mt-3">Looking for more examples? Check out my <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/folders/1GHfbQhgnt68Fu2OzDTVO4u5DObrGkS-T">repository</a> of Witch Hat Atelier stuff where you can find the images and JSON&nbsp;files of every spell I've recreated so far.</p>
 
-            <p id="about-definitions" class="h4 mt-5 mb-3">Definitions:</p>
+            <h3 id="about-definitions" class="h4 mt-5 mb-3">Definitions:</h3>
             <p>This project defines, for its own use, the following parts of a spell as such:</p>
             <dl class="row">
                 <dt class="col-sm-1 text-nowrap">Spell</dt>
@@ -157,7 +159,7 @@ export default function updateCustomTabs() {
                 <dd class="col-sm-11">A path containing one or more connected line segments. This part was exclusively defined for this project.</dd>
             </dl>
 
-            <p id="about-miscellaneous-tips" class="h4 mt-5 mb-3">Miscellaneous Tips:</p>
+            <h3 id="about-miscellaneous-tips" class="h4 mt-5 mb-3">Miscellaneous Tips:</h3>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Angles range from 0 to 360 degrees.</li>
                 <li class="list-group-item">Offsets allow moving elements vertically or horizontally relative to their original center.</li>
@@ -170,7 +172,7 @@ export default function updateCustomTabs() {
                 <li class="list-group-item">For maximum compatibility custom images of sigils should have size 400×400px while signs should have size 200×200px. Both should have stroke widths of 10px.</li>
             </ul>
 
-            <p id="about-custom-images" class="h4 mt-5 mb-3">Custom Images</p>
+            <h3 id="about-custom-images" class="h4 mt-5 mb-3">Custom Images</h3>
             <p>Custom images can be loaded into the editor to be used as symbols for Sigils and Signs within the spell currently being created. Note that this is not a general catalog of images; they are tied to the current spell and will be lost if the spell is cleared or overwritten.</p>
             <p>To add custom images there are three steps to be followed:</p>
             <ol class="list-group list-group-flush list-group-numbered my-2">
@@ -180,14 +182,14 @@ export default function updateCustomTabs() {
             </ol>
             <p>Once the above steps were completed custom images will become an option when choosing the symbols for Sigils and Signs, under the custom name given to each one.</p>
 
-            <p id="about-import-export" class="h4 mt-5 mb-3">Import / Export</p>
+            <h3 id="about-import-export" class="h4 mt-5 mb-3">Import / Export</h3>
             <p>The JSON editor updates in real time to reflect the current spell, but can also be edited directly. After editing, press the <span className="badge bg-secondary"><i class="fas fa-paste" />&nbsp;Load&nbsp;JSON&nbsp;Into&nbsp;Editor</span> button to apply any changes made to the editor.</p>
             <p>A link is generated from the current state of the editor, including custom images, which can be used to restore or share the spell. Note that very complex spells may exceed the maximum URL size allowed by some browsers.</p>
             <p>The <span className="badge bg-secondary"><i class="fas fa-copy" />&nbsp;Copy&nbsp;JSON&nbsp;to&nbsp;Clipboard</span> button copies the spell code to the clipboard.</p>
             <p>The <span className="badge bg-secondary"><i class="fas fa-download" />&nbsp;Download&nbsp;Spell&nbsp;Image</span> button downloads a 1000×1000px PNG image of the current spell.</p>
             <p>The <span className="badge bg-danger"><i class="fas fa-triangle-exclamation" />&nbsp;Reset&nbsp;to&nbsp;Blank&nbsp;Spell</span> permanently clears the editor, including custom images.</p>
 
-            <p id="about-credits-tools-used" class="h4 mt-5 mb-3">Credits</p>
+            <h3 id="about-credits-tools-used" class="h4 mt-5 mb-3">Credits</h3>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><i class="me-2 fab fa-x-twitter" /><a href="https://x.com/shirahamakamome" target="_blank" rel="noopener noreferrer">Kamome Shirahama</a> for creating this amazing series, both the <a href="https://kmanga.kodansha.com/title/10065" target="_blank" rel="noopener noreferrer">manga</a> and <a href="https://tongari-anime.com/en/" target="_blank" rel="noopener noreferrer">anime</a>.</li>
                 <li class="list-group-item"><i class="me-2 fas fa-book" /><a href="https://witchhatatelier.telepedia.net/wiki/Witch_Hat_Atelier_Wiki" target="_blank" rel="noopener noreferrer">Independent Witch Hat Atelier Wiki</a> for listing and providing the base designs for the signs and sigils.</li>

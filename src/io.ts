@@ -260,7 +260,7 @@ export async function btn_uploadSpellJson() {
 }
 
 export function btn_resetSpell() {
-    if (confirm("This will completely erase your current spell.\nAre you sure you want to continue?"))
+    if (confirm("This action will permanently ERASE your current spell.\nAre you sure you want to continue?"))
         createJsonEditor(null);
 }
 

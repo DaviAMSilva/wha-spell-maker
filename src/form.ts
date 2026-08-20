@@ -215,7 +215,7 @@ try {
     window.history.replaceState({}, document.title, window.location.pathname);
 
     // Trying first to load from query param (with confirmation), otherwise from localStorage
-    if (spellParam && confirm("Loading a spell from a link will erase your current spell.\nAre you sure you want to continue?")) {
+    if (spellParam && confirm("You're currently trying to load a spell from a share link.\nThis action will permanently ERASE your previous spell.\nAre you sure you want to continue?")) {
         spellText = await base64urlDeflateRawDecode(spellParam);
     } else {
         spellText = localStorage.getItem("lastSpell");
