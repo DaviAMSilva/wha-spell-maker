@@ -13,7 +13,7 @@
         "p5": "^2.2.2"
     },
     "devDependencies": {
-        "@cloudflare/vite-plugin": "^1.52.1",
+        "@cloudflare/vite-plugin": "^1.54.7",
         "@cloudflare/workers-types": "^5.20260815.1",
         "@eslint/js": "^10.0.1",
         "@types/node": "^25.6.0",
@@ -27,7 +27,7 @@
         "typescript-eslint": "^8.56.1",
         "vite": "^7.3.1",
         "vite-plugin-sitemap": "^0.8.2",
-        "wrangler": "^4.123.0"
+        "wrangler": "^4.131.0"
     },
     "scripts": {
         "dev": "vite",
