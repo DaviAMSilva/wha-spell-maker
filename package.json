@@ -8,7 +8,7 @@
         "@fortawesome/fontawesome-free": "^7.2.0",
         "@json-editor/json-editor": "^2.16.0",
         "bootstrap": "^5.3.8",
-        "handlebars": "^4.7.8",
+        "handlebars": "^4.7.10",
         "mini-jsx": "^4.0.0",
         "p5": "^2.2.2"
     },
