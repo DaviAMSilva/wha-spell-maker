@@ -8,6 +8,7 @@
         "@fortawesome/fontawesome-free": "^7.2.0",
         "@json-editor/json-editor": "^2.16.0",
         "bootstrap": "^5.3.8",
+        "dompurify": "^3.4.17",
         "handlebars": "^4.7.10",
         "mini-jsx": "^4.0.0",
         "p5": "^2.2.2"
@@ -15,16 +16,16 @@
     "devDependencies": {
         "@cloudflare/vite-plugin": "^1.67.0",
         "@cloudflare/workers-types": "^5.20260815.1",
-        "@eslint/js": "^10.0.1",
+        "@eslint/js": "^9.39.5",
         "@types/node": "^25.6.0",
         "@types/p5": "^1.7.7",
-        "eslint": "^10.0.3",
+        "eslint": "^9.39.5",
         "json-schema-to-typescript": "^15.0.4",
         "json-to-ts": "^2.1.0",
         "sass": "^1.97.3",
         "terser": "^5.46.1",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.56.1",
+        "typescript-eslint": "^7.3.1",
         "vite": "^7.3.7",
         "vite-plugin-sitemap": "^0.8.2",
         "wrangler": "^4.156.1"

@@ -6,5 +6,6 @@ declare global {
         Handlebars: any;
         jsonEditor: any;
         JSONEditor: any;
+        DOMPurify: any;
     }
 }

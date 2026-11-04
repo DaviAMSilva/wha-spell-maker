@@ -1,4 +1,5 @@
 import { JSONEditor } from "@json-editor/json-editor";
+import DOMPurify from "dompurify";
 import Handlebars from "handlebars";
 import { WitchHatAtelierSpellMaker as SpellType } from "../types/spell";
 import { base64urlDeflateRawDecode, updateSpellJson, updateSpellLink } from "./io";
@@ -13,6 +14,22 @@ import schema from "./schemas/spell.json";
 
 
 let jsonEditor: JSONEditor;
+
+
+
+// Necessary for Handlebars to be used by JSONEditor
+window.Handlebars = Handlebars;
+
+// Not strictly necessary but useful
+window.jsonEditor = jsonEditor;
+
+// Prevent XSS
+DOMPurify.setConfig({
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: [],
+    KEEP_CONTENT: true,
+});
+window.DOMPurify = DOMPurify;
 
 
 
@@ -107,19 +124,13 @@ export function createJsonEditor(newSpell: SpellType | null) {
         use_default_values: true
     };
 
+
+
     // Using a starting value if available
     if (newSpell) options.startval = newSpell;
 
     // Creating the editor
     jsonEditor = new JSONEditor(document.getElementById("jsoneditor-container"), options);
-
-
-
-    // Necessary for Handlebars to be used by JSONEditor
-    window.Handlebars = Handlebars;
-
-    // Not strictly necessary but useful
-    window.jsonEditor = jsonEditor;
 
 
 
