@@ -11,7 +11,7 @@
         "dompurify": "^3.4.17",
         "handlebars": "^4.7.10",
         "mini-jsx": "^4.0.0",
-        "p5": "^2.2.2"
+        "p5": "^2.4.0"
     },
     "devDependencies": {
         "@cloudflare/vite-plugin": "^1.67.0",
